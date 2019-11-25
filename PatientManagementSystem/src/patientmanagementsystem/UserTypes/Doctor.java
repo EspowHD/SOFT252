@@ -46,5 +46,10 @@ public class Doctor extends User{
     public void setRatings(Rating[] ratings) {
         this.ratings = ratings;
     }
+
+    public Rating[] getRatings() {
+        return ratings;
+    }
+    
     
 }

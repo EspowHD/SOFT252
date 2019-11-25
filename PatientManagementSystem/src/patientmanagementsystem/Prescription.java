@@ -17,7 +17,7 @@ public class Prescription {
     Patient issueTo;
     Medicine medicine;
     String notes;
-    int Quantity;
+    int quantity;
     String dosage;
 
     public Prescription(Doctor prescribedBy, Patient issueTo, Medicine medicine, String notes, int Quantity, String dosage) {
@@ -25,7 +25,7 @@ public class Prescription {
         this.issueTo = issueTo;
         this.medicine = medicine;
         this.notes = notes;
-        this.Quantity = Quantity;
+        this.quantity = Quantity;
         this.dosage = dosage;
     }
     

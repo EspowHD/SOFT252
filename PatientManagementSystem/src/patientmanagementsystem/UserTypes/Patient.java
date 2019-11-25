@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package patientmanagementsystem.UserTypes;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
 import patientmanagementsystem.*;
@@ -50,5 +52,13 @@ public class Patient extends User {
             }
         }
         return appointments;
+    }
+
+    public String getgender() {
+        return gender;
+    }
+
+    public Date getDOB() {
+        return DOB;
     }
 }

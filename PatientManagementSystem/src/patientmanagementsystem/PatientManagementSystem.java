@@ -8,8 +8,11 @@ package patientmanagementsystem;
 import Forms.*;
 import Panels.*;
 import java.awt.Font;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import patientmanagementsystem.UserTypes.*;
@@ -46,6 +49,7 @@ public class PatientManagementSystem {
         for (int i = 0; i < appointments.size(); i++) {
             System.out.println(FORMAT.format(appointments.get(i).getDateTime()));
         }
+        saveInformation(FILENAME);
     }
 
     /**
@@ -67,6 +71,16 @@ public class PatientManagementSystem {
     public static SimpleDateFormat getFormat() {
         return FORMAT;
     }
+
+    public static ArrayList<Medicine> getMedicines() {
+        return medicines;
+    }
+
+    public static ArrayList<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+    
+    
     
     private static void loadUsers(Scanner sc){
         String userType = sc.nextLine();
@@ -104,10 +118,48 @@ public class PatientManagementSystem {
         }
     }
     
-    private static void saveUsers(String fileName,ArrayList<User> users){
-        File file = new File(fileName);
+    private static void saveUsers(BufferedWriter writer,ArrayList<User> users) throws IOException{
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        for (int i = 0; i < users.size(); i++) {
+            char type = users.get(i).getUniqueID().charAt(0);
+            switch(type){
+                case 'D':
+                    Doctor doctor = (Doctor) users.get(i);
+                    writer.write("DOCTOR\n");
+                    writer.write(doctor.getUniqueID()+"\n");
+                    writer.write(doctor.getFirstName()+"\n");
+                    writer.write(doctor.getLastName()+"\n");
+                    writer.write(doctor.getPassword()+"\n");
+                    writeAddress(writer,doctor.getAddress());
+                    writeRatings(writer,doctor.getRatings());
+                    break;
+                case 'P':
+                    Patient patient = (Patient) users.get(i);
+                    writer.write("PATIENT\n");
+                    writer.write(patient.getUniqueID()+"\n");
+                    writer.write(patient.getFirstName()+"\n");
+                    writer.write(patient.getLastName()+"\n");
+                    writer.write(patient.getPassword()+"\n");
+                    writer.write(patient.getgender()+"\n");
+                    writer.write(sdf.format(patient.getDOB())+"\n");
+                    writeAddress(writer,patient.getAddress());
+                    break;
+            }
+        }
     }
 
+    private static void saveInformation(String fileName){
+        try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        saveUsers(writer,getUsers());
+        saveMedicines(writer,getMedicines());
+        saveAppointments(writer,getAppointments());
+        writer.close();
+        } catch (IOException e){
+            
+        }
+    }
+    
     private static Address loadAddress(Scanner sc) {
         String roadNum = sc.nextLine();
         String roadName = sc.nextLine();
@@ -139,10 +191,11 @@ public class PatientManagementSystem {
         loadUsers(sc);
         loadMedicine(sc);
         loadAppointments(sc);
+        sc.close();
         } catch (FileNotFoundException e){
             System.out.println("Error loading file");
         } catch (Exception e){
-            System.out.println("Some other error has occured");
+            System.out.println(e.getStackTrace());
         }
     }
 
@@ -166,8 +219,9 @@ public class PatientManagementSystem {
             String date = sc.nextLine();
             Date dateTime = new Date(date);
             Appointment appointment = new Appointment(patient,doctor,dateTime);
-            if(!(sc.nextLine().contains("No ")))appointment.setDoctorNotes(sc.nextLine());
-            if(!(sc.nextLine().contains("No ")))appointment.setPrescription(
+            String notes = sc.nextLine();
+            if(!(notes.contains("NO ")))appointment.setDoctorNotes(sc.nextLine());
+            if(!(sc.nextLine().contains("NO ")))appointment.setPrescription(
                     getPresciptionFromFile(sc,patient,doctor));
             if(appointment.getPrescription() != null)prescriptions.add(appointment.getPrescription());
             appointments.add(appointment);
@@ -183,5 +237,52 @@ public class PatientManagementSystem {
         String dosage = sc.nextLine();
         Prescription prescription = new Prescription(doctor,patient,medicine,prescriptionNote,Integer.parseInt(quantity),dosage);
         return prescription;
+    }
+
+    private static void writeAddress(BufferedWriter writer, Address address) throws IOException {
+        writer.write(address.roadNum+"\n");
+        writer.write(address.roadName+"\n");
+        writer.write(address.area+"\n");
+        writer.write(address.city+"\n");
+        writer.write(address.postCode+"\n");
+    }
+
+    private static void writeRatings(BufferedWriter writer, Rating[] ratings) throws IOException {
+        int length = ratings.length;
+        writer.write(Integer.toString(length)+"\n");
+        for (Rating rating : ratings) {
+            writer.write("RATING\n");
+            writer.write(rating.getStars()+"\n");
+            writer.write(rating.getFeedback()+"\n");
+        }
+    }
+
+    private static void saveMedicines(BufferedWriter writer, ArrayList<Medicine> medicines) throws IOException {
+        writer.write("MEDICINES\n");
+        for (int i = 0; i <medicines.size(); i++) {
+            writer.write(medicines.get(i).getMedicineName()+"\n");
+            writer.write(Integer.toString(medicines.get(i).getStock())+"\n");
+        }
+    }
+
+    private static void saveAppointments(BufferedWriter writer, ArrayList<Appointment> appointments) throws IOException {
+        writer.write("APPOINTMENTS\n");
+        for (int i = 0; i < appointments.size(); i++) {
+            writer.write(appointments.get(i).patient.getUniqueID()+"\n");
+            writer.write(appointments.get(i).doctor.getUniqueID()+"\n");
+            writer.write(appointments.get(i).dateTime+"\n");
+            if(appointments.get(i).doctorNotes != null){
+                writer.write("NOTES\n");
+                writer.write(appointments.get(i).doctorNotes+"\n");
+            } else writer.write("NO NOTES\n");
+            if(appointments.get(i).prescription != null){
+                writer.write("PRESCRIPTION\n");
+                writer.write(appointments.get(i).prescription.medicine.getMedicineName()+"\n");
+                writer.write(appointments.get(i).prescription.notes+"\n");
+                writer.write(appointments.get(i).prescription.quantity+"\n");
+                writer.write(appointments.get(i).prescription.dosage+"\n");
+            } else writer.write("NO PRESCRIPTION\n");
+            
+        }
     }
 }

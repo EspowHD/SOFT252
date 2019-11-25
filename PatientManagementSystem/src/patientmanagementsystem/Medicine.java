@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author espow
  */
 public class Medicine {
-    String medicineName;
-    int stock;//Number of that medicine in stock
+    private final String medicineName;
+    private int stock;//Number of that medicine in stock
 
     public Medicine(String medicineName, int stock) {
         this.medicineName = medicineName;

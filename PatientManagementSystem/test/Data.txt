@@ -24,7 +24,7 @@ Maggie
 Simpson
 Password1
 female
-1/14/1989
+01/14/1989
 3
 Patient Road
 Drake Circus
@@ -88,7 +88,7 @@ Chris
 Thompson
 Password1
 male
-9/11/1992
+09/11/1992
 2
 Patient Road
 Drake Circus
@@ -118,22 +118,22 @@ Lyrica
 APPOINTMENTS
 P0001
 D0000
-11/25/2019 12:30
-Notes
+Mon Nov 25 12:30:00 GMT 2019
+NOTES
 Had major Headache
-Prescription
+PRESCRIPTION
 Ibuprofen
 To help with headache
 2
 Take one very 4 hours after food or drink
 P0002
 D0002
-12/25/2019 17:15
-No Notes
-No Prescription
+Wed Dec 25 17:15:00 GMT 2019
+NO NOTES
+NO PRESCRIPTION
 P0000
 D0000
-12/25/2019 11:45
-Notes
+Wed Dec 25 11:45:00 GMT 2019
+NOTES
 Did not need to see GP minor cold
-No Prescription
+NO PRESCRIPTION
