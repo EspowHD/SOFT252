@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package patientmanagementsystem;
+
+/**
+ *
+ * @author espow
+ */
+public class Address {
+    String roadNum;
+    String roadName;
+    String area;
+    String city;
+    String postCode;
+    
+    public Address(){
+        this.roadNum = "Road Number";
+        this.roadName = "Road Name";
+        this.area = "Area";
+        this.city = "City";
+        this.postCode = "PostCode";
+    }
+
+    public Address(String roadNum, String roadName, String area, String city, String postCode) {
+        this.roadNum = roadNum;
+        this.roadName = roadName;
+        this.area = area;
+        this.city = city;
+        this.postCode = postCode;
+    }
+
+    public String getRoadNum() {
+        return roadNum;
+    }
+
+    public String getRoadName() {
+        return roadName;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+    
+    public String getFormattedAddress() {
+        return roadNum+" "+roadName+"\n"+area+"\n"+city+"\n"+postCode;
+    }
+}
