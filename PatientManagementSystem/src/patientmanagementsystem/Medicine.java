@@ -32,7 +32,7 @@ public class Medicine {
         if(stock>-1)this.stock = stock;
     }
     
-    public Medicine getMedicine(ArrayList<Medicine> medicines,String medicineName){
+    public static Medicine getMedicine(ArrayList<Medicine> medicines,String medicineName){
         Medicine medicine = null;
         for(int i = 0;i<medicines.size();i++)
         {

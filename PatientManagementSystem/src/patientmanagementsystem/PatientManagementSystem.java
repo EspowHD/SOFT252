@@ -23,25 +23,29 @@ import java.util.ArrayList;
 public class PatientManagementSystem {
     static Font textFont = new Font("Tahoma",0,16);
     static ArrayList<User> users = new ArrayList();
-    static Medicine[] medicines;
-    static ArrayList<Appointment> appointments;
-    static ArrayList<Prescription> prescriptions;
-    static final String USERFILENAME = "test//Users.txt";
-    static final String APPOINTMENTFILENAME = "test//Appointments.txt";
-    static final String MEDICINEFILENAME = "test//Medicine.txt";
+    static ArrayList<Medicine> medicines = new ArrayList();
+    static ArrayList<Appointment> appointments = new ArrayList();
+    static ArrayList<Prescription> prescriptions = new ArrayList();
+    static final String FILENAME = "test//Data.txt";
     static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/mm/yyyy HH:mm");
     public static void main(String[] args) {
-        loadUsers(USERFILENAME);
-        loadMedicines(MEDICINEFILENAME);
-        loadAppointments(APPOINTMENTFILENAME);
+        loadInformation(FILENAME);
+        /**
         java.awt.EventQueue.invokeLater(() -> {
             PatientHomePage PHP = new PatientHomePage((Patient)users.get(4));
             test.add(new AppointmentPanel(new Appointment(new Patient("Bob","Bob",new Address(),"Bob",new Date(),"bob"),new Doctor("FirstName","LastName",new Address(),"bob",new Rating[]{new Rating(4,"")}),new Date())));
             test.setVisible(true);
-        });
-        /**for(int i = 0;i<users.size();i++){
+        });*/
+        for(int i = 0;i<users.size();i++){
             System.out.println(users.get(i).getUniqueID());
-        }*/
+        }
+        for (int i = 0; i < medicines.size(); i++) {
+            System.out.println(medicines.get(i).getMedicineName()+" "+
+                    medicines.get(i).getStock());
+        }
+        for (int i = 0; i < appointments.size(); i++) {
+            System.out.println(FORMAT.format(appointments.get(i).getDateTime()));
+        }
     }
 
     /**
@@ -64,45 +68,39 @@ public class PatientManagementSystem {
         return FORMAT;
     }
     
-    private static void loadUsers(String fileName){
-        try{
-            File file = new File(fileName);
-            Scanner sc = new Scanner(file);
-            String userType = sc.nextLine();
-            String uniqueID,firstName,lastName,password;
-            Address address;
-            while(userType != null && !(userType.equals("")))
-            {
-                User user = null;
-                switch(userType){
-                    case "DOCTOR" :
-                        uniqueID = sc.nextLine();
-                        firstName = sc.nextLine();
-                        lastName = sc.nextLine();
-                        password = sc.nextLine();
-                        address = loadAddress(sc);
-                        Rating[] ratings = loadRatings(sc);
-                        user = new Doctor(uniqueID,firstName,lastName,password,address,ratings);
-                        break;
-                    case "PATIENT" :
-                        uniqueID = sc.nextLine();
-                        firstName = sc.nextLine();
-                        lastName = sc.nextLine();
-                        password = sc.nextLine();
-                        String gender = sc.nextLine();
-                        Date dob = new Date(sc.nextLine());
-                        address = loadAddress(sc);
-                        user = new Patient(uniqueID,firstName,lastName,password,gender,dob,address);
-                }
-                users.add(user);
-                try{
-                userType = sc.nextLine();
-                }catch(Exception e){
-                    userType = null;
-                }
+    private static void loadUsers(Scanner sc){
+        String userType = sc.nextLine();
+        String uniqueID,firstName,lastName,password;
+        Address address;
+        while(userType != null && !(userType.equals("") || userType.equals("MEDICINES")))
+        {
+            User user = null;
+            switch(userType){
+                case "DOCTOR" :
+                    uniqueID = sc.nextLine();
+                    firstName = sc.nextLine();
+                    lastName = sc.nextLine();
+                    password = sc.nextLine();
+                    address = loadAddress(sc);
+                    Rating[] ratings = loadRatings(sc);
+                    user = new Doctor(uniqueID,firstName,lastName,password,address,ratings);
+                    break;
+                case "PATIENT" :
+                    uniqueID = sc.nextLine();
+                    firstName = sc.nextLine();
+                    lastName = sc.nextLine();
+                    password = sc.nextLine();
+                    String gender = sc.nextLine();
+                    Date dob = new Date(sc.nextLine());
+                    address = loadAddress(sc);
+                    user = new Patient(uniqueID,firstName,lastName,password,gender,dob,address);
             }
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
+            users.add(user);
+            try{
+            userType = sc.nextLine();
+            }catch(Exception e){
+                userType = null;
+            }
         }
     }
     
@@ -134,26 +132,52 @@ public class PatientManagementSystem {
         return ratings;
     }
 
-    private void loadAppointments(String fileName) {
+    private static void loadInformation(String FILENAME) {
+        File file = new File(FILENAME);
         try{
-            File file = new File(fileName);
-            Scanner sc = new Scanner(file);
-            while(sc.nextLine()!=null && !(sc.nextLine().equals(""))){
-                Patient patient = (Patient) User.getUser(getUsers(),sc.nextLine());
-                Doctor doctor = (Doctor) User.getUser(getUsers(),sc.nextLine());
-                Date DOB = new Date(sc.nextLine());
-                Appointment appointment = new Appointment(patient,doctor,DOB);
-                if(!(sc.nextLine().contains("No ")))appointment.setDoctorNotes(sc.nextLine());
-                if(!(sc.nextLine().contains("No ")))appointment.setPrescription(getPresciptionFromFile(sc,patient,doctor));
-                if(appointment.getPrescription() != null)prescriptions.add(appointment.getPrescription());
-            }
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }    }
+        Scanner sc = new Scanner(file);
+        loadUsers(sc);
+        loadMedicine(sc);
+        loadAppointments(sc);
+        } catch (FileNotFoundException e){
+            System.out.println("Error loading file");
+        } catch (Exception e){
+            System.out.println("Some other error has occured");
+        }
+    }
 
-    private Prescription getPresciptionFromFile(Scanner sc,Patient patient,Doctor doctor) {
+    private static void loadMedicine(Scanner sc) {
         String medicineName = sc.nextLine();
-        Medicine medicine = getMedicine(medicineName);
+        while(medicineName != null &&
+                !(medicineName.equals("") || medicineName.equals("APPOINTMENTS")))
+        {
+            int stock = Integer.parseInt(sc.nextLine());
+            medicines.add(new Medicine(medicineName,stock));
+            medicineName = sc.nextLine();
+        }
+    }
+
+    private static void loadAppointments(Scanner sc) {
+        String patientID = sc.nextLine();
+        while(patientID !=null && !(patientID.equals(""))){
+            Patient patient = (Patient) User.getUser(getUsers(),patientID);
+            String doctorID = sc.nextLine();
+            Doctor doctor = (Doctor) User.getUser(getUsers(),doctorID);
+            String date = sc.nextLine();
+            Date dateTime = new Date(date);
+            Appointment appointment = new Appointment(patient,doctor,dateTime);
+            if(!(sc.nextLine().contains("No ")))appointment.setDoctorNotes(sc.nextLine());
+            if(!(sc.nextLine().contains("No ")))appointment.setPrescription(
+                    getPresciptionFromFile(sc,patient,doctor));
+            if(appointment.getPrescription() != null)prescriptions.add(appointment.getPrescription());
+            appointments.add(appointment);
+            patientID = sc.nextLine();
+        }   
+    }
+
+    private static Prescription getPresciptionFromFile(Scanner sc,Patient patient,Doctor doctor) {
+        String medicineName = sc.nextLine();
+        Medicine medicine = Medicine.getMedicine(medicines,medicineName);
         String prescriptionNote = sc.nextLine();
         String quantity = sc.nextLine();
         String dosage = sc.nextLine();
