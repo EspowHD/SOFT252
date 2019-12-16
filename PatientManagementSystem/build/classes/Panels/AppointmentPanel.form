@@ -6,13 +6,13 @@
       <Connection code="PatientManagementSystem.getTextFont()" type="code"/>
     </Property>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[400, 100]"/>
+      <Dimension value="[600, 100]"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[400, 100]"/>
+      <Dimension value="[600, 100]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[400, 100]"/>
+      <Dimension value="[600, 100]"/>
     </Property>
   </Properties>
   <AuxValues>

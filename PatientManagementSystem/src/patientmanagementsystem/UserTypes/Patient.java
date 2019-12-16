@@ -30,7 +30,7 @@ public class Patient extends User {
     }
     
     public Patient(String firstName, String lastName, String password, String gender, Date DOB, Address address) {
-        this.uniqueID = uniqueIdentifier+getNextID(uniqueIdentifier);
+        this.uniqueID = uniqueIdentifier+getNextID(uniqueIdentifier,PatientManagementSystem.getUsers());
         this.DOB = DOB;
         this.gender = gender;
         this.firstName = firstName;

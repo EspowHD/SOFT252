@@ -6,6 +6,7 @@
 package patientmanagementsystem.UserTypes;
 
 import patientmanagementsystem.Address;
+import patientmanagementsystem.PatientManagementSystem;
 import patientmanagementsystem.Rating;
 
 /**
@@ -26,7 +27,7 @@ public class Doctor extends User{
     }
 
     public Doctor(String firstName, String lastName, String password, Address address, Rating[] ratings) {
-        this.uniqueID = this.uniqueIdentifier+getNextID(uniqueIdentifier);
+        this.uniqueID = this.uniqueIdentifier+getNextID(uniqueIdentifier,PatientManagementSystem.getUsers());
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

@@ -6,6 +6,10 @@
 package patientmanagementsystem;
 
 import Forms.*;
+import Forms.HomePages.AdministratorHomePage;
+import Forms.HomePages.DoctorHomePage;
+import Forms.HomePages.PatientHomePage;
+import Forms.HomePages.SecretaryHomePage;
 import Panels.*;
 import java.awt.Font;
 import java.io.BufferedWriter;
@@ -29,16 +33,14 @@ public class PatientManagementSystem {
     static ArrayList<Medicine> medicines = new ArrayList();
     static ArrayList<Appointment> appointments = new ArrayList();
     static ArrayList<Prescription> prescriptions = new ArrayList();
+    static PatientHomePage php = null;
+    static DoctorHomePage dhp = null;
+    static SecretaryHomePage shp = null;
+    static AdministratorHomePage ahp = null;
     static final String FILENAME = "test//Data.txt";
     static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/mm/yyyy HH:mm");
     public static void main(String[] args) {
         loadInformation(FILENAME);
-        /**
-        java.awt.EventQueue.invokeLater(() -> {
-            PatientHomePage PHP = new PatientHomePage((Patient)users.get(4));
-            test.add(new AppointmentPanel(new Appointment(new Patient("Bob","Bob",new Address(),"Bob",new Date(),"bob"),new Doctor("FirstName","LastName",new Address(),"bob",new Rating[]{new Rating(4,"")}),new Date())));
-            test.setVisible(true);
-        });*/
         for(int i = 0;i<users.size();i++){
             System.out.println(users.get(i).getUniqueID());
         }
@@ -49,6 +51,8 @@ public class PatientManagementSystem {
         for (int i = 0; i < appointments.size(); i++) {
             System.out.println(FORMAT.format(appointments.get(i).getDateTime()));
         }
+        StartPage test = new StartPage();
+        test.setVisible(true);
         saveInformation(FILENAME);
     }
 
@@ -80,8 +84,16 @@ public class PatientManagementSystem {
         return prescriptions;
     }
     
+    public static PatientHomePage getPhp() {
+        return php;
+    }
+
+    public static void setPhp(PatientHomePage php) {
+        PatientManagementSystem.php = php;
+    }
     
     
+      
     private static void loadUsers(Scanner sc){
         String userType = sc.nextLine();
         String uniqueID,firstName,lastName,password;

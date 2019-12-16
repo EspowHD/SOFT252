@@ -16,9 +16,8 @@ public abstract class User {
     String uniqueID;
     String password;
     
-    protected String getNextID(String type){
+    protected String getNextID(String type,ArrayList<User> users){
         int maxID = 0;
-        ArrayList<User> users = PatientManagementSystem.getUsers();
         for(int i = 0;i < users.size();i++){
             if(users.get(i).uniqueID.contains(type)){
                 int inInt = Integer.parseInt(users.get(i).uniqueID.substring(1));

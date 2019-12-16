@@ -40,9 +40,9 @@ public class AppointmentPanel extends javax.swing.JPanel {
         TxtAddress = new javax.swing.JTextArea();
 
         setFont(PatientManagementSystem.getTextFont());
-        setMaximumSize(new java.awt.Dimension(400, 100));
-        setMinimumSize(new java.awt.Dimension(400, 100));
-        setPreferredSize(new java.awt.Dimension(400, 100));
+        setMaximumSize(new java.awt.Dimension(600, 100));
+        setMinimumSize(new java.awt.Dimension(600, 100));
+        setPreferredSize(new java.awt.Dimension(600, 100));
         setLayout(new java.awt.GridBagLayout());
 
         LblTime.setFont(PatientManagementSystem.getTextFont());

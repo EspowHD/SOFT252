@@ -4,18 +4,35 @@
  * and open the template in the editor.
  */
 package Panels;
+import java.util.Arrays;
 import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.UserTypes.*;
+import Forms.HomePages.*;
 /**
  *
  * @author espow
  */
 public class LoginPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form LoginPanel
-     */
+    boolean done = false;
     public LoginPanel() {
         initComponents();
+    }
+    
+    public User loginCheck(){
+        User userLogin = null;
+        String uniqueID = txtUniqueID.getText();
+        String password = String.valueOf(pfPassword.getPassword());
+        System.out.println(uniqueID + "" + password);
+        for (User user : PatientManagementSystem.getUsers()) {
+            if(user.getUniqueID().equals(uniqueID)){
+                if(user.getPassword().equals(password))userLogin = User.getUser(PatientManagementSystem.getUsers(), uniqueID);
+            }
+        }
+        return userLogin;
+    }
+    
+    public boolean getDone(){
+        return this.done;
     }
 
     /**
@@ -28,25 +45,25 @@ public class LoginPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        PfPassword = new javax.swing.JPasswordField();
-        TxtUniqueID = new javax.swing.JTextField();
-        JbLogin = new javax.swing.JButton();
-        LblUniqueID = new javax.swing.JLabel();
-        LblPassword = new javax.swing.JLabel();
+        pfPassword = new javax.swing.JPasswordField();
+        txtUniqueID = new javax.swing.JTextField();
+        jbLogin = new javax.swing.JButton();
+        lblUniqueID = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(200, 125));
         setMinimumSize(new java.awt.Dimension(200, 125));
         setPreferredSize(new java.awt.Dimension(200, 125));
         setLayout(new java.awt.GridBagLayout());
 
-        PfPassword.setFont(PatientManagementSystem.getTextFont());
-        PfPassword.setMaximumSize(new java.awt.Dimension(100, 22));
-        PfPassword.setMinimumSize(new java.awt.Dimension(100, 22));
-        PfPassword.setName(""); // NOI18N
-        PfPassword.setPreferredSize(new java.awt.Dimension(100, 22));
-        PfPassword.addActionListener(new java.awt.event.ActionListener() {
+        pfPassword.setFont(PatientManagementSystem.getTextFont());
+        pfPassword.setMaximumSize(new java.awt.Dimension(100, 22));
+        pfPassword.setMinimumSize(new java.awt.Dimension(100, 22));
+        pfPassword.setName(""); // NOI18N
+        pfPassword.setPreferredSize(new java.awt.Dimension(100, 22));
+        pfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PfPasswordActionPerformed(evt);
+                pfPasswordActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -54,20 +71,20 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 15);
-        add(PfPassword, gridBagConstraints);
-        PfPassword.getAccessibleContext().setAccessibleName("");
+        add(pfPassword, gridBagConstraints);
+        pfPassword.getAccessibleContext().setAccessibleName("");
 
-        TxtUniqueID.setFont(PatientManagementSystem.getTextFont());
-        TxtUniqueID.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        TxtUniqueID.setToolTipText("Your user type (P for Patient,\nD for Doctor, A for Administrator,\nS for Secretary) followed\n by 4 numbers.");
-        TxtUniqueID.setAutoscrolls(false);
-        TxtUniqueID.setMaximumSize(new java.awt.Dimension(100, 22));
-        TxtUniqueID.setMinimumSize(new java.awt.Dimension(100, 22));
-        TxtUniqueID.setName("TxtUniqueID"); // NOI18N
-        TxtUniqueID.setPreferredSize(new java.awt.Dimension(100, 22));
-        TxtUniqueID.addActionListener(new java.awt.event.ActionListener() {
+        txtUniqueID.setFont(PatientManagementSystem.getTextFont());
+        txtUniqueID.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtUniqueID.setToolTipText("Your user type (P for Patient,\nD for Doctor, A for Administrator,\nS for Secretary) followed\n by 4 numbers.");
+        txtUniqueID.setAutoscrolls(false);
+        txtUniqueID.setMaximumSize(new java.awt.Dimension(100, 22));
+        txtUniqueID.setMinimumSize(new java.awt.Dimension(100, 22));
+        txtUniqueID.setName("txtUniqueID"); // NOI18N
+        txtUniqueID.setPreferredSize(new java.awt.Dimension(100, 22));
+        txtUniqueID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtUniqueIDActionPerformed(evt);
+                txtUniqueIDActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -75,13 +92,13 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 15);
-        add(TxtUniqueID, gridBagConstraints);
+        add(txtUniqueID, gridBagConstraints);
 
-        JbLogin.setFont(PatientManagementSystem.getTextFont());
-        JbLogin.setText("Log in");
-        JbLogin.addActionListener(new java.awt.event.ActionListener() {
+        jbLogin.setFont(PatientManagementSystem.getTextFont());
+        jbLogin.setText("Log in");
+        jbLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JbLoginActionPerformed(evt);
+                jbLoginActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -89,45 +106,60 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        add(JbLogin, gridBagConstraints);
+        add(jbLogin, gridBagConstraints);
 
-        LblUniqueID.setFont(PatientManagementSystem.getTextFont());
-        LblUniqueID.setText("Unique ID:");
+        lblUniqueID.setFont(PatientManagementSystem.getTextFont());
+        lblUniqueID.setText("Unique ID:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(7, 15, 0, 0);
-        add(LblUniqueID, gridBagConstraints);
+        add(lblUniqueID, gridBagConstraints);
 
-        LblPassword.setFont(PatientManagementSystem.getTextFont());
-        LblPassword.setText("Password:");
+        lblPassword.setFont(PatientManagementSystem.getTextFont());
+        lblPassword.setText("Password:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(13, 15, 0, 0);
-        add(LblPassword, gridBagConstraints);
+        add(lblPassword, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PfPasswordActionPerformed
+    private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PfPasswordActionPerformed
+    }//GEN-LAST:event_pfPasswordActionPerformed
 
-    private void TxtUniqueIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUniqueIDActionPerformed
+    private void txtUniqueIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUniqueIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtUniqueIDActionPerformed
+    }//GEN-LAST:event_txtUniqueIDActionPerformed
 
-    private void JbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JbLoginActionPerformed
+    private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
+        User user = loginCheck();
+        if(user != null){
+            char type = user.getUniqueID().charAt(0);
+            switch(type){
+                case 'D':
+                    Doctor doctor = (Doctor) user;
+                    break;
+                case 'P':
+                    Patient patient = (Patient) user;
+                    PatientManagementSystem.setPhp(new PatientHomePage(patient));
+                    PatientManagementSystem.getPhp().setVisible(true);
+                    this.done = true;
+                    break;
+            }
+        }
+        
+    }//GEN-LAST:event_jbLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JbLogin;
-    private javax.swing.JLabel LblPassword;
-    private javax.swing.JLabel LblUniqueID;
-    private javax.swing.JPasswordField PfPassword;
-    private javax.swing.JTextField TxtUniqueID;
+    private javax.swing.JButton jbLogin;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUniqueID;
+    private javax.swing.JPasswordField pfPassword;
+    private javax.swing.JTextField txtUniqueID;
     // End of variables declaration//GEN-END:variables
 }

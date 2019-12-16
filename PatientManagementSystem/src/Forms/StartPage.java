@@ -33,7 +33,7 @@ public class StartPage extends javax.swing.JFrame {
         BtnLogin = new javax.swing.JButton();
         loginPanel = new Panels.LoginPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Management System - Start page");
         setBounds(new java.awt.Rectangle(0, 0, 400, 300));
         setMinimumSize(new java.awt.Dimension(300, 250));
@@ -60,6 +60,16 @@ public class StartPage extends javax.swing.JFrame {
         getContentPane().add(BtnLogin, gridBagConstraints);
         BtnLogin.getAccessibleContext().setAccessibleName("");
 
+        loginPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                loginPanelComponentHidden(evt);
+            }
+        });
+        loginPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                loginPanelPropertyChange(evt);
+            }
+        });
         getContentPane().add(loginPanel, new java.awt.GridBagConstraints());
 
         pack();
@@ -70,41 +80,18 @@ public class StartPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnLoginActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StartPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StartPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StartPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StartPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new StartPage().setVisible(true);
-        });
-    }
+    private void loginPanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_loginPanelPropertyChange
+
+    }//GEN-LAST:event_loginPanelPropertyChange
+
+    private void loginPanelComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_loginPanelComponentHidden
+        if(this.loginPanel.getDone())this.dispose();
+    }//GEN-LAST:event_loginPanelComponentHidden
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnLogin;
     private Panels.LoginPanel loginPanel;
     // End of variables declaration//GEN-END:variables
+
 }
