@@ -5,7 +5,9 @@
  */
 package patientmanagementsystem.UserTypes;
 
+import java.util.ArrayList;
 import patientmanagementsystem.Address;
+import patientmanagementsystem.Appointment;
 import patientmanagementsystem.PatientManagementSystem;
 import patientmanagementsystem.Rating;
 
@@ -41,7 +43,17 @@ public class Doctor extends User{
             Average += rating.getStars();
         }
         Average = Average/this.ratings.length;
-        return Average.toString();
+        return Average.toString().substring(0, 4);
+    }
+    
+    public ArrayList<Appointment> getAppointments(){
+        ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+        for(int i = 0;i<PatientManagementSystem.getAppointments().size();i++){
+            if(PatientManagementSystem.getAppointments().get(i).getDoctor().getUniqueID().equals(this.uniqueID)){
+                appointments.add(PatientManagementSystem.getAppointments().get(i));
+            }
+        }
+        return appointments;
     }
 
     public void setRatings(Rating[] ratings) {

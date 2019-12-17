@@ -148,6 +148,7 @@ public class LoginPanel extends javax.swing.JPanel {
                     PatientManagementSystem.setPhp(new PatientHomePage(patient));
                     PatientManagementSystem.getPhp().setVisible(true);
                     this.done = true;
+                    this.setVisible(false);
                     break;
             }
         }

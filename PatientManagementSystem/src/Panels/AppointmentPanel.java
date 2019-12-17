@@ -39,6 +39,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         LblPatientName = new javax.swing.JLabel();
         TxtAddress = new javax.swing.JTextArea();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setFont(PatientManagementSystem.getTextFont());
         setMaximumSize(new java.awt.Dimension(600, 100));
         setMinimumSize(new java.awt.Dimension(600, 100));
@@ -50,7 +51,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 10, 10, 10);
         add(LblTime, gridBagConstraints);
 
@@ -59,7 +60,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 15, 10);
         add(LblDoctorName, gridBagConstraints);
 
@@ -68,7 +69,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 15, 10);
         add(LblDoctorRating, gridBagConstraints);
 
@@ -77,7 +78,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 10, 10);
         add(LblPatientName, gridBagConstraints);
 

@@ -5,6 +5,7 @@
  */
 package Forms.HomePages;
 import Panels.AppointmentPanel;
+import Panels.NewAppointmentButton;
 import java.util.ArrayList;
 import javax.swing.*;
 import patientmanagementsystem.Appointment;
@@ -62,5 +63,6 @@ public class PatientHomePage extends JFrame {
         for(Appointment appointment : appointments){
             jPanel1.add(new AppointmentPanel(appointment));
         }
+        jPanel1.add(new NewAppointmentButton());
     }
 }
