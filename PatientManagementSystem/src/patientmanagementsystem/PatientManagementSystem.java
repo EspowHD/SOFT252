@@ -41,6 +41,15 @@ public class PatientManagementSystem {
     static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/mm/yyyy HH:mm");
     public static void main(String[] args) {
         loadInformation(FILENAME);
+        JFrame AM = new JFrame();
+        AM.setSize(600, 200);
+        AM.add(new PnlAppointmentMaker());
+        AM.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        AM.setVisible(true);
+        //runPMS();
+    }
+    
+    private static void runPMS(){
         for(int i = 0;i<users.size();i++){
             System.out.println(users.get(i).getUniqueID());
         }
