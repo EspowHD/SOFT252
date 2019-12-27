@@ -7,23 +7,26 @@ package Forms.HomePages;
 import Forms.PatientApppintmentRequester;
 import Forms.StartPage;
 import Panels.AppointmentPanel;
+import Panels.PrescriptionPanel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.*;
 import patientmanagementsystem.Appointment;
 import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.Prescription;
 import patientmanagementsystem.UserTypes.Patient;
 /**
  *
  * @author espow
  */
-public class PatientHomePage extends JFrame {
+public final class PatientHomePage extends JFrame {
     private final Patient PATIENT;
     public PatientHomePage(Patient patient) {
         this.PATIENT = patient;
         initComponents();
         updateAppointmentsList(this.PATIENT.getAppointments());
+        updatePrescriptionsList(this.PATIENT.getPrescriptions());
     }
 
     /**
@@ -41,6 +44,9 @@ public class PatientHomePage extends JFrame {
         BtnRequestAppointment = new javax.swing.JButton();
         LblAppointments = new javax.swing.JLabel();
         BtnLogOut = new javax.swing.JButton();
+        SclPrescriptions = new javax.swing.JScrollPane();
+        PrescriptionsContainer = new javax.swing.JPanel();
+        LblPrescriptions = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -111,6 +117,38 @@ public class PatientHomePage extends JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
         getContentPane().add(BtnLogOut, gridBagConstraints);
 
+        SclPrescriptions.setBackground(new java.awt.Color(255, 102, 102));
+        SclPrescriptions.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclPrescriptions.setAlignmentX(0.0F);
+        SclPrescriptions.setAlignmentY(0.0F);
+        SclPrescriptions.setMaximumSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        SclPrescriptions.setMinimumSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        SclPrescriptions.setPreferredSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-220));
+
+        PrescriptionsContainer.setBackground(new java.awt.Color(247, 247, 247));
+        PrescriptionsContainer.setAutoscrolls(true);
+        PrescriptionsContainer.setMaximumSize(new java.awt.Dimension(700, 10000));
+        PrescriptionsContainer.setMinimumSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        PrescriptionsContainer.setName(""); // NOI18N
+        PrescriptionsContainer.setPreferredSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-150));
+        PrescriptionsContainer.setLayout(new javax.swing.BoxLayout(PrescriptionsContainer, javax.swing.BoxLayout.Y_AXIS));
+        SclPrescriptions.setViewportView(PrescriptionsContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        getContentPane().add(SclPrescriptions, gridBagConstraints);
+
+        LblPrescriptions.setFont(PatientManagementSystem.getTextFont());
+        LblPrescriptions.setText("Prescriptions:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 0);
+        getContentPane().add(LblPrescriptions, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,7 +170,10 @@ public class PatientHomePage extends JFrame {
     private javax.swing.JButton BtnLogOut;
     private javax.swing.JButton BtnRequestAppointment;
     private javax.swing.JLabel LblAppointments;
+    private javax.swing.JLabel LblPrescriptions;
+    private javax.swing.JPanel PrescriptionsContainer;
     private javax.swing.JScrollPane SclAppointments;
+    private javax.swing.JScrollPane SclPrescriptions;
     // End of variables declaration//GEN-END:variables
 
     public void updateAppointmentsList(ArrayList<Appointment> appointments) {
@@ -164,5 +205,25 @@ public class PatientHomePage extends JFrame {
     public void resizeAppointmentContainerToFit(){
         int componentHeight = 100*(this.PATIENT.getAppointments().size());
         this.AppointmentsContainer.setPreferredSize(new Dimension(700, componentHeight));
+    }
+
+    private void updatePrescriptionsList(ArrayList<Prescription> prescriptions) {
+        PrescriptionsContainer.removeAll();
+        for(Prescription prescription : prescriptions){
+            PrescriptionPanel PP = new PrescriptionPanel(prescription);
+            PP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            PP.setVisible(true);
+            PrescriptionsContainer.add(PP);
+        }
+        resizePrescriptionContainerToFit();
+        validate();
+        repaint();
+    }
+
+    private void resizePrescriptionContainerToFit() {
+        if(this.PATIENT.getPrescriptions().size() != 0){
+        int componentHeight = 350*(this.PATIENT.getPrescriptions().size());
+        this.PrescriptionsContainer.setPreferredSize(new Dimension(700, componentHeight));
+        }
     }
 }

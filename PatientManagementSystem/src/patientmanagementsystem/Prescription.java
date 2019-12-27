@@ -28,5 +28,29 @@ public class Prescription {
         this.quantity = Quantity;
         this.dosage = dosage;
     }
+
+    public Doctor getPrescribedBy() {
+        return prescribedBy;
+    }
+
+    public Patient getIssueTo() {
+        return issueTo;
+    }
+
+    public Medicine getMedicine() {
+        return medicine;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
     
 }

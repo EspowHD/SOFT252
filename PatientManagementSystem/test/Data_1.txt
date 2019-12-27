@@ -118,8 +118,8 @@ Lyrica
 APPOINTMENTS
 P0001
 D0000
-
-Mon Nov 25 12:30:00 GMT 2019
+Completed
+11/25/2019 12:30
 NOTES
 Had major Headache
 PRESCRIPTION
@@ -129,21 +129,21 @@ To help with headache
 Take one very 4 hours after food or drink
 P0002
 D0002
-
-Wed Dec 25 17:15:00 GMT 2019
+Completed
+12/25/2019 17:15
 NO NOTES
 NO PRESCRIPTION
 P0000
 D0000
-
-Wed Dec 25 11:45:00 GMT 2019
+Completed
+12/25/2019 11:45
 NOTES
 Did not need to see GP minor cold
 NO PRESCRIPTION
 P0000
 D0001
-
-Wed Dec 25 11:30:00 GMT 2019
+Completed
+12/25/2019 11:30
 NOTES
 Did not need to see GP minor cold
 NO PRESCRIPTION

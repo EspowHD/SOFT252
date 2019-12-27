@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package patientmanagementsystem.UserTypes;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import patientmanagementsystem.*;
 import patientmanagementsystem.PatientManagementSystem;
 /**
@@ -60,5 +62,23 @@ public class Patient extends User {
 
     public Date getDOB() {
         return DOB;
+    }
+    
+    public int getAge(){
+        Date birthDate = this.getDOB();
+        Date secondDate = new Date();
+        long diffInMillies = Math.abs(secondDate.getTime() - birthDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        int age = (int) (diff/365.24);
+        return age;
+    }
+    public ArrayList<Prescription> getPrescriptions(){
+        ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
+        for(int i = 0;i<PatientManagementSystem.getPrescriptions().size();i++){
+            if(PatientManagementSystem.getPrescriptions().get(i).getIssueTo().getUniqueID().equals(this.uniqueID)){
+                prescriptions.add(PatientManagementSystem.getPrescriptions().get(i));
+            }
+        }
+        return prescriptions;
     }
 }

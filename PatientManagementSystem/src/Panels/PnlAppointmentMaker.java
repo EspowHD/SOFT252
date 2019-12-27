@@ -8,6 +8,7 @@ package Panels;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.UserTypes.Doctor;
 
 /**
  *
@@ -45,6 +46,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         LblColon = new javax.swing.JLabel();
         SpinHour = new javax.swing.JSpinner();
         SpinMinutes = new javax.swing.JSpinner();
+        LblDoctorRating = new javax.swing.JLabel();
 
         setFont(PatientManagementSystem.getTextFont());
         setMaximumSize(new java.awt.Dimension(600, 200));
@@ -78,7 +80,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         LblPickDate.setText("Pick Date:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(LblPickDate, gridBagConstraints);
 
@@ -86,7 +88,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         LblPickTime.setText("Pick Time");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(LblPickTime, gridBagConstraints);
 
@@ -101,6 +103,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
         add(TxtAddress, gridBagConstraints);
 
         SpinMonth.setFont(PatientManagementSystem.getTextFont());
@@ -114,7 +117,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         add(SpinMonth, gridBagConstraints);
 
         SpinYear.setFont(PatientManagementSystem.getTextFont());
@@ -128,7 +131,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(SpinYear, gridBagConstraints);
 
@@ -149,7 +152,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         add(SpinDay, gridBagConstraints);
 
@@ -157,21 +160,21 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         LblSlash.setText("/");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         add(LblSlash, gridBagConstraints);
 
         LblSlash1.setFont(PatientManagementSystem.getTextFont());
         LblSlash1.setText("/");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         add(LblSlash1, gridBagConstraints);
 
         LblColon.setFont(PatientManagementSystem.getTextFont());
         LblColon.setText(":");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         add(LblColon, gridBagConstraints);
 
         SpinHour.setFont(PatientManagementSystem.getTextFont());
@@ -191,7 +194,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         add(SpinHour, gridBagConstraints);
 
@@ -212,12 +215,22 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         add(SpinMinutes, gridBagConstraints);
+
+        LblDoctorRating.setFont(PatientManagementSystem.getTextFont());
+        LblDoctorRating.setText("Rating: N/A");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(LblDoctorRating, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CoBoDoctorSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoBoDoctorSelectorActionPerformed
         updateAddress();
+        updateRating();
     }//GEN-LAST:event_CoBoDoctorSelectorActionPerformed
 
     private void SpinDayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_SpinDayPropertyChange
@@ -255,6 +268,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> CoBoDoctorSelector;
     private javax.swing.JLabel LblColon;
+    private javax.swing.JLabel LblDoctorRating;
     private javax.swing.JLabel LblPickDate;
     private javax.swing.JLabel LblPickDoctor;
     private javax.swing.JLabel LblPickTime;
@@ -319,5 +333,18 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
 
     private void updateDate() {
         date = new Date(this.SpinYear.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString()+" "+this.SpinHour.getValue().toString()+":"+this.SpinMinutes.getValue().toString());
+    }
+
+    private void updateRating() {
+        for (int i = 0; i < PatientManagementSystem.getUsers().size(); i++) {
+            String userID = PatientManagementSystem.getUsers().get(i).getUniqueID();
+            if(userID.contains("D")){
+                if(this.CoBoDoctorSelector.getSelectedItem().toString().contains(PatientManagementSystem.getUsers().get(i).getFirstName()) &&
+                    this.CoBoDoctorSelector.getSelectedItem().toString().contains(PatientManagementSystem.getUsers().get(i).getLastName())){
+                    this.LblDoctorRating.setText("Rating: "+((Doctor) PatientManagementSystem.getUsers().get(i)).getAverageRating());
+                }
+            }
+        }
+        if(this.LblDoctorRating.getText() == null || this.LblDoctorRating.getText() == "") this.LblDoctorRating.setText("Rating: N/A");
     }
 }

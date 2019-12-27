@@ -30,7 +30,7 @@ public class StartPage extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        BtnLogin = new javax.swing.JButton();
+        BtnRegister = new javax.swing.JButton();
         loginPanel = new Panels.LoginPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -42,14 +42,14 @@ public class StartPage extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        BtnLogin.setFont(PatientManagementSystem.getTextFont());
-        BtnLogin.setText("Register");
-        BtnLogin.setAlignmentX(0.5F);
-        BtnLogin.setAlignmentY(0.0F);
-        BtnLogin.setMaximumSize(new java.awt.Dimension(100, 30));
-        BtnLogin.addActionListener(new java.awt.event.ActionListener() {
+        BtnRegister.setFont(PatientManagementSystem.getTextFont());
+        BtnRegister.setText("Register");
+        BtnRegister.setAlignmentX(0.5F);
+        BtnRegister.setAlignmentY(0.0F);
+        BtnRegister.setMaximumSize(new java.awt.Dimension(100, 30));
+        BtnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnLoginActionPerformed(evt);
+                BtnRegisterActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -57,8 +57,8 @@ public class StartPage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 1;
-        getContentPane().add(BtnLogin, gridBagConstraints);
-        BtnLogin.getAccessibleContext().setAccessibleName("");
+        getContentPane().add(BtnRegister, gridBagConstraints);
+        BtnRegister.getAccessibleContext().setAccessibleName("");
 
         loginPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -76,9 +76,9 @@ public class StartPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
+    private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnLoginActionPerformed
+    }//GEN-LAST:event_BtnRegisterActionPerformed
 
     private void loginPanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_loginPanelPropertyChange
 
@@ -90,7 +90,7 @@ public class StartPage extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnLogin;
+    private javax.swing.JButton BtnRegister;
     private Panels.LoginPanel loginPanel;
     // End of variables declaration//GEN-END:variables
 

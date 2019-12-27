@@ -45,8 +45,8 @@ public class PatientManagementSystem {
     public static void main(String[] args) {
         loadInformation(FILENAME);
 //        JFrame AM = new JFrame();
-//        AM.setSize(600, 200);
-//        AM.add(new PnlAppointmentMaker());
+//        AM.setSize(700, 350);
+//        AM.add(new PrescriptionPanel(prescriptions.get(0)));
 //        AM.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 //        AM.setVisible(true);
        runPMS();
