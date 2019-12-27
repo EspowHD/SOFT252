@@ -5,17 +5,24 @@
  */
 package Forms;
 
+import Forms.HomePages.PatientHomePage;
+import java.util.Date;
+import patientmanagementsystem.Appointment;
+import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.UserTypes.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author espow
  */
-public class AppointmentMaker extends javax.swing.JFrame {
+public class PatientApppintmentRequester extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AppointmentMaker
-     */
-    public AppointmentMaker() {
+    PatientHomePage php;
+    public PatientApppintmentRequester(PatientHomePage php) {
+        this.php = php;
         initComponents();
+        this.LblPatientName.setText(this.LblPatientName.getText()+this.php.getPatient().getFirstName()+" "+this.php.getPatient().getLastName());
     }
 
     /**
@@ -26,61 +33,117 @@ public class AppointmentMaker extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        LblPatientName = new javax.swing.JLabel();
+        pnlAppointmentMaker1 = new Panels.PnlAppointmentMaker();
+        BtnCancel = new javax.swing.JButton();
+        BtnRequest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(600, 400));
-        setMinimumSize(new java.awt.Dimension(600, 400));
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setTitle("Request an Appointment");
+        setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(600, 300));
+        setMinimumSize(new java.awt.Dimension(600, 300));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
+        LblPatientName.setFont(PatientManagementSystem.getTextFont());
+        LblPatientName.setText("Patient: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 23;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
+        getContentPane().add(LblPatientName, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(13, 0, 0, 0);
+        getContentPane().add(pnlAppointmentMaker1, gridBagConstraints);
+
+        BtnCancel.setFont(PatientManagementSystem.getTextFont());
+        BtnCancel.setText("Cancel");
+        BtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 75, 10, 0);
+        getContentPane().add(BtnCancel, gridBagConstraints);
+
+        BtnRequest.setFont(PatientManagementSystem.getTextFont());
+        BtnRequest.setText("Request this Appoinment");
+        BtnRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRequestActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 75);
+        getContentPane().add(BtnRequest, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void BtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_BtnCancelActionPerformed
+
+    private void BtnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestActionPerformed
+        try{
+            Doctor doctor = null;
+            for (int i = 0; i < PatientManagementSystem.getUsers().size(); i++) {
+                User user = PatientManagementSystem.getUsers().get(i);
+                if(user.getUniqueID().contains("D")){
+                if(this.pnlAppointmentMaker1.CoBoDoctorSelector.getSelectedItem().toString().contains(PatientManagementSystem.getUsers().get(i).getFirstName()) &&
+                    this.pnlAppointmentMaker1.CoBoDoctorSelector.getSelectedItem().toString().contains(PatientManagementSystem.getUsers().get(i).getLastName())){
+                    doctor = (Doctor) user;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppointmentMaker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AppointmentMaker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppointmentMaker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AppointmentMaker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AppointmentMaker().setVisible(true);
             }
-        });
-    }
+            if(!checkIfBusy(this.php.getPatient(),doctor,this.pnlAppointmentMaker1.getDate())){
+                ArrayList<Appointment> appointments = PatientManagementSystem.getAppointments();
+                appointments.add(new Appointment(this.php.getPatient(),doctor,"Request",this.pnlAppointmentMaker1.getDate()));
+                PatientManagementSystem.setAppointments(appointments);
+                this.php.updateAppointmentsList(php.getPatient().getAppointments());
+                dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "The doctor or patient is busy\non this day");
+            }
+        } catch (Exception e){
+        }
+    }//GEN-LAST:event_BtnRequestActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnCancel;
+    private javax.swing.JButton BtnRequest;
+    private javax.swing.JLabel LblPatientName;
+    private Panels.PnlAppointmentMaker pnlAppointmentMaker1;
     // End of variables declaration//GEN-END:variables
+
+    private boolean checkIfBusy(Patient patient, Doctor doctor, Date date) {
+        boolean busy = false;
+        for (Appointment appointment : PatientManagementSystem.getAppointments()) {
+            if (appointment.getDoctor() == doctor || appointment.getPatient() == patient){
+                if(appointment.getDateTime().equals(date)) busy = true;
+            }
+        }
+        return busy;
+    }
+
+    private void requesterClose() {
+        php.updateAppointmentsList(php.getPatient().getAppointments());
+        this.dispose();
+    }
 }

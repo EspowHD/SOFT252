@@ -38,12 +38,14 @@ public class AppointmentPanel extends javax.swing.JPanel {
         LblDoctorRating = new javax.swing.JLabel();
         LblPatientName = new javax.swing.JLabel();
         TxtAddress = new javax.swing.JTextArea();
+        LblStatus = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setFont(PatientManagementSystem.getTextFont());
-        setMaximumSize(new java.awt.Dimension(600, 100));
-        setMinimumSize(new java.awt.Dimension(600, 100));
-        setPreferredSize(new java.awt.Dimension(600, 100));
+        setMaximumSize(new java.awt.Dimension(700, 100));
+        setMinimumSize(new java.awt.Dimension(700, 100));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(700, 100));
         setLayout(new java.awt.GridBagLayout());
 
         LblTime.setFont(PatientManagementSystem.getTextFont());
@@ -52,7 +54,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 5, 5);
         add(LblTime, gridBagConstraints);
 
         LblDoctorName.setFont(PatientManagementSystem.getTextFont());
@@ -61,7 +63,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 15, 15, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 10, 5);
         add(LblDoctorName, gridBagConstraints);
 
         LblDoctorRating.setFont(PatientManagementSystem.getTextFont());
@@ -70,7 +72,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 15, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
         add(LblDoctorRating, gridBagConstraints);
 
         LblPatientName.setFont(PatientManagementSystem.getTextFont());
@@ -79,21 +81,33 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 5, 5);
         add(LblPatientName, gridBagConstraints);
 
         TxtAddress.setEditable(false);
+        TxtAddress.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
         TxtAddress.setColumns(20);
         TxtAddress.setFont(PatientManagementSystem.getTextFont());
         TxtAddress.setLineWrap(true);
         TxtAddress.setRows(4);
+        TxtAddress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
         add(TxtAddress, gridBagConstraints);
+
+        LblStatus.setFont(PatientManagementSystem.getTextFont());
+        LblStatus.setText("Status: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 10);
+        add(LblStatus, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -101,6 +115,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
     private javax.swing.JLabel LblDoctorName;
     private javax.swing.JLabel LblDoctorRating;
     private javax.swing.JLabel LblPatientName;
+    private javax.swing.JLabel LblStatus;
     private javax.swing.JLabel LblTime;
     private javax.swing.JTextArea TxtAddress;
     // End of variables declaration//GEN-END:variables
@@ -110,6 +125,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         LblTime.setText(LblTime.getText()+PatientManagementSystem.getFormat().format(this.Appointment.getDateTime()));
         LblDoctorName.setText(LblDoctorName.getText()+this.Appointment.getDoctor().getFirstName()+" "+this.Appointment.getDoctor().getLastName());
         LblDoctorRating.setText(LblDoctorRating.getText()+this.Appointment.getDoctor().getAverageRating());
+        LblStatus.setText(LblStatus.getText()+this.Appointment.getStatus());
         TxtAddress.setText(this.Appointment.getDoctor().getAddress().getFormattedAddress());
     }
 }

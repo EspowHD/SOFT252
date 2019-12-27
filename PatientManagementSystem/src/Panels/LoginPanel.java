@@ -8,6 +8,7 @@ import java.util.Arrays;
 import patientmanagementsystem.PatientManagementSystem;
 import patientmanagementsystem.UserTypes.*;
 import Forms.HomePages.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author espow
@@ -22,11 +23,16 @@ public class LoginPanel extends javax.swing.JPanel {
         User userLogin = null;
         String uniqueID = txtUniqueID.getText();
         String password = String.valueOf(pfPassword.getPassword());
-        System.out.println(uniqueID + "" + password);
         for (User user : PatientManagementSystem.getUsers()) {
             if(user.getUniqueID().equals(uniqueID)){
                 if(user.getPassword().equals(password))userLogin = User.getUser(PatientManagementSystem.getUsers(), uniqueID);
             }
+        }
+        if(userLogin == null){
+            JOptionPane.showMessageDialog(null,
+                            "The User ID or Password are incorrect",
+                            "Incorrect ID/Pass",
+                            JOptionPane.ERROR_MESSAGE);
         }
         return userLogin;
     }

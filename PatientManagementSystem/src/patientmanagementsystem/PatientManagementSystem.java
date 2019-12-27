@@ -11,7 +11,9 @@ import Forms.HomePages.DoctorHomePage;
 import Forms.HomePages.PatientHomePage;
 import Forms.HomePages.SecretaryHomePage;
 import Panels.*;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,15 +40,16 @@ public class PatientManagementSystem {
     static SecretaryHomePage shp = null;
     static AdministratorHomePage ahp = null;
     static final String FILENAME = "test//Data.txt";
-    static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/mm/yyyy HH:mm");
+    static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
     public static void main(String[] args) {
         loadInformation(FILENAME);
-        JFrame AM = new JFrame();
-        AM.setSize(600, 200);
-        AM.add(new PnlAppointmentMaker());
-        AM.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        AM.setVisible(true);
-        //runPMS();
+//        JFrame AM = new JFrame();
+//        AM.setSize(600, 200);
+//        AM.add(new PnlAppointmentMaker());
+//        AM.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//        AM.setVisible(true);
+       runPMS();
     }
     
     private static void runPMS(){
@@ -97,11 +100,21 @@ public class PatientManagementSystem {
         return php;
     }
 
+    public static Dimension getSCREEN_SIZE() {
+        return SCREEN_SIZE;
+    }
+    
+    public static String getFile(){
+        return FILENAME;
+    }
+
     public static void setPhp(PatientHomePage php) {
         PatientManagementSystem.php = php;
     }
     
-    
+    public static void setAppointments(ArrayList<Appointment> appointments){
+        PatientManagementSystem.appointments = appointments;
+    }
       
     private static void loadUsers(Scanner sc){
         String userType = sc.nextLine();
@@ -169,7 +182,7 @@ public class PatientManagementSystem {
         }
     }
 
-    private static void saveInformation(String fileName){
+    public static void saveInformation(String fileName){
         try {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         saveUsers(writer,getUsers());
@@ -237,9 +250,10 @@ public class PatientManagementSystem {
             Patient patient = (Patient) User.getUser(getUsers(),patientID);
             String doctorID = sc.nextLine();
             Doctor doctor = (Doctor) User.getUser(getUsers(),doctorID);
+            String status = sc.nextLine();
             String date = sc.nextLine();
             Date dateTime = new Date(date);
-            Appointment appointment = new Appointment(patient,doctor,dateTime);
+            Appointment appointment = new Appointment(patient,doctor,status,dateTime);
             String notes = sc.nextLine();
             if(!(notes.contains("NO ")))appointment.setDoctorNotes(sc.nextLine());
             if(!(sc.nextLine().contains("NO ")))appointment.setPrescription(
@@ -291,7 +305,9 @@ public class PatientManagementSystem {
         for (int i = 0; i < appointments.size(); i++) {
             writer.write(appointments.get(i).patient.getUniqueID()+"\n");
             writer.write(appointments.get(i).doctor.getUniqueID()+"\n");
-            writer.write(appointments.get(i).dateTime+"\n");
+            writer.write(appointments.get(i).getStatus()+"\n");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+            writer.write(sdf.format(appointments.get(i).dateTime)+"\n");
             if(appointments.get(i).doctorNotes != null){
                 writer.write("NOTES\n");
                 writer.write(appointments.get(i).doctorNotes+"\n");

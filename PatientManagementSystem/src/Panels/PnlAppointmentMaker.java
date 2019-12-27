@@ -15,13 +15,16 @@ import patientmanagementsystem.PatientManagementSystem;
  */
 public class PnlAppointmentMaker extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AppointmentMaker
-     */
+    Date date = null;
     public PnlAppointmentMaker() {
         initComponents();
         loadDoctors();
         updateAddress();
+        updateDate();
+    }
+    
+    public Date getDate(){
+        return this.date;
     }
     
     @SuppressWarnings("unchecked")
@@ -37,11 +40,11 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         SpinMonth = new javax.swing.JSpinner();
         SpinYear = new javax.swing.JSpinner();
         SpinDay = new javax.swing.JSpinner();
-        SpinHour = new javax.swing.JSpinner();
-        SpinMinutes = new javax.swing.JSpinner();
         LblSlash = new javax.swing.JLabel();
         LblSlash1 = new javax.swing.JLabel();
         LblColon = new javax.swing.JLabel();
+        SpinHour = new javax.swing.JSpinner();
+        SpinMinutes = new javax.swing.JSpinner();
 
         setFont(PatientManagementSystem.getTextFont());
         setMaximumSize(new java.awt.Dimension(600, 200));
@@ -150,26 +153,6 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         add(SpinDay, gridBagConstraints);
 
-        SpinHour.setFont(PatientManagementSystem.getTextFont());
-        SpinHour.setModel(new javax.swing.SpinnerListModel(new String[] {"08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"}));
-        SpinHour.setEditor(new javax.swing.JSpinner.ListEditor(SpinHour));
-        SpinHour.setMinimumSize(new java.awt.Dimension(40, 22));
-        SpinHour.setPreferredSize(new java.awt.Dimension(40, 22));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        add(SpinHour, gridBagConstraints);
-
-        SpinMinutes.setFont(PatientManagementSystem.getTextFont());
-        SpinMinutes.setModel(new javax.swing.SpinnerListModel(new String[] {"00", "15", "30", "45"}));
-        SpinMinutes.setEditor(new javax.swing.JSpinner.ListEditor(SpinMinutes));
-        SpinMinutes.setPreferredSize(new java.awt.Dimension(40, 22));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        add(SpinMinutes, gridBagConstraints);
-
         LblSlash.setFont(PatientManagementSystem.getTextFont());
         LblSlash.setText("/");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -190,6 +173,47 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         add(LblColon, gridBagConstraints);
+
+        SpinHour.setFont(PatientManagementSystem.getTextFont());
+        SpinHour.setModel(new javax.swing.SpinnerListModel(new String[] {"08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"}));
+        SpinHour.setEditor(new javax.swing.JSpinner.ListEditor(SpinHour));
+        SpinHour.setMinimumSize(new java.awt.Dimension(40, 22));
+        SpinHour.setPreferredSize(new java.awt.Dimension(40, 22));
+        SpinHour.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinHourStateChanged(evt);
+            }
+        });
+        SpinHour.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                SpinHourPropertyChange(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        add(SpinHour, gridBagConstraints);
+
+        SpinMinutes.setFont(PatientManagementSystem.getTextFont());
+        SpinMinutes.setModel(new javax.swing.SpinnerListModel(new String[] {"00", "15", "30", "45"}));
+        SpinMinutes.setEditor(new javax.swing.JSpinner.ListEditor(SpinMinutes));
+        SpinMinutes.setMinimumSize(new java.awt.Dimension(40, 22));
+        SpinMinutes.setPreferredSize(new java.awt.Dimension(40, 22));
+        SpinMinutes.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinMinutesStateChanged(evt);
+            }
+        });
+        SpinMinutes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                SpinMinutesPropertyChange(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        add(SpinMinutes, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CoBoDoctorSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoBoDoctorSelectorActionPerformed
@@ -212,8 +236,24 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
         setDayToValid();
     }//GEN-LAST:event_SpinYearStateChanged
 
+    private void SpinHourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinHourStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SpinHourStateChanged
+
+    private void SpinHourPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_SpinHourPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SpinHourPropertyChange
+
+    private void SpinMinutesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinMinutesStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SpinMinutesStateChanged
+
+    private void SpinMinutesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_SpinMinutesPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SpinMinutesPropertyChange
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CoBoDoctorSelector;
+    public javax.swing.JComboBox<String> CoBoDoctorSelector;
     private javax.swing.JLabel LblColon;
     private javax.swing.JLabel LblPickDate;
     private javax.swing.JLabel LblPickDoctor;
@@ -251,6 +291,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
                 else this.SpinDay.setValue("30");
             }
         }
+        updateDate();
     }
     
     private void loadDoctors() {
@@ -274,5 +315,9 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
             }
         }
         if(this.TxtAddress.getText() == null || this.TxtAddress.getText() == "") this.TxtAddress.setText("No Doctors Loaded");
+    }
+
+    private void updateDate() {
+        date = new Date(this.SpinYear.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString()+" "+this.SpinHour.getValue().toString()+":"+this.SpinMinutes.getValue().toString());
     }
 }

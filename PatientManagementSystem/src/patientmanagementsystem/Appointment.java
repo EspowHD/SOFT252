@@ -17,9 +17,11 @@ public class Appointment {
     Date dateTime;
     String doctorNotes = null;
     Prescription prescription = null;
-    public Appointment(Patient patient, Doctor doctor, Date dateTime) {
+    String status;
+    public Appointment(Patient patient, Doctor doctor,String status, Date dateTime) {
         this.patient = patient;
         this.doctor = doctor;
+        this.status = status;
         this.dateTime = dateTime;
     }
 
@@ -29,6 +31,10 @@ public class Appointment {
 
     public void setPrescription(Prescription prescription) {
         this.prescription = prescription;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     public Patient getPatient() {
@@ -45,5 +51,9 @@ public class Appointment {
 
     public Prescription getPrescription() {
         return prescription;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
