@@ -10,7 +10,8 @@ package Forms;
  *
  * @author espow
  */
-import java.awt.Font;
+import Panels.PatientRegistrationPanel;
+import javax.swing.JFrame;
 import patientmanagementsystem.PatientManagementSystem;
 public class StartPage extends javax.swing.JFrame {
     /**
@@ -36,6 +37,7 @@ public class StartPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Management System - Start page");
         setBounds(new java.awt.Rectangle(0, 0, 400, 300));
+        setMaximumSize(new java.awt.Dimension(300, 250));
         setMinimumSize(new java.awt.Dimension(300, 250));
         setName("Start Page"); // NOI18N
         setPreferredSize(new java.awt.Dimension(300, 250));
@@ -77,7 +79,8 @@ public class StartPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
-        // TODO add your handling code here:
+        RegisterNewPatient rnp = new RegisterNewPatient();
+        rnp.setVisible(true);
     }//GEN-LAST:event_BtnRegisterActionPerformed
 
     private void loginPanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_loginPanelPropertyChange

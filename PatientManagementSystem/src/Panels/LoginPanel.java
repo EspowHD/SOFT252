@@ -151,10 +151,20 @@ public class LoginPanel extends javax.swing.JPanel {
                     break;
                 case 'P':
                     Patient patient = (Patient) user;
-                    PatientManagementSystem.setPhp(new PatientHomePage(patient));
-                    PatientManagementSystem.getPhp().setVisible(true);
-                    this.done = true;
-                    this.setVisible(false);
+                    if(patient.getStatus().equals("Completed")){
+                        PatientManagementSystem.setPhp(new PatientHomePage(patient));
+                        PatientManagementSystem.getPhp().setVisible(true);
+                        this.done = true;
+                        this.setVisible(false);
+                    }
+                    else {
+                            JOptionPane.showMessageDialog(null,
+                                "This account has not yet been approved\n"
+                                        + "please allow up to 5 working days for\n"
+                                        + "approval.",
+                                "Unapproved Account",
+                                 JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
             }
         }

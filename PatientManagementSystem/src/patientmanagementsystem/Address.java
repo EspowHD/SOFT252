@@ -55,4 +55,10 @@ public class Address {
     public String getFormattedAddress() {
         return roadNum+" "+roadName+"\n"+area+"\n"+city+"\n"+postCode;
     }
+    
+    public static boolean checkPostCodeValid(String postCode){
+    if(postCode.matches("([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\\s?[0-9][A-Za-z]{2})")) return true;
+    //The regex provided by the british government
+    else return false;
+    }
 }

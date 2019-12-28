@@ -19,9 +19,10 @@ import patientmanagementsystem.PatientManagementSystem;
 public class Patient extends User {
     Date DOB;
     String gender;
+    String status;
     final String uniqueIdentifier = "P";
     
-    public Patient(String uniqueID, String firstName, String lastName, String password, String gender, Date DOB, Address address) {
+    public Patient(String uniqueID, String firstName, String lastName, String password, String gender, Date DOB, Address address, String status) {
         this.uniqueID = uniqueID;
         this.DOB = DOB;
         this.gender = gender;
@@ -29,9 +30,20 @@ public class Patient extends User {
         this.lastName = lastName;
         this.address = address;
         this.password = password;
+        this.status = status;
     }
     
-    public Patient(String firstName, String lastName, String password, String gender, Date DOB, Address address) {
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param password
+     * @param gender
+     * @param DOB
+     * @param address
+     * @param status
+     */
+    public Patient(String firstName, String lastName, String password, String gender, Date DOB, Address address, String status) {
         this.uniqueID = uniqueIdentifier+getNextID(uniqueIdentifier,PatientManagementSystem.getUsers());
         this.DOB = DOB;
         this.gender = gender;
@@ -39,6 +51,7 @@ public class Patient extends User {
         this.lastName = lastName;
         this.address = address;
         this.password = password;
+        this.status = status;
     }
     
     @Override
@@ -73,12 +86,20 @@ public class Patient extends User {
         return age;
     }
     public ArrayList<Prescription> getPrescriptions(){
-        ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
+        ArrayList<Prescription> prescriptions = new ArrayList<>();
         for(int i = 0;i<PatientManagementSystem.getPrescriptions().size();i++){
             if(PatientManagementSystem.getPrescriptions().get(i).getIssueTo().getUniqueID().equals(this.uniqueID)){
                 prescriptions.add(PatientManagementSystem.getPrescriptions().get(i));
             }
         }
         return prescriptions;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

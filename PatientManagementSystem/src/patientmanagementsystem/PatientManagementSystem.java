@@ -44,12 +44,7 @@ public class PatientManagementSystem {
     static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
     public static void main(String[] args) {
         loadInformation(FILENAME);
-//        JFrame AM = new JFrame();
-//        AM.setSize(700, 350);
-//        AM.add(new PrescriptionPanel(prescriptions.get(0)));
-//        AM.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-//        AM.setVisible(true);
-       runPMS();
+        runPMS();
     }
     
     private static void runPMS(){
@@ -118,7 +113,7 @@ public class PatientManagementSystem {
       
     private static void loadUsers(Scanner sc){
         String userType = sc.nextLine();
-        String uniqueID,firstName,lastName,password;
+        String uniqueID,firstName,lastName,password,status;
         Address address;
         while(userType != null && !(userType.equals("") || userType.equals("MEDICINES")))
         {
@@ -141,7 +136,8 @@ public class PatientManagementSystem {
                     String gender = sc.nextLine();
                     Date dob = new Date(sc.nextLine());
                     address = loadAddress(sc);
-                    user = new Patient(uniqueID,firstName,lastName,password,gender,dob,address);
+                    status = sc.nextLine();
+                    user = new Patient(uniqueID,firstName,lastName,password,gender,dob,address,status);
             }
             users.add(user);
             try{
@@ -177,6 +173,7 @@ public class PatientManagementSystem {
                     writer.write(patient.getgender()+"\n");
                     writer.write(sdf.format(patient.getDOB())+"\n");
                     writeAddress(writer,patient.getAddress());
+                    writer.write(patient.getStatus() +"\n");
                     break;
             }
         }

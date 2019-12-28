@@ -16,7 +16,7 @@ public abstract class User {
     String uniqueID;
     String password;
     
-    protected String getNextID(String type,ArrayList<User> users){
+    public String getNextID(String type,ArrayList<User> users){
         int maxID = 0;
         for(int i = 0;i < users.size();i++){
             if(users.get(i).uniqueID.contains(type)){
@@ -24,7 +24,7 @@ public abstract class User {
                 if(maxID < inInt) maxID = inInt;
             }
         }
-        return String.format("%04d", maxID);
+        return String.format("%04d", maxID+1);
     }
     
     public static User getUser(ArrayList<User> users,String userID){

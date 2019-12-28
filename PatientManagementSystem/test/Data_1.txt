@@ -13,7 +13,7 @@ RATING
 2
 Was over an hour late with a previous patient
 RATING
-4
+2
 Was over an hour late with a previous patient
 RATING
 4
@@ -30,6 +30,7 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
+Completed
 DOCTOR
 D0001
 Sarah
@@ -82,6 +83,7 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
+Completed
 PATIENT
 P0001
 Chris
@@ -94,6 +96,20 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
+Completed
+PATIENT
+P0003
+Hayden
+Davies
+Password1
+Male
+02/05/2000
+4
+Goulston Walk
+Bishopsworth
+Bristol
+BS13 7SH
+Requested
 MEDICINES
 Paracetemol
 20
@@ -146,4 +162,10 @@ Completed
 12/25/2019 11:30
 NOTES
 Did not need to see GP minor cold
+NO PRESCRIPTION
+P0000
+D0000
+Request
+01/01/2019 08:00
+NO NOTES
 NO PRESCRIPTION

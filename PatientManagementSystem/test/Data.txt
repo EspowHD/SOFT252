@@ -30,6 +30,7 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
+Completed
 DOCTOR
 D0001
 Sarah
@@ -82,6 +83,7 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
+Completed
 PATIENT
 P0001
 Chris
@@ -94,6 +96,7 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
+Completed
 MEDICINES
 Paracetemol
 20

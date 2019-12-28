@@ -282,7 +282,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
     private javax.swing.JTextArea TxtAddress;
     // End of variables declaration//GEN-END:variables
 
-        private boolean checkDateValid(){
+    private boolean checkDateValid(){
         boolean result = false;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date(this.SpinYear.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString());
