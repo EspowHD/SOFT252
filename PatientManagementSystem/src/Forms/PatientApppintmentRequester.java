@@ -116,6 +116,7 @@ public class PatientApppintmentRequester extends javax.swing.JFrame {
                 appointments.add(new Appointment(this.php.getPatient(),doctor,"Request",this.pnlAppointmentMaker1.getDate()));
                 PatientManagementSystem.setAppointments(appointments);
                 this.php.updateAppointmentsList(php.getPatient().getAppointments());
+                PatientManagementSystem.saveInformation("test//Data_1.txt");
                 dispose();
             }
             else{

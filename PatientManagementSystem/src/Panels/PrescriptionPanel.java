@@ -59,9 +59,11 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         LblDoctorAddress = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setMaximumSize(new java.awt.Dimension(700, 350));
-        setMinimumSize(new java.awt.Dimension(700, 350));
-        setPreferredSize(new java.awt.Dimension(700, 350));
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
+        setMaximumSize(new java.awt.Dimension(650, 350));
+        setMinimumSize(new java.awt.Dimension(650, 350));
+        setPreferredSize(new java.awt.Dimension(650, 350));
         setLayout(new java.awt.GridBagLayout());
 
         LblPatientName.setFont(PatientManagementSystem.getTextFont());
@@ -91,8 +93,8 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         TxtDoctorAddress.setRows(4);
         TxtDoctorAddress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TxtDoctorAddress.setMaximumSize(new java.awt.Dimension(150, 80));
-        TxtDoctorAddress.setMinimumSize(new java.awt.Dimension(150, 80));
-        TxtDoctorAddress.setPreferredSize(new java.awt.Dimension(150, 80));
+        TxtDoctorAddress.setMinimumSize(new java.awt.Dimension(102, 80));
+        TxtDoctorAddress.setPreferredSize(new java.awt.Dimension(102, 80));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
@@ -109,8 +111,8 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         TxtPatientAddress.setRows(4);
         TxtPatientAddress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TxtPatientAddress.setMaximumSize(new java.awt.Dimension(150, 80));
-        TxtPatientAddress.setMinimumSize(new java.awt.Dimension(150, 80));
-        TxtPatientAddress.setPreferredSize(new java.awt.Dimension(150, 80));
+        TxtPatientAddress.setMinimumSize(new java.awt.Dimension(102, 80));
+        TxtPatientAddress.setPreferredSize(new java.awt.Dimension(102, 80));
         TxtPatientAddress.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -118,14 +120,14 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 10);
         add(TxtPatientAddress, gridBagConstraints);
 
         LblPatientSex.setFont(PatientManagementSystem.getTextFont());
         LblPatientSex.setText("Sex: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         add(LblPatientSex, gridBagConstraints);
@@ -139,9 +141,9 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
         add(LblPatientAge, gridBagConstraints);
 
-        jSeparator3.setMaximumSize(new java.awt.Dimension(700, 1));
-        jSeparator3.setMinimumSize(new java.awt.Dimension(700, 1));
-        jSeparator3.setPreferredSize(new java.awt.Dimension(700, 1));
+        jSeparator3.setMaximumSize(new java.awt.Dimension(645, 1));
+        jSeparator3.setMinimumSize(new java.awt.Dimension(645, 1));
+        jSeparator3.setPreferredSize(new java.awt.Dimension(645, 1));
         jSeparator3.setVerifyInputWhenFocusTarget(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -151,30 +153,31 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         add(jSeparator3, gridBagConstraints);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(600, 100));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(600, 100));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(600, 100));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(400, 100));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(400, 100));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(400, 100));
 
         TxtNotes.setEditable(false);
         TxtNotes.setColumns(20);
         TxtNotes.setFont(PatientManagementSystem.getTextFont());
         TxtNotes.setRows(5);
-        TxtNotes.setMaximumSize(new java.awt.Dimension(550, 2147483647));
-        TxtNotes.setMinimumSize(new java.awt.Dimension(550, 100));
-        TxtNotes.setPreferredSize(new java.awt.Dimension(550, 100));
+        TxtNotes.setMaximumSize(new java.awt.Dimension(400, 2147483647));
+        TxtNotes.setMinimumSize(new java.awt.Dimension(400, 100));
+        TxtNotes.setPreferredSize(new java.awt.Dimension(400, 100));
+        TxtNotes.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(TxtNotes);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(jScrollPane1, gridBagConstraints);
 
-        jSeparator4.setMaximumSize(new java.awt.Dimension(700, 1));
-        jSeparator4.setMinimumSize(new java.awt.Dimension(700, 1));
-        jSeparator4.setPreferredSize(new java.awt.Dimension(700, 1));
+        jSeparator4.setMaximumSize(new java.awt.Dimension(645, 1));
+        jSeparator4.setMinimumSize(new java.awt.Dimension(645, 1));
+        jSeparator4.setPreferredSize(new java.awt.Dimension(645, 1));
         jSeparator4.setVerifyInputWhenFocusTarget(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -197,6 +200,7 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         add(LblNotes, gridBagConstraints);
@@ -204,9 +208,8 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         LblPatientAddress.setFont(PatientManagementSystem.getTextFont());
         LblPatientAddress.setText("Address: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         add(LblPatientAddress, gridBagConstraints);

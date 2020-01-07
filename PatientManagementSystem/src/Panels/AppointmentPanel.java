@@ -41,11 +41,13 @@ public class AppointmentPanel extends javax.swing.JPanel {
         LblStatus = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
         setFont(PatientManagementSystem.getTextFont());
-        setMaximumSize(new java.awt.Dimension(700, 100));
-        setMinimumSize(new java.awt.Dimension(700, 100));
+        setMaximumSize(new java.awt.Dimension(600, 100));
+        setMinimumSize(new java.awt.Dimension(600, 100));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(700, 100));
+        setPreferredSize(new java.awt.Dimension(600, 100));
         setLayout(new java.awt.GridBagLayout());
 
         LblTime.setFont(PatientManagementSystem.getTextFont());
@@ -53,7 +55,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 5, 5);
         add(LblTime, gridBagConstraints);
 
@@ -62,7 +64,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 10, 5);
         add(LblDoctorName, gridBagConstraints);
 
@@ -71,7 +73,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
         add(LblDoctorRating, gridBagConstraints);
 
@@ -80,7 +82,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 5, 5);
         add(LblPatientName, gridBagConstraints);
 
@@ -91,12 +93,16 @@ public class AppointmentPanel extends javax.swing.JPanel {
         TxtAddress.setLineWrap(true);
         TxtAddress.setRows(4);
         TxtAddress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TxtAddress.setMaximumSize(new java.awt.Dimension(150, 75));
+        TxtAddress.setMinimumSize(new java.awt.Dimension(102, 75));
+        TxtAddress.setPreferredSize(new java.awt.Dimension(102, 75));
+        TxtAddress.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
         add(TxtAddress, gridBagConstraints);
 
@@ -106,6 +112,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 10);
         add(LblStatus, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents

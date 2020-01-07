@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * @author espow
  */
 public class PatientManagementSystem {
-    static Font textFont = new Font("Tahoma",0,16);
+    static Font textFont = new Font("Tahoma",0,15);
     static ArrayList<User> users = new ArrayList();
     static ArrayList<Medicine> medicines = new ArrayList();
     static ArrayList<Appointment> appointments = new ArrayList();

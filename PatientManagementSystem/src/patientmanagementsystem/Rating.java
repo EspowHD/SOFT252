@@ -10,8 +10,8 @@ package patientmanagementsystem;
  * @author espow
  */
 public class Rating {
-    private int stars;// Maximum of 5 stored as int so average score can be calculated
-    private String feedback;
+    private final int stars;// Maximum of 5 stored as int so average score can be calculated
+    private final String feedback;
 
     public Rating(int stars, String feedback) {
         this.stars = stars;
