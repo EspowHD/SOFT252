@@ -119,7 +119,7 @@ public class PatientApppintmentRequester extends javax.swing.JFrame {
                 dispose();
             }
             else{
-                JOptionPane.showMessageDialog(null, "The doctor or patient is busy\non this day");
+                JOptionPane.showMessageDialog(null, "The doctor or patient is busy\nat this time");
             }
         } catch (Exception e){
         }

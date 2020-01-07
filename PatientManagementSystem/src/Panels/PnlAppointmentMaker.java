@@ -250,7 +250,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
     }//GEN-LAST:event_SpinYearStateChanged
 
     private void SpinHourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinHourStateChanged
-        // TODO add your handling code here:
+        updateDate();
     }//GEN-LAST:event_SpinHourStateChanged
 
     private void SpinHourPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_SpinHourPropertyChange
@@ -258,7 +258,7 @@ public class PnlAppointmentMaker extends javax.swing.JPanel {
     }//GEN-LAST:event_SpinHourPropertyChange
 
     private void SpinMinutesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinMinutesStateChanged
-        // TODO add your handling code here:
+        updateDate();
     }//GEN-LAST:event_SpinMinutesStateChanged
 
     private void SpinMinutesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_SpinMinutesPropertyChange
