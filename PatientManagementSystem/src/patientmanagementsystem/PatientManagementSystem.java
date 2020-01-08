@@ -10,7 +10,6 @@ import Forms.HomePages.AdministratorHomePage;
 import Forms.HomePages.DoctorHomePage;
 import Forms.HomePages.PatientHomePage;
 import Forms.HomePages.SecretaryHomePage;
-import Panels.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -20,11 +19,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import javax.swing.JFrame;
 import patientmanagementsystem.UserTypes.*;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 /**
  *
  * @author espow
@@ -225,7 +224,8 @@ public class PatientManagementSystem {
         sc.close();
         } catch (FileNotFoundException e){
             System.out.println("Error loading file");
-        } catch (Exception e){
+        } catch (NoSuchElementException e){
+        }catch (Exception e){
             System.out.println(e.getStackTrace());
         }
     }
@@ -262,12 +262,17 @@ public class PatientManagementSystem {
     }
 
     private static Prescription getPresciptionFromFile(Scanner sc,Patient patient,Doctor doctor) {
-        String medicineName = sc.nextLine();
-        Medicine medicine = Medicine.getMedicine(medicines,medicineName);
+        int length =Integer.parseInt(sc.nextLine());
+        PrescribedMedicine[] prescribedMedicines = new PrescribedMedicine[length];
+        for(int i = 0;i<length;i++){
+            String medicineName = sc.nextLine();
+            Medicine medicine = Medicine.getMedicine(medicines,medicineName);
+            String quantity = sc.nextLine();
+            String dosage = sc.nextLine();
+            prescribedMedicines[i] = new PrescribedMedicine(medicine,Integer.parseInt(quantity),dosage);
+        }
         String prescriptionNote = sc.nextLine();
-        String quantity = sc.nextLine();
-        String dosage = sc.nextLine();
-        Prescription prescription = new Prescription(doctor,patient,medicine,prescriptionNote,Integer.parseInt(quantity),dosage);
+        Prescription prescription = new Prescription(doctor,patient,prescribedMedicines,prescriptionNote);
         return prescription;
     }
 
@@ -310,13 +315,20 @@ public class PatientManagementSystem {
                 writer.write(appointments.get(i).doctorNotes+"\n");
             } else writer.write("NO NOTES\n");
             if(appointments.get(i).prescription != null){
-                writer.write("PRESCRIPTION\n");
-                writer.write(appointments.get(i).prescription.medicine.getMedicineName()+"\n");
-                writer.write(appointments.get(i).prescription.notes+"\n");
-                writer.write(appointments.get(i).prescription.quantity+"\n");
-                writer.write(appointments.get(i).prescription.dosage+"\n");
+                savePrescription(writer,appointments.get(i).prescription);
             } else writer.write("NO PRESCRIPTION\n");
             
         }
+    }
+
+    private static void savePrescription(BufferedWriter writer, Prescription prescription) throws IOException {
+        writer.write("PRESCRIPTION\n");
+        writer.write(Integer.toString(prescription.getPrescribedMedicine().length)+"\n");
+        for(int i = 0;i<prescription.getPrescribedMedicine().length;i++){
+            writer.write(prescription.getPrescribedMedicine()[i].getMedicine().getMedicineName()+"\n");
+            writer.write(prescription.getPrescribedMedicine()[i].getQuantity()+"\n");
+            writer.write(prescription.getPrescribedMedicine()[i].getDosage()+"\n");
+        }
+        writer.write(prescription.getNotes()+"\n");
     }
 }

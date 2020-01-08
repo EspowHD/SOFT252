@@ -6,7 +6,7 @@
 package Panels;
 
 import patientmanagementsystem.PatientManagementSystem;
-import patientmanagementsystem.Prescription;
+import patientmanagementsystem.PrescribedMedicine;
 
 /**
  *
@@ -21,10 +21,10 @@ public class MedicinePanel extends javax.swing.JPanel {
      * Creates new form MedicinePanel
      * @param prescription
      */
-    public MedicinePanel(Prescription prescription) {
-        this.name = prescription.getMedicine().getMedicineName();
-        this.quantity = Integer.toString(prescription.getQuantity());
-        this.dosage = prescription.getDosage();
+    public MedicinePanel(PrescribedMedicine medicine) {
+        this.name = medicine.getMedicine().getMedicineName();
+        this.quantity = Integer.toString(medicine.getQuantity());
+        this.dosage = medicine.getDosage();
         initComponents();
     }
 
@@ -38,9 +38,6 @@ public class MedicinePanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        LblMedicineName = new javax.swing.JLabel();
-        LblMedicineQuantity = new javax.swing.JLabel();
-        LblMedicineDosage = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
@@ -48,42 +45,12 @@ public class MedicinePanel extends javax.swing.JPanel {
         TxtQuantity = new javax.swing.JTextArea();
         TxtDosage = new javax.swing.JTextArea();
 
-        setMaximumSize(new java.awt.Dimension(640, 100));
-        setMinimumSize(new java.awt.Dimension(640, 100));
+        setMaximumSize(new java.awt.Dimension(640, 50));
+        setMinimumSize(new java.awt.Dimension(640, 50));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(640, 100));
+        setPreferredSize(new java.awt.Dimension(640, 50));
         setRequestFocusEnabled(false);
         setLayout(new java.awt.GridBagLayout());
-
-        LblMedicineName.setFont(PatientManagementSystem.getTextFont());
-        LblMedicineName.setText("Medicine Name:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
-        add(LblMedicineName, gridBagConstraints);
-
-        LblMedicineQuantity.setFont(PatientManagementSystem.getTextFont());
-        LblMedicineQuantity.setText("Dosage:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
-        add(LblMedicineQuantity, gridBagConstraints);
-
-        LblMedicineDosage.setFont(PatientManagementSystem.getTextFont());
-        LblMedicineDosage.setText("Quantity:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
-        add(LblMedicineDosage, gridBagConstraints);
 
         jSeparator1.setMaximumSize(new java.awt.Dimension(650, 1));
         jSeparator1.setMinimumSize(new java.awt.Dimension(650, 1));
@@ -98,9 +65,9 @@ public class MedicinePanel extends javax.swing.JPanel {
         add(jSeparator1, gridBagConstraints);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator2.setMaximumSize(new java.awt.Dimension(1, 100));
-        jSeparator2.setMinimumSize(new java.awt.Dimension(1, 100));
-        jSeparator2.setPreferredSize(new java.awt.Dimension(1, 100));
+        jSeparator2.setMaximumSize(new java.awt.Dimension(1, 50));
+        jSeparator2.setMinimumSize(new java.awt.Dimension(1, 50));
+        jSeparator2.setPreferredSize(new java.awt.Dimension(1, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -110,9 +77,9 @@ public class MedicinePanel extends javax.swing.JPanel {
         add(jSeparator2, gridBagConstraints);
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator4.setMaximumSize(new java.awt.Dimension(1, 100));
-        jSeparator4.setMinimumSize(new java.awt.Dimension(1, 100));
-        jSeparator4.setPreferredSize(new java.awt.Dimension(1, 100));
+        jSeparator4.setMaximumSize(new java.awt.Dimension(1, 50));
+        jSeparator4.setMinimumSize(new java.awt.Dimension(1, 50));
+        jSeparator4.setPreferredSize(new java.awt.Dimension(1, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -163,9 +130,6 @@ public class MedicinePanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LblMedicineDosage;
-    private javax.swing.JLabel LblMedicineName;
-    private javax.swing.JLabel LblMedicineQuantity;
     private javax.swing.JTextArea TxtDosage;
     private javax.swing.JTextArea TxtMedicinceName;
     private javax.swing.JTextArea TxtQuantity;

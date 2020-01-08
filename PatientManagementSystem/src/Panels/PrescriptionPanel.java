@@ -4,32 +4,21 @@
  * and open the template in the editor.
  */
 package Panels;
-import Panels.MedicinePanel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import javax.swing.table.DefaultTableModel;
 import patientmanagementsystem.Prescription;
 
 import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.PrescribedMedicine;
 
 /**
  *
  * @author espow
  */
 public class PrescriptionPanel extends javax.swing.JPanel {
-    private final MedicinePanel mp;
     private final Prescription prescription;
     public PrescriptionPanel(Prescription prescription) {
         this.prescription = prescription;
         initComponents();
-        mp = new MedicinePanel(this.prescription);
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 7;
-        c.gridwidth = 7;
-        c.anchor = GridBagConstraints.WEST;
-        c.insets = new Insets(0,5,0,0);
-        this.add(mp,c);
         fillData();
     }
 
@@ -57,6 +46,8 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         LblNotes = new javax.swing.JLabel();
         LblPatientAddress = new javax.swing.JLabel();
         LblDoctorAddress = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TblMedicines = new javax.swing.JTable();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setAlignmentX(0.0F);
@@ -222,6 +213,30 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         add(LblDoctorAddress, gridBagConstraints);
+
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(640, 100));
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(640, 100));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(640, 100));
+
+        TblMedicines.setFont(PatientManagementSystem.getTextFont());
+        TblMedicines.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        TblMedicines.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        TblMedicines.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(TblMedicines);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(jScrollPane2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -233,10 +248,12 @@ public class PrescriptionPanel extends javax.swing.JPanel {
     private javax.swing.JLabel LblPatientAge;
     private javax.swing.JLabel LblPatientName;
     private javax.swing.JLabel LblPatientSex;
+    private javax.swing.JTable TblMedicines;
     private javax.swing.JTextArea TxtDoctorAddress;
     private javax.swing.JTextArea TxtNotes;
     private javax.swing.JTextArea TxtPatientAddress;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
@@ -246,6 +263,7 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         fillPatientData();
         fillDoctorData();
         fillNotes();
+        fillMedicines();
     }
 
     private void fillPatientData() {
@@ -262,5 +280,25 @@ public class PrescriptionPanel extends javax.swing.JPanel {
 
     private void fillNotes() {
         this.TxtNotes.setText(this.prescription.getNotes());
+    }
+
+    private void fillMedicines() {
+        String[] col = {"Medicine Name","Quantity","Dosage"};
+        Object[][] data = new String[this.prescription.getPrescribedMedicine().length][3];
+        for(int i = 0;i<data.length;i++){
+            PrescribedMedicine pm = this.prescription.getPrescribedMedicine()[i];
+            data[i][0] = pm.getMedicine().getMedicineName();
+            data[i][1] = Integer.toString(pm.getQuantity());
+            data[i][2] = pm.getDosage();
+        }
+        DefaultTableModel model = new DefaultTableModel(data,col){
+            @Override
+            public boolean isCellEditable(int i, int i1){return false;}
+        };
+        this.TblMedicines.setModel(model);
+        this.TblMedicines.getColumnModel().getColumn(0).setPreferredWidth(140);//Medicine Name width
+        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(100);//Medicine Name width
+        this.TblMedicines.getColumnModel().getColumn(2).setPreferredWidth(400);//Medicine Name width
+        
     }
 }

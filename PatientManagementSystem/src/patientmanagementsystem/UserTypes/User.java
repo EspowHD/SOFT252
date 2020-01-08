@@ -7,7 +7,6 @@ package patientmanagementsystem.UserTypes;
 
 import java.util.ArrayList;
 import patientmanagementsystem.Address;
-import patientmanagementsystem.PatientManagementSystem;
 
 public abstract class User {
     String firstName;

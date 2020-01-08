@@ -10,5 +10,5 @@ package patientmanagementsystem.UserTypes;
  * @author espow
  */
 public class Secretary extends User{
-    
+    final String uniqueIdentifier = "S";
 }

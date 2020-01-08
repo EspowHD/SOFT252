@@ -10,5 +10,5 @@ package patientmanagementsystem.UserTypes;
  * @author espow
  */
 public class Administrator extends User{
-    
+    final String uniqueIdentifier = "A";
 }

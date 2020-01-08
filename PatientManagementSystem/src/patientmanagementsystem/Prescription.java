@@ -15,18 +15,14 @@ import patientmanagementsystem.UserTypes.Doctor;
 public class Prescription {
     Doctor prescribedBy;
     Patient issueTo;
-    Medicine medicine;
+    PrescribedMedicine[] medicines;
     String notes;
-    int quantity;
-    String dosage;
 
-    public Prescription(Doctor prescribedBy, Patient issueTo, Medicine medicine, String notes, int Quantity, String dosage) {
+    public Prescription(Doctor prescribedBy, Patient issueTo, PrescribedMedicine[] medicines, String notes) {
         this.prescribedBy = prescribedBy;
         this.issueTo = issueTo;
-        this.medicine = medicine;
+        this.medicines= medicines;
         this.notes = notes;
-        this.quantity = Quantity;
-        this.dosage = dosage;
     }
 
     public Doctor getPrescribedBy() {
@@ -37,20 +33,11 @@ public class Prescription {
         return issueTo;
     }
 
-    public Medicine getMedicine() {
-        return medicine;
+    public PrescribedMedicine[] getPrescribedMedicine() {
+        return medicines;
     }
 
     public String getNotes() {
         return notes;
     }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public String getDosage() {
-        return dosage;
-    }
-    
 }

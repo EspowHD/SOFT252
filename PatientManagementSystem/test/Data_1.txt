@@ -97,19 +97,6 @@ Drake Circus
 Plymouth
 PL1 1AB
 Completed
-PATIENT
-P0003
-Hayden
-Davies
-1
-Male
-02/05/2000
-4
-Goulston Walk
-Bishopsworth
-Bristol
-BS13 7SH
-Requested
 MEDICINES
 Paracetemol
 20
@@ -139,10 +126,11 @@ Completed
 NOTES
 Had major Headache
 PRESCRIPTION
+1
 Ibuprofen
-To help with headache
 2
 Take one very 4 hours after food or drink
+To help with headache
 P0002
 D0002
 Completed

@@ -126,10 +126,11 @@ Completed
 NOTES
 Had major Headache
 PRESCRIPTION
+1
 Ibuprofen
-To help with headache
 2
 Take one very 4 hours after food or drink
+To help with headache
 P0002
 D0002
 Completed
