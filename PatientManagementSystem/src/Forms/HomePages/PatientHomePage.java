@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package Forms.HomePages;
-import Forms.PatientApppintmentRequester;
-import Forms.RatingMakerPage;
+import Forms.Requesters.PatientApppintmentRequester;
+import Forms.Makers.RatingMakerPage;
 import Forms.StartPage;
 import Panels.AppointmentPanel;
 import Panels.PrescriptionPanel;
@@ -14,10 +14,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.*;
-import patientmanagementsystem.Appointment;
+import Objects.Appointment;
 import patientmanagementsystem.PatientManagementSystem;
-import patientmanagementsystem.Prescription;
-import patientmanagementsystem.Rating;
+import Objects.Prescription;
+import Objects.Rating;
 import patientmanagementsystem.UserTypes.Doctor;
 import patientmanagementsystem.UserTypes.Patient;
 import patientmanagementsystem.UserTypes.User;
@@ -65,7 +65,10 @@ public final class PatientHomePage extends JFrame {
         BtnRequestTermination = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Patient Home Page");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setFont(PatientManagementSystem.getTextFont());
+        setMaximumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
         setMinimumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -276,7 +279,7 @@ public final class PatientHomePage extends JFrame {
     }//GEN-LAST:event_CbxDoctorActionPerformed
 
     private void BtnNewReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewReviewActionPerformed
-        new RatingMakerPage().setVisible(true);
+        new RatingMakerPage(this).setVisible(true);
     }//GEN-LAST:event_BtnNewReviewActionPerformed
 
     private void BtnRequestTerminationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestTerminationActionPerformed
@@ -335,9 +338,9 @@ public final class PatientHomePage extends JFrame {
         repaint();
     }
     
-    private void updateRatingsList() {
+    public void updateRatingsList() {
         RatingsContainer.removeAll();
-        Rating[] ratings = this.selectedDoctor.getRatings();
+        ArrayList<Rating> ratings = this.selectedDoctor.getRatings();
         for(Rating rating : ratings){
             RatingPanel RP = new RatingPanel(rating);
             RP.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -356,12 +359,13 @@ public final class PatientHomePage extends JFrame {
     }
     
     public void resizeRatingContainerToFit(){
-        int componentHeight = 100*(this.selectedDoctor.getRatings().length);
+        int componentHeight;
+        componentHeight = 100*(this.selectedDoctor.getRatings().size());
         this.RatingsContainer.setPreferredSize(new Dimension(600, componentHeight));
     }
     
     private void resizePrescriptionContainerToFit() {
-        if(this.PATIENT.getPrescriptions().size() != 0){
+        if(!this.PATIENT.getPrescriptions().isEmpty()){
         int componentHeight = 350*(this.PATIENT.getPrescriptions().size());
         this.PrescriptionsContainer.setPreferredSize(new Dimension(600, componentHeight));
         }

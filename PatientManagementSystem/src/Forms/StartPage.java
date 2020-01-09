@@ -10,6 +10,7 @@ package Forms;
  *
  * @author espow
  */
+import Forms.Requesters.RequestNewPatient;
 import Panels.PatientRegistrationPanel;
 import javax.swing.JFrame;
 import patientmanagementsystem.PatientManagementSystem;
@@ -79,7 +80,7 @@ public class StartPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegisterActionPerformed
-        RegisterNewPatient rnp = new RegisterNewPatient();
+        RequestNewPatient rnp = new RequestNewPatient();
         rnp.setVisible(true);
     }//GEN-LAST:event_BtnRegisterActionPerformed
 

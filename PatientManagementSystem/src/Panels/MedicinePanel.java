@@ -6,7 +6,7 @@
 package Panels;
 
 import patientmanagementsystem.PatientManagementSystem;
-import patientmanagementsystem.PrescribedMedicine;
+import Objects.PrescribedMedicine;
 
 /**
  *

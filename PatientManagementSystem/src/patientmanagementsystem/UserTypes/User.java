@@ -6,7 +6,7 @@
 package patientmanagementsystem.UserTypes;
 
 import java.util.ArrayList;
-import patientmanagementsystem.Address;
+import Objects.Address;
 
 public abstract class User {
     String firstName;
@@ -35,6 +35,15 @@ public abstract class User {
             }
         }
         return user;
+    }
+    
+    public static void removeUser(ArrayList<User> users,String userID){
+        User user = null;
+        for(int i = 0;i<users.size();i++){
+            if(users.get(i).uniqueID.equals(userID)){
+                users.remove(i);
+            }
+        }
     }
 
     public String getFirstName() {

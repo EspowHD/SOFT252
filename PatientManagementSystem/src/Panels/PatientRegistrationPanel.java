@@ -5,7 +5,7 @@
  */
 package Panels;
 
-import Forms.RegisterNewPatient;
+import Forms.Requesters.RequestNewPatient;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import patientmanagementsystem.PatientManagementSystem;

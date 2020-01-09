@@ -5,10 +5,10 @@
  */
 package Panels;
 import javax.swing.table.DefaultTableModel;
-import patientmanagementsystem.Prescription;
+import Objects.Prescription;
 
 import patientmanagementsystem.PatientManagementSystem;
-import patientmanagementsystem.PrescribedMedicine;
+import Objects.PrescribedMedicine;
 
 /**
  *
@@ -269,7 +269,7 @@ public class PrescriptionPanel extends javax.swing.JPanel {
     private void fillPatientData() {
         this.LblPatientName.setText(this.LblPatientName.getText()+this.prescription.getIssueTo().getFirstName()+" "+this.prescription.getIssueTo().getLastName());
         this.LblPatientAge.setText(this.LblPatientAge.getText()+" "+this.prescription.getIssueTo().getAge());
-        this.LblPatientSex.setText(this.LblPatientSex.getText()+" "+ this.prescription.getIssueTo().getgender());
+        this.LblPatientSex.setText(this.LblPatientSex.getText()+" "+ this.prescription.getIssueTo().getGender());
         this.TxtPatientAddress.setText(this.prescription.getIssueTo().getAddress().getFormattedAddress());
     }
 

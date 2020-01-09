@@ -5,17 +5,30 @@
  */
 package Forms.HomePages;
 
+import Forms.Makers.FeedbackMakerPage;
+import Panels.RatingPanel;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import patientmanagementsystem.PatientManagementSystem;
+import Objects.Rating;
+import Panels.UserPanel;
+import javax.swing.JOptionPane;
+import patientmanagementsystem.UserTypes.*;
+
 /**
  *
  * @author espow
  */
 public class AdministratorHomePage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form AdministratorHomePage
-     */
-    public AdministratorHomePage() {
+    private final Administrator ADMIN;
+    private Doctor selectedDoctor = null;
+    public AdministratorHomePage(Administrator admin) {
+        this.ADMIN = admin;
         initComponents();
+        loadUsers();
+        updateDoctor();
     }
 
     /**
@@ -26,58 +39,268 @@ public class AdministratorHomePage extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        SclRatings = new javax.swing.JScrollPane();
+        RatingsContainer = new javax.swing.JPanel();
+        LblDoctor = new javax.swing.JLabel();
+        CbxDoctor = new javax.swing.JComboBox<>();
+        LblDoctorRating = new javax.swing.JLabel();
+        BtnDeleteUser = new javax.swing.JButton();
+        SclUsers = new javax.swing.JScrollPane();
+        UsersContainer = new javax.swing.JPanel();
+        LblUsers = new javax.swing.JLabel();
+        LblSelectUser = new javax.swing.JLabel();
+        CbxUser = new javax.swing.JComboBox<>();
+        BtnNewReview = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setMinimumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        SclRatings.setBackground(new java.awt.Color(255, 102, 102));
+        SclRatings.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SclRatings.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclRatings.setAlignmentX(0.0F);
+        SclRatings.setAlignmentY(0.0F);
+        SclRatings.setMaximumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclRatings.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclRatings.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+
+        RatingsContainer.setBackground(new java.awt.Color(247, 247, 247));
+        RatingsContainer.setAutoscrolls(true);
+        RatingsContainer.setMaximumSize(new java.awt.Dimension(600, 10000));
+        RatingsContainer.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        RatingsContainer.setName(""); // NOI18N
+        RatingsContainer.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        RatingsContainer.setLayout(new javax.swing.BoxLayout(RatingsContainer, javax.swing.BoxLayout.PAGE_AXIS));
+        SclRatings.setViewportView(RatingsContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(SclRatings, gridBagConstraints);
+
+        LblDoctor.setFont(PatientManagementSystem.getTextFont());
+        LblDoctor.setText("Doctor:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblDoctor, gridBagConstraints);
+
+        CbxDoctor.setFont(PatientManagementSystem.getTextFont());
+        CbxDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbxDoctorActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
+        getContentPane().add(CbxDoctor, gridBagConstraints);
+
+        LblDoctorRating.setFont(PatientManagementSystem.getTextFont());
+        LblDoctorRating.setText("Average Rating: ");
+        getContentPane().add(LblDoctorRating, new java.awt.GridBagConstraints());
+
+        BtnDeleteUser.setFont(PatientManagementSystem.getTextFont());
+        BtnDeleteUser.setText("Delete User");
+        BtnDeleteUser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        BtnDeleteUser.setMaximumSize(new java.awt.Dimension(150, 50));
+        BtnDeleteUser.setMinimumSize(new java.awt.Dimension(150, 50));
+        BtnDeleteUser.setPreferredSize(new java.awt.Dimension(150, 50));
+        BtnDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDeleteUser(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
+        getContentPane().add(BtnDeleteUser, gridBagConstraints);
+
+        SclUsers.setBackground(new java.awt.Color(255, 102, 102));
+        SclUsers.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SclUsers.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclUsers.setAlignmentX(0.0F);
+        SclUsers.setAlignmentY(0.0F);
+        SclUsers.setMaximumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclUsers.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclUsers.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+
+        UsersContainer.setBackground(new java.awt.Color(247, 247, 247));
+        UsersContainer.setAutoscrolls(true);
+        UsersContainer.setMaximumSize(new java.awt.Dimension(600, 10000));
+        UsersContainer.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        UsersContainer.setName(""); // NOI18N
+        UsersContainer.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        UsersContainer.setLayout(new javax.swing.BoxLayout(UsersContainer, javax.swing.BoxLayout.PAGE_AXIS));
+        SclUsers.setViewportView(UsersContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(SclUsers, gridBagConstraints);
+
+        LblUsers.setFont(PatientManagementSystem.getTextFont());
+        LblUsers.setText("Users:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblUsers, gridBagConstraints);
+
+        LblSelectUser.setFont(PatientManagementSystem.getTextFont());
+        LblSelectUser.setText("Selected User: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblSelectUser, gridBagConstraints);
+
+        CbxUser.setFont(PatientManagementSystem.getTextFont());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 10);
+        getContentPane().add(CbxUser, gridBagConstraints);
+
+        BtnNewReview.setFont(PatientManagementSystem.getTextFont());
+        BtnNewReview.setText("Provide Feedback");
+        BtnNewReview.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        BtnNewReview.setMaximumSize(new java.awt.Dimension(200, 50));
+        BtnNewReview.setMinimumSize(new java.awt.Dimension(200, 50));
+        BtnNewReview.setPreferredSize(new java.awt.Dimension(200, 50));
+        BtnNewReview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNewReviewActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        getContentPane().add(BtnNewReview, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdministratorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdministratorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdministratorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdministratorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void CbxDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxDoctorActionPerformed
+        updateDoctor();
+        updateRatingsList();
+    }//GEN-LAST:event_CbxDoctorActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdministratorHomePage().setVisible(true);
-            }
-        });
-    }
+    private void BtnDeleteUser(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteUser
+        int res = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this user?\n"+this.CbxUser.getSelectedItem().toString());
+        if(res == 0) {
+            User.removeUser(PatientManagementSystem.getUsers(), this.CbxUser.getSelectedItem().toString());
+            loadUsers();
+            updateDoctor();
+        }
+    }//GEN-LAST:event_BtnDeleteUser
+
+    private void BtnNewReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewReviewActionPerformed
+        new FeedbackMakerPage(this.selectedDoctor,this.ADMIN).setVisible(true);
+    }//GEN-LAST:event_BtnNewReviewActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnDeleteUser;
+    private javax.swing.JButton BtnNewReview;
+    private javax.swing.JComboBox<String> CbxDoctor;
+    private javax.swing.JComboBox<String> CbxUser;
+    private javax.swing.JLabel LblDoctor;
+    private javax.swing.JLabel LblDoctorRating;
+    private javax.swing.JLabel LblSelectUser;
+    private javax.swing.JLabel LblUsers;
+    private javax.swing.JPanel RatingsContainer;
+    private javax.swing.JScrollPane SclRatings;
+    private javax.swing.JScrollPane SclUsers;
+    private javax.swing.JPanel UsersContainer;
     // End of variables declaration//GEN-END:variables
+
+    private void updateDoctor() {
+        ArrayList<User> users = PatientManagementSystem.getUsers();
+        for(User user: users){
+            if(user.getUniqueID().contains("D")){
+                    if(this.CbxDoctor.getSelectedItem().toString().contains(user.getFirstName()) &&
+                        this.CbxDoctor.getSelectedItem().toString().contains(user.getLastName())){
+                        this.selectedDoctor = ((Doctor) user);
+                        break;
+                    }
+            }
+        }
+        if(this.selectedDoctor!=null)this.LblDoctorRating.setText("Rating: "+this.selectedDoctor.getAverageRating()+"/5");
+    }
+    
+    private void updateRatingsList() {
+        RatingsContainer.removeAll();
+        ArrayList<Rating> ratings = this.selectedDoctor.getRatings();
+        for(Rating rating : ratings){
+            RatingPanel RP = new RatingPanel(rating);
+            RP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            RP.setVisible(true);
+            RatingsContainer.add(RP);
+        }
+        resizeRatingContainerToFit();
+        validate();
+        repaint();
+    }
+    
+    private void resizeRatingContainerToFit(){
+        int componentHeight = 100*(this.selectedDoctor.getRatings().size());
+        this.RatingsContainer.setPreferredSize(new Dimension(600, componentHeight));
+    }
+    
+    private void resizeUsersContainerToFit(){
+        int componentHeight = 100*(this.selectedDoctor.getRatings().size());
+        this.RatingsContainer.setPreferredSize(new Dimension(600, componentHeight));
+    }
+
+    private void loadUsers() {
+        loadUsersToCombo();
+        loadUsersToContainer();
+    }
+
+    private void loadUsersToCombo() {
+        ArrayList<User> users = PatientManagementSystem.getUsers();
+         for (int i = 0; i < users.size(); i++) {
+            String userID = users.get(i).getUniqueID();
+            if(userID.contains("D")){
+                this.CbxUser.addItem(users.get(i).getUniqueID());
+                this.CbxDoctor.addItem("Dr "+users.get(i).getFirstName()+" "+users.get(i).getLastName());
+            }
+            else if(userID.contains("S")) this.CbxUser.addItem(users.get(i).getUniqueID());
+        }
+        if(this.CbxDoctor.getItemCount() == 0) this.CbxUser.addItem("No Users Loaded");
+    }
+
+    private void loadUsersToContainer() {
+        UsersContainer.removeAll();
+        ArrayList<User> users = PatientManagementSystem.getUsers();
+        for(User user : users){
+            if(user.getUniqueID().contains("D") || user.getUniqueID().contains("S")){
+            UserPanel UP = new UserPanel(user);
+            UP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            UP.setVisible(true);
+            UsersContainer.add(UP);
+            }
+        }
+        resizeUsersContainerToFit();
+        validate();
+        repaint();
+    }
 }

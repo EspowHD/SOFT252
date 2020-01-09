@@ -6,35 +6,39 @@
 package patientmanagementsystem.UserTypes;
 
 import java.util.ArrayList;
-import patientmanagementsystem.Address;
-import patientmanagementsystem.Appointment;
+import Objects.Address;
+import Objects.Appointment;
+import Objects.Feedback;
 import patientmanagementsystem.PatientManagementSystem;
-import patientmanagementsystem.Rating;
+import Objects.Rating;
 
 /**
  *
  * @author espow
  */
 public class Doctor extends User{
-    Rating[] ratings;
+    ArrayList<Rating> ratings;
+    ArrayList<Feedback> feedbacks;
     final String uniqueIdentifier = "D";
 
-    public Doctor(String uniqueID, String firstName, String lastName, String password, Address address, Rating[] ratings) {
+    public Doctor(String uniqueID, String firstName, String lastName, String password, Address address, ArrayList<Rating> ratings,ArrayList<Feedback> feedbacks) {
         this.uniqueID = uniqueID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.address = address;
         this.ratings = ratings;
+        this.feedbacks = feedbacks;
     }
 
-    public Doctor(String firstName, String lastName, String password, Address address, Rating[] ratings) {
+    public Doctor(String firstName, String lastName, String password, Address address, ArrayList<Rating> ratings,ArrayList<Feedback> feedbacks) {
         this.uniqueID = this.uniqueIdentifier+getNextID(uniqueIdentifier,PatientManagementSystem.getUsers());
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.address = address;
         this.ratings = ratings;
+        this.feedbacks = feedbacks;
     }
 
     public String getAverageRating() {
@@ -42,7 +46,7 @@ public class Doctor extends User{
         for (Rating rating : this.ratings){
             Average += rating.getStars();
         }
-        Average = Average/this.ratings.length;
+        Average = Average/this.ratings.size();
         return Average.toString().substring(0, 4);
     }
     
@@ -56,13 +60,15 @@ public class Doctor extends User{
         return appointments;
     }
 
-    public void setRatings(Rating[] ratings) {
+    public void setRatings(ArrayList<Rating> ratings) {
         this.ratings = ratings;
     }
 
-    public Rating[] getRatings() {
+    public ArrayList<Rating> getRatings() {
         return ratings;
     }
-    
-    
+
+    public ArrayList<Feedback> getFeedback() {
+        return feedbacks;
+    }
 }

@@ -8,6 +8,7 @@ Clinic Way
 Drake Circus
 Plymouth
 PL1 1AA
+RATINGS
 3
 RATING
 2
@@ -41,6 +42,7 @@ Clinic Way
 Drake Circus
 Plymouth
 PL1 1AA
+RATINGS
 3
 RATING
 2
@@ -61,6 +63,7 @@ Clinic Way
 Drake Circus
 Plymouth
 PL1 1AA
+RATINGS
 3
 RATING
 2

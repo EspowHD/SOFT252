@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Panels.Parts;
+import Objects.Address;
 import javax.swing.JOptionPane;
 import patientmanagementsystem.*;
 /**

@@ -6,7 +6,7 @@
 package Panels;
 
 import patientmanagementsystem.PatientManagementSystem;
-import patientmanagementsystem.Rating;
+import Objects.Rating;
 
 /**
  *
@@ -38,6 +38,7 @@ public class RatingPanel extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setMaximumSize(new java.awt.Dimension(600, 100));
         setMinimumSize(new java.awt.Dimension(600, 100));
+        setPreferredSize(new java.awt.Dimension(600, 100));
         setLayout(new java.awt.GridBagLayout());
 
         LblRating.setFont(PatientManagementSystem.getTextFont());

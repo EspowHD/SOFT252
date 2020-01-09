@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package patientmanagementsystem.UserTypes;
+import Objects.Prescription;
+import Objects.Appointment;
+import Objects.Address;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
@@ -69,7 +72,7 @@ public class Patient extends User {
         return appointments;
     }
 
-    public String getgender() {
+    public String getGender() {
         return gender;
     }
 

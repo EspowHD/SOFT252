@@ -150,21 +150,10 @@ public class LoginPanel extends javax.swing.JPanel {
                     Doctor doctor = (Doctor) user;
                     break;
                 case 'P':
-                    Patient patient = (Patient) user;
-                    if(patient.getStatus().equals("Completed")){
-                        PatientManagementSystem.setPhp(new PatientHomePage(patient));
-                        PatientManagementSystem.getPhp().setVisible(true);
-                        this.done = true;
-                        this.setVisible(false);
-                    }
-                    else {
-                            JOptionPane.showMessageDialog(null,
-                                "This account has not yet been approved\n"
-                                        + "please allow up to 5 working days for\n"
-                                        + "approval.",
-                                "Unapproved Account",
-                                 JOptionPane.ERROR_MESSAGE);
-                    }
+                    openPatientPage(user);
+                    break;
+                case 'A':
+                    openAdminPage(user);
                     break;
             }
         }
@@ -179,4 +168,41 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField txtUniqueID;
     // End of variables declaration//GEN-END:variables
+
+    private void openPatientPage(User user) {
+        Patient patient = (Patient) user;
+        switch (patient.getStatus()) {
+            case "Completed":
+                new PatientHomePage(patient).setVisible(true);
+                this.done = true;
+                this.setVisible(false);
+                break;
+            case "Request Termination":
+                JOptionPane.showMessageDialog(null,
+                        "This account has been requested to be terminated\n"
+                                + "please allow up to 5 working days for\n"
+                                + "termination.",
+                        "Termination Request",
+                        JOptionPane.ERROR_MESSAGE);
+                new PatientHomePage(patient).setVisible(true);
+                this.done = true;
+                this.setVisible(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null,
+                        "This account has not yet been approved\n"
+                                + "please allow up to 5 working days for\n"
+                                + "approval.",
+                        "Unapproved Account",
+                        JOptionPane.ERROR_MESSAGE);
+                break;
+        }
+  }
+
+    private void openAdminPage(User user) {
+        Administrator admin = (Administrator) user;
+        new AdministratorHomePage(admin).setVisible(true);
+        this.done = true;
+        this.setVisible(false);
+    }
 }
