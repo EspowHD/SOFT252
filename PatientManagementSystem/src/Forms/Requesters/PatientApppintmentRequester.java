@@ -6,6 +6,7 @@
 package Forms.Requesters;
 
 import Forms.HomePages.PatientHomePage;
+import Forms.HomePages.SecretaryHomePage;
 import java.util.Date;
 import Objects.Appointment;
 import patientmanagementsystem.PatientManagementSystem;
@@ -17,12 +18,12 @@ import javax.swing.JOptionPane;
  * @author espow
  */
 public class PatientApppintmentRequester extends javax.swing.JFrame {
-
     PatientHomePage php;
     public PatientApppintmentRequester(PatientHomePage php) {
         this.php = php;
         initComponents();
         this.LblPatientName.setText(this.LblPatientName.getText()+this.php.getPatient().getFirstName()+" "+this.php.getPatient().getLastName());
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -115,7 +116,7 @@ public class PatientApppintmentRequester extends javax.swing.JFrame {
                 appointments.add(new Appointment(this.php.getPatient(),doctor,"Request",this.pnlAppointmentMaker1.getDate()));
                 PatientManagementSystem.setAppointments(appointments);
                 this.php.updateAppointmentsList(php.getPatient().getAppointments());
-                PatientManagementSystem.saveInformation("test//Data_1.txt");
+                PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
                 dispose();
             }
             else{

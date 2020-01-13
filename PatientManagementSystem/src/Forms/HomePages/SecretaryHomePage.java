@@ -5,17 +5,43 @@
  */
 package Forms.HomePages;
 
+import Forms.Makers.SecretaryAppointmentMakerPage;
+import Forms.Requesters.PatientApppintmentRequester;
+import Objects.Appointment;
+import Objects.Medicine;
+import Objects.Prescription;
+import Panels.AppointmentPanel;
+import Panels.UserPanel;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.UserTypes.Doctor;
+import patientmanagementsystem.UserTypes.Patient;
+import patientmanagementsystem.UserTypes.User;
+
 /**
  *
  * @author espow
  */
 public class SecretaryHomePage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SecerataryHomePage
-     */
+    private Doctor selectedDoctor;
+    private Patient selectedPatient;
+    
     public SecretaryHomePage() {
         initComponents();
+        fillCombos(PatientManagementSystem.getUsers());
+        updateSelected();
+        updateAppointmentsList(this.selectedDoctor.getAppointments());
+        
+        updateUsersList(Patient.getPatients(PatientManagementSystem.getUsers()));
+        
+        updateRequestsList(this.getRequestedPatients(PatientManagementSystem.getUsers()),
+                this.getRequestedAppointments(PatientManagementSystem.getAppointments()));
+        //updateMedicinesList();
     }
 
     /**
@@ -26,59 +52,442 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        SclUsers = new javax.swing.JScrollPane();
+        UsersContainer = new javax.swing.JPanel();
+        SclAppointments = new javax.swing.JScrollPane();
+        AppointmentsContainer = new javax.swing.JPanel();
+        LblDoctor = new javax.swing.JLabel();
+        CbxDoctor = new javax.swing.JComboBox<>();
+        BtnRequestAppointment = new javax.swing.JButton();
+        SclRequests = new javax.swing.JScrollPane();
+        RequestsContainer = new javax.swing.JPanel();
+        LblPatients = new javax.swing.JLabel();
+        LblPatient = new javax.swing.JLabel();
+        CbxPatient = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TblMedicines = new javax.swing.JTable();
+        BtnRemovePatient = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        BtnApprove = new javax.swing.JButton();
+        BtnDeny = new javax.swing.JButton();
+        BtnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Secretary Home Page");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        SclUsers.setBackground(new java.awt.Color(255, 102, 102));
+        SclUsers.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SclUsers.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclUsers.setAlignmentX(0.0F);
+        SclUsers.setAlignmentY(0.0F);
+        SclUsers.setMaximumSize(new java.awt.Dimension(600, 300));
+        SclUsers.setMinimumSize(new java.awt.Dimension(600, 300));
+        SclUsers.setPreferredSize(new java.awt.Dimension(600, 300));
+
+        UsersContainer.setBackground(new java.awt.Color(247, 247, 247));
+        UsersContainer.setAutoscrolls(true);
+        UsersContainer.setMaximumSize(new java.awt.Dimension(600, 10000));
+        UsersContainer.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        UsersContainer.setName(""); // NOI18N
+        UsersContainer.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        UsersContainer.setLayout(new javax.swing.BoxLayout(UsersContainer, javax.swing.BoxLayout.PAGE_AXIS));
+        SclUsers.setViewportView(UsersContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(SclUsers, gridBagConstraints);
+
+        SclAppointments.setBackground(new java.awt.Color(255, 102, 102));
+        SclAppointments.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SclAppointments.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclAppointments.setAlignmentX(0.0F);
+        SclAppointments.setAlignmentY(0.0F);
+        SclAppointments.setMaximumSize(new java.awt.Dimension(600, 300));
+        SclAppointments.setMinimumSize(new java.awt.Dimension(600, 300));
+        SclAppointments.setPreferredSize(new java.awt.Dimension(600, 300));
+
+        AppointmentsContainer.setBackground(new java.awt.Color(247, 247, 247));
+        AppointmentsContainer.setAutoscrolls(true);
+        AppointmentsContainer.setMaximumSize(new java.awt.Dimension(700, 10000));
+        AppointmentsContainer.setMinimumSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        AppointmentsContainer.setName(""); // NOI18N
+        AppointmentsContainer.setPreferredSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-150));
+        AppointmentsContainer.setLayout(new javax.swing.BoxLayout(AppointmentsContainer, javax.swing.BoxLayout.Y_AXIS));
+        SclAppointments.setViewportView(AppointmentsContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(SclAppointments, gridBagConstraints);
+
+        LblDoctor.setFont(PatientManagementSystem.getTextFont());
+        LblDoctor.setText("Doctor:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblDoctor, gridBagConstraints);
+
+        CbxDoctor.setFont(PatientManagementSystem.getTextFont());
+        CbxDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbxDoctorActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
+        getContentPane().add(CbxDoctor, gridBagConstraints);
+
+        BtnRequestAppointment.setFont(PatientManagementSystem.getTextFont());
+        BtnRequestAppointment.setText("Request new appointment");
+        BtnRequestAppointment.setAlignmentY(0.0F);
+        BtnRequestAppointment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        BtnRequestAppointment.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnRequestAppointment.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BtnRequestAppointment.setMaximumSize(new java.awt.Dimension(200, 50));
+        BtnRequestAppointment.setMinimumSize(new java.awt.Dimension(200, 50));
+        BtnRequestAppointment.setPreferredSize(new java.awt.Dimension(200, 50));
+        BtnRequestAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRequestAppointmentActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        getContentPane().add(BtnRequestAppointment, gridBagConstraints);
+
+        SclRequests.setBackground(new java.awt.Color(255, 102, 102));
+        SclRequests.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SclRequests.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclRequests.setAlignmentX(0.0F);
+        SclRequests.setAlignmentY(0.0F);
+        SclRequests.setMaximumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclRequests.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclRequests.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+
+        RequestsContainer.setBackground(new java.awt.Color(247, 247, 247));
+        RequestsContainer.setAutoscrolls(true);
+        RequestsContainer.setMaximumSize(new java.awt.Dimension(600, 10000));
+        RequestsContainer.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        RequestsContainer.setName(""); // NOI18N
+        RequestsContainer.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-150));
+        RequestsContainer.setLayout(new javax.swing.BoxLayout(RequestsContainer, javax.swing.BoxLayout.Y_AXIS));
+        SclRequests.setViewportView(RequestsContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(SclRequests, gridBagConstraints);
+
+        LblPatients.setFont(PatientManagementSystem.getTextFont());
+        LblPatients.setText("Patients:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblPatients, gridBagConstraints);
+
+        LblPatient.setFont(PatientManagementSystem.getTextFont());
+        LblPatient.setText("Patient:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblPatient, gridBagConstraints);
+
+        CbxPatient.setFont(PatientManagementSystem.getTextFont());
+        CbxPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbxPatientActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
+        getContentPane().add(CbxPatient, gridBagConstraints);
+
+        jScrollPane3.setMaximumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        jScrollPane3.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        jScrollPane3.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+
+        TblMedicines.setFont(PatientManagementSystem.getTextFont());
+        TblMedicines.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        TblMedicines.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        TblMedicines.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(TblMedicines);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(jScrollPane3, gridBagConstraints);
+
+        BtnRemovePatient.setFont(PatientManagementSystem.getTextFont());
+        BtnRemovePatient.setText("Remove Selected User");
+        BtnRemovePatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRemovePatientActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        getContentPane().add(BtnRemovePatient, gridBagConstraints);
+
+        jComboBox1.setFont(PatientManagementSystem.getTextFont());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
+        getContentPane().add(jComboBox1, gridBagConstraints);
+
+        jLabel1.setFont(PatientManagementSystem.getTextFont());
+        jLabel1.setText("Request:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(jLabel1, gridBagConstraints);
+
+        BtnApprove.setFont(PatientManagementSystem.getTextFont());
+        BtnApprove.setText("Approve");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 10);
+        getContentPane().add(BtnApprove, gridBagConstraints);
+
+        BtnDeny.setFont(PatientManagementSystem.getTextFont());
+        BtnDeny.setText("Deny");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
+        getContentPane().add(BtnDeny, gridBagConstraints);
+
+        BtnLogout.setText("jButton3");
+        getContentPane().add(BtnLogout, new java.awt.GridBagConstraints());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void CbxDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxDoctorActionPerformed
+        updateSelected();
+        updateAppointmentsList(this.selectedDoctor.getAppointments());
+    }//GEN-LAST:event_CbxDoctorActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SecretaryHomePage().setVisible(true);
-            }
-        });
-    }
+    private void BtnRequestAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestAppointmentActionPerformed
+        new SecretaryAppointmentMakerPage(this).setVisible(true);
+    }//GEN-LAST:event_BtnRequestAppointmentActionPerformed
+
+    private void CbxPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxPatientActionPerformed
+        updateSelected();
+    }//GEN-LAST:event_CbxPatientActionPerformed
+
+    private void BtnRemovePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemovePatientActionPerformed
+        for(Appointment appointment: PatientManagementSystem.getAppointments()){
+            if(appointment.getPatient().equals(this.selectedPatient)) PatientManagementSystem.getAppointments().remove(appointment);
+        }
+        for(Prescription prescription: PatientManagementSystem.getPrescriptions()){
+            if(prescription.getIssueTo().equals(this.selectedPatient)) PatientManagementSystem.getPrescriptions().remove(prescription);
+        }
+        PatientManagementSystem.getUsers().remove(this.selectedPatient);
+        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+        this.updateUsersList(PatientManagementSystem.getUsers());
+        this.updateAppointmentsList(PatientManagementSystem.getAppointments());
+        this.updateRequestsList(this.getRequestedPatients(PatientManagementSystem.getUsers()),
+                this.getRequestedAppointments(PatientManagementSystem.getAppointments()));
+    }//GEN-LAST:event_BtnRemovePatientActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AppointmentsContainer;
+    private javax.swing.JButton BtnApprove;
+    private javax.swing.JButton BtnDeny;
+    private javax.swing.JButton BtnLogout;
+    private javax.swing.JButton BtnRemovePatient;
+    private javax.swing.JButton BtnRequestAppointment;
+    private javax.swing.JComboBox<String> CbxDoctor;
+    private javax.swing.JComboBox<String> CbxPatient;
+    private javax.swing.JLabel LblDoctor;
+    private javax.swing.JLabel LblPatient;
+    private javax.swing.JLabel LblPatients;
+    private javax.swing.JPanel RequestsContainer;
+    private javax.swing.JScrollPane SclAppointments;
+    private javax.swing.JScrollPane SclRequests;
+    private javax.swing.JScrollPane SclUsers;
+    private javax.swing.JTable TblMedicines;
+    private javax.swing.JPanel UsersContainer;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
+
+    public void updateAppointmentsList(ArrayList<Appointment> appointments) {
+        AppointmentsContainer.removeAll();
+        for(Appointment appointment : appointments){
+            if(!appointment.getStatus().contains("Request")){
+                AppointmentPanel AP = new AppointmentPanel(appointment);
+                AP.setAlignmentX(Component.CENTER_ALIGNMENT);
+                AP.setVisible(true);
+                AppointmentsContainer.add(AP);
+                }
+        }
+        resizeAppointmentContainerToFit();
+        validate();
+        repaint();
+    }
+    
+    private void updateUsersList(ArrayList<User> users) {
+        UsersContainer.removeAll();
+        for(User user : users){
+            UserPanel UP = new UserPanel(user);
+            UP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            UP.setVisible(true);
+            UsersContainer.add(UP);
+        }
+        resizeUsersContainerToFit();
+        validate();
+        repaint();
+    }
+
+    private void updateMedicinesList(ArrayList<Medicine> medicines) {
+        String[] col = {"Medicine Name","Quantity","Dosage"};
+        Object[][] data = new String[PatientManagementSystem.getMedicines().size()][2];
+        for(int i = 0;i<data.length;i++){
+            data[i][0] = PatientManagementSystem.getMedicines().get(i).getMedicineName();
+            data[i][1] = Integer.toString(PatientManagementSystem.getMedicines().get(i).getStock());
+        }
+        DefaultTableModel model = new DefaultTableModel(data,col){
+            @Override
+            public boolean isCellEditable(int i, int i1){return false;}
+        };
+        this.TblMedicines.setModel(model);
+        this.TblMedicines.getColumnModel().getColumn(0).setPreferredWidth(300);//Medicine Name width
+        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(300);//Medicine Name width
+    }
+
+    private void updateRequestsList(ArrayList<Patient> patients,ArrayList<Appointment> appointments) {
+        RequestsContainer.removeAll();
+        for(Patient patient : patients){
+            UserPanel UP = new UserPanel(patient);
+            UP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            UP.setVisible(true);
+            RequestsContainer.add(UP);
+        }
+        for(Appointment appointment : appointments){
+            AppointmentPanel AP = new AppointmentPanel(appointment);
+            AP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            AP.setVisible(true);
+            RequestsContainer.add(AP);
+        }
+        resizeRequestsContainerToFit();
+        validate();
+        repaint();
+    }
+    
+    public void resizeAppointmentContainerToFit(){
+        int componentHeight = 100*(this.AppointmentsContainer.getComponentCount());
+        this.AppointmentsContainer.setPreferredSize(new Dimension(600, componentHeight));
+    }
+    
+    private void resizeRequestsContainerToFit() {
+        int componentHeight = 100*(this.RequestsContainer.getComponentCount());
+        this.RequestsContainer.setPreferredSize(new Dimension(600, componentHeight));
+    }
+    
+    private void resizeUsersContainerToFit() {
+        int componentHeight = 100*(this.UsersContainer.getComponentCount());
+        this.UsersContainer.setPreferredSize(new Dimension(600, componentHeight));
+    }
+    
+    private void updateSelected() {
+        ArrayList<User> users = PatientManagementSystem.getUsers();
+        for(User user: users){
+            if(user.getUniqueID().contains("D")&& this.CbxDoctor.getSelectedItem() != null){
+                if(this.CbxDoctor.getSelectedItem().toString().contains(user.getFirstName()) &&
+                    this.CbxDoctor.getSelectedItem().toString().contains(user.getLastName())){
+                    this.selectedDoctor = ((Doctor) user);
+                }
+            } else if(user.getUniqueID().contains("P") && this.CbxPatient.getSelectedItem() != null){
+                if(this.CbxPatient.getSelectedItem().toString().contains(user.getFirstName()) &&
+                    this.CbxPatient.getSelectedItem().toString().contains(user.getLastName())){
+                    this.selectedPatient = ((Patient) user);
+                }
+            }
+        }
+    }
+
+    public Doctor getSelectedDoctor() {
+        return selectedDoctor;
+    }
+
+    private void fillCombos(ArrayList<User> users) {
+        for(User user : users){
+            if(user.getUniqueID().contains("P")) this.CbxPatient.addItem(user.displayUser());
+            else if (user.getUniqueID().contains("D")) this.CbxDoctor.addItem(user.displayUser());
+        }
+    }
+    
+    private ArrayList<Patient> getRequestedPatients(ArrayList<User> users){
+        ArrayList<Patient> patients = new ArrayList<>();
+        for(User user : users){
+            if(user.getUniqueID().contains("P")){
+                Patient patient = (Patient) user;
+                if(patient.getStatus().contains("Request"))patients.add(patient);
+            }
+        }
+        return patients;
+    }
+    
+    private ArrayList<Appointment> getRequestedAppointments(ArrayList<Appointment> appointments){
+        ArrayList<Appointment> requestedAppointments = new ArrayList<>();
+        for(Appointment appointment : appointments){
+            if(appointment.getStatus().contains("Request")) requestedAppointments.add(appointment);
+        }
+        return requestedAppointments;
+    }
 }

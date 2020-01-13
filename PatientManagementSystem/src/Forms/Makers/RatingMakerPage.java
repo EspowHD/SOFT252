@@ -23,6 +23,7 @@ public class RatingMakerPage extends javax.swing.JFrame {
         this.php = php;
         initComponents();
         loadInDocotrs();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -45,6 +46,7 @@ public class RatingMakerPage extends javax.swing.JFrame {
         BtnSaveReview = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Make a Rating");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         CbxDoctorSelector.setFont(PatientManagementSystem.getTextFont());

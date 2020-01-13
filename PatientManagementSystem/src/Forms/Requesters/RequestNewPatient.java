@@ -5,7 +5,9 @@
  */
 package Forms.Requesters;
 
+import javax.swing.JOptionPane;
 import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.UserTypes.Patient;
 
 /**
  *
@@ -31,36 +33,74 @@ public class RequestNewPatient extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        patientRegistrationPanel1 = new Panels.PatientRegistrationPanel();
+        BtnCancel = new javax.swing.JButton();
+        BtnRequestPatient = new javax.swing.JButton();
+        patientRegistrationPanel = new Panels.PatientRegistrationPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Register new Patient");
         setFont(PatientManagementSystem.getTextFont());
-        setMinimumSize(new java.awt.Dimension(550, 440));
+        setMinimumSize(new java.awt.Dimension(550, 410));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        patientRegistrationPanel1.setMaximumSize(new java.awt.Dimension(550, 400));
-        patientRegistrationPanel1.setMinimumSize(new java.awt.Dimension(550, 400));
-        patientRegistrationPanel1.setPreferredSize(new java.awt.Dimension(550, 450));
-        patientRegistrationPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                patientRegistrationPanel1ComponentHidden(evt);
+        BtnCancel.setFont(PatientManagementSystem.getTextFont());
+        BtnCancel.setText("Cancel");
+        BtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 100, 15, 10);
+        getContentPane().add(BtnCancel, gridBagConstraints);
+
+        BtnRequestPatient.setFont(PatientManagementSystem.getTextFont());
+        BtnRequestPatient.setText("Request this Account");
+        BtnRequestPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRequestPatientActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 15, 100);
+        getContentPane().add(BtnRequestPatient, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        getContentPane().add(patientRegistrationPanel1, gridBagConstraints);
+        gridBagConstraints.gridwidth = 2;
+        getContentPane().add(patientRegistrationPanel, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void patientRegistrationPanel1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_patientRegistrationPanel1ComponentHidden
+    private void BtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelActionPerformed
         this.dispose();
-    }//GEN-LAST:event_patientRegistrationPanel1ComponentHidden
+    }//GEN-LAST:event_BtnCancelActionPerformed
+
+    private void BtnRequestPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestPatientActionPerformed
+        if(this.patientRegistrationPanel.checkPasswordsMatch() && this.patientRegistrationPanel.dateSelectPart1.getDate() != null && this.patientRegistrationPanel.addressInputPart1.getAddress() != null) {
+            PatientManagementSystem.getUsers().add(new Patient(this.patientRegistrationPanel.TxtFirstName.getText(),this.patientRegistrationPanel.TxtLastName.getText(),
+                this.patientRegistrationPanel.pfPassword.getText(),this.patientRegistrationPanel.CBoxGender.getSelectedItem().toString(),
+                this.patientRegistrationPanel.dateSelectPart1.getDate(),this.patientRegistrationPanel.addressInputPart1.getAddress(),"Requested"));
+            PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+            this.setVisible(false);
+        }
+        else JOptionPane.showMessageDialog(null,
+            "Not all information is filled in\nmake sure to press input address",
+            "Invalid Post Code",
+            JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_BtnRequestPatientActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Panels.PatientRegistrationPanel patientRegistrationPanel1;
+    private javax.swing.JButton BtnCancel;
+    private javax.swing.JButton BtnRequestPatient;
+    private Panels.PatientRegistrationPanel patientRegistrationPanel;
     // End of variables declaration//GEN-END:variables
 }

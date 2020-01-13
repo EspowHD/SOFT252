@@ -40,7 +40,7 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
-female
+Female
 01/14/1989
 Completed
 DOCTOR
@@ -97,7 +97,7 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
-male
+Male
 02/11/1974
 Completed
 PATIENT
@@ -110,9 +110,19 @@ Patient Road
 Drake Circus
 Plymouth
 PL1 1AB
-male
+Male
 09/11/1992
 Completed
+SECRETARY
+S0000
+Richie
+Rich
+Password1
+1
+Secretary Road
+Drake Circus
+Plymouth
+PL1 1BB
 MEDICINES
 Paracetemol
 20
@@ -171,5 +181,11 @@ P0000
 D0000
 Request
 01/01/2019 08:00
+NO NOTES
+NO PRESCRIPTION
+P0000
+D0002
+Approved
+02/01/2019 08:00
 NO NOTES
 NO PRESCRIPTION

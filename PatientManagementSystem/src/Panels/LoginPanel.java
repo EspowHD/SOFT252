@@ -155,6 +155,9 @@ public class LoginPanel extends javax.swing.JPanel {
                 case 'A':
                     openAdminPage(user);
                     break;
+                case 'S':
+                    openSecretaryPage(user);
+                    break;
             }
         }
         
@@ -202,6 +205,13 @@ public class LoginPanel extends javax.swing.JPanel {
     private void openAdminPage(User user) {
         Administrator admin = (Administrator) user;
         new AdministratorHomePage(admin).setVisible(true);
+        this.done = true;
+        this.setVisible(false);
+    }
+
+    private void openSecretaryPage(User user) {
+        Secretary secretary = (Secretary) user;
+        new SecretaryHomePage().setVisible(true);
         this.done = true;
         this.setVisible(false);
     }

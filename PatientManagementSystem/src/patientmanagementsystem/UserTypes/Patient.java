@@ -59,7 +59,7 @@ public class Patient extends User {
     
     @Override
     public String displayUser(){
-        return "Name: "+this.firstName+" "+this.lastName+" Date of Birth: "+PatientManagementSystem.getFormat().format(this.DOB);
+        return "Name: "+this.firstName+" "+this.lastName+" Date of Birth: "+PatientManagementSystem.getFormat().format(this.DOB).replace(" 00:00", "");
     }
     
     public ArrayList<Appointment> getAppointments(){
@@ -104,5 +104,13 @@ public class Patient extends User {
 
     public String getStatus() {
         return status;
+    }
+    
+    public static ArrayList<User> getPatients(ArrayList<User> users){
+        ArrayList<User> patients = new ArrayList<>();
+        for(User user : users){
+            if(user.getUniqueID().contains("P")) patients.add(user);
+        }
+        return patients;
     }
 }

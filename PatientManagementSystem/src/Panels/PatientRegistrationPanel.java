@@ -5,12 +5,9 @@
  */
 package Panels;
 
-import Forms.Requesters.RequestNewPatient;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import patientmanagementsystem.PatientManagementSystem;
 import patientmanagementsystem.UserTypes.Patient;
-import patientmanagementsystem.UserTypes.User;
 
 /**
  *
@@ -49,8 +46,6 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         pfPassword = new javax.swing.JPasswordField();
         pfRePassword = new javax.swing.JPasswordField();
         CBoxGender = new javax.swing.JComboBox<>();
-        BtnCancel = new javax.swing.JButton();
-        BtnRequestPatient = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 350));
         setMinimumSize(new java.awt.Dimension(550, 350));
@@ -58,17 +53,18 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(550, 350));
         setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 15);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         add(dateSelectPart1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 15);
@@ -77,17 +73,17 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         LblDOB.setFont(PatientManagementSystem.getTextFont());
         LblDOB.setText("DOB:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 10, 0, 15);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 10);
         add(LblDOB, gridBagConstraints);
 
         LblAddress.setFont(PatientManagementSystem.getTextFont());
         LblAddress.setText("Address:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 15);
         add(LblAddress, gridBagConstraints);
@@ -96,7 +92,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         LblFirstName.setText("First Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 10);
         add(LblFirstName, gridBagConstraints);
@@ -105,7 +101,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         LblLastName.setText("Last Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 10);
         add(LblLastName, gridBagConstraints);
@@ -114,7 +110,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         LblPassword.setText("Password:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 10);
         add(LblPassword, gridBagConstraints);
@@ -123,7 +119,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         LblRePassword.setText("Re-type Password:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 10);
         add(LblRePassword, gridBagConstraints);
@@ -132,7 +128,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         LblGender.setText("Gender:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 10);
         add(LblGender, gridBagConstraints);
@@ -148,7 +144,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(TxtFirstName, gridBagConstraints);
 
@@ -158,7 +154,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         TxtLastName.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(TxtLastName, gridBagConstraints);
 
@@ -168,7 +164,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         pfPassword.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(pfPassword, gridBagConstraints);
 
@@ -178,7 +174,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         pfRePassword.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(pfRePassword, gridBagConstraints);
 
@@ -186,67 +182,18 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
         CBoxGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(CBoxGender, gridBagConstraints);
-
-        BtnCancel.setFont(PatientManagementSystem.getTextFont());
-        BtnCancel.setText("Cancel");
-        BtnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCancelActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 0);
-        add(BtnCancel, gridBagConstraints);
-
-        BtnRequestPatient.setFont(PatientManagementSystem.getTextFont());
-        BtnRequestPatient.setText("Request this Account");
-        BtnRequestPatient.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnRequestPatientActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        add(BtnRequestPatient, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtFirstNameActionPerformed
 
-    private void BtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_BtnCancelActionPerformed
-
-    private void BtnRequestPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestPatientActionPerformed
-        if(this.checkPasswordsMatch() && this.dateSelectPart1.getDate() != null && this.addressInputPart1.getAddress() != null) {
-            this.patient = new Patient(this.TxtFirstName.getText(),this.TxtLastName.getText(),
-                this.pfPassword.getText(),this.CBoxGender.getSelectedItem().toString(),
-                this.dateSelectPart1.getDate(),this.addressInputPart1.getAddress(),"Requested");
-            PatientManagementSystem.getUsers().add(patient);
-            PatientManagementSystem.saveInformation("test//Data_1.txt");
-            this.setVisible(false);
-        }
-        else JOptionPane.showMessageDialog(null,
-                            "Not all information is filled in\nmake sure to press input address",
-                            "Invalid Post Code",
-                            JOptionPane.ERROR_MESSAGE);
-        
-    }//GEN-LAST:event_BtnRequestPatientActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnCancel;
-    private javax.swing.JButton BtnRequestPatient;
-    private javax.swing.JComboBox<String> CBoxGender;
+    public javax.swing.JComboBox<String> CBoxGender;
     private javax.swing.JLabel LblAddress;
     private javax.swing.JLabel LblDOB;
     private javax.swing.JLabel LblFirstName;
@@ -254,15 +201,15 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
     private javax.swing.JLabel LblLastName;
     private javax.swing.JLabel LblPassword;
     private javax.swing.JLabel LblRePassword;
-    private javax.swing.JTextField TxtFirstName;
-    private javax.swing.JTextField TxtLastName;
-    private Panels.Parts.AddressInputPart addressInputPart1;
-    private Panels.Parts.DateSelectPart dateSelectPart1;
-    private javax.swing.JPasswordField pfPassword;
+    public javax.swing.JTextField TxtFirstName;
+    public javax.swing.JTextField TxtLastName;
+    public Panels.Parts.AddressInputPart addressInputPart1;
+    public Panels.Parts.DateSelectPart dateSelectPart1;
+    public javax.swing.JPasswordField pfPassword;
     private javax.swing.JPasswordField pfRePassword;
     // End of variables declaration//GEN-END:variables
 
-private boolean checkPasswordsMatch(){
+public boolean checkPasswordsMatch(){
     if(pfPassword.getText().equals(pfRePassword.getText())) return true;
     else{
         JOptionPane.showMessageDialog(null,

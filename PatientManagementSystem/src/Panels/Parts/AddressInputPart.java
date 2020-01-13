@@ -49,7 +49,6 @@ public class AddressInputPart extends javax.swing.JPanel {
 
         TxtRoadNum.setFont(PatientManagementSystem.getTextFont());
         TxtRoadNum.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        TxtRoadNum.setToolTipText("Your user type (P for Patient,\nD for Doctor, A for Administrator,\nS for Secretary) followed\n by 4 numbers.");
         TxtRoadNum.setAutoscrolls(false);
         TxtRoadNum.setMaximumSize(new java.awt.Dimension(100, 22));
         TxtRoadNum.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -69,7 +68,6 @@ public class AddressInputPart extends javax.swing.JPanel {
 
         TxtRoadName.setFont(PatientManagementSystem.getTextFont());
         TxtRoadName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        TxtRoadName.setToolTipText("Your user type (P for Patient,\nD for Doctor, A for Administrator,\nS for Secretary) followed\n by 4 numbers.");
         TxtRoadName.setAutoscrolls(false);
         TxtRoadName.setMaximumSize(new java.awt.Dimension(100, 22));
         TxtRoadName.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -89,7 +87,6 @@ public class AddressInputPart extends javax.swing.JPanel {
 
         TxtArea.setFont(PatientManagementSystem.getTextFont());
         TxtArea.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        TxtArea.setToolTipText("Your user type (P for Patient,\nD for Doctor, A for Administrator,\nS for Secretary) followed\n by 4 numbers.");
         TxtArea.setAutoscrolls(false);
         TxtArea.setMaximumSize(new java.awt.Dimension(100, 22));
         TxtArea.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -109,7 +106,6 @@ public class AddressInputPart extends javax.swing.JPanel {
 
         TxtCity.setFont(PatientManagementSystem.getTextFont());
         TxtCity.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        TxtCity.setToolTipText("Your user type (P for Patient,\nD for Doctor, A for Administrator,\nS for Secretary) followed\n by 4 numbers.");
         TxtCity.setAutoscrolls(false);
         TxtCity.setMaximumSize(new java.awt.Dimension(100, 22));
         TxtCity.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -129,7 +125,6 @@ public class AddressInputPart extends javax.swing.JPanel {
 
         TxtPostCode.setFont(PatientManagementSystem.getTextFont());
         TxtPostCode.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        TxtPostCode.setToolTipText("Your user type (P for Patient,\nD for Doctor, A for Administrator,\nS for Secretary) followed\n by 4 numbers.");
         TxtPostCode.setAutoscrolls(false);
         TxtPostCode.setMaximumSize(new java.awt.Dimension(150, 22));
         TxtPostCode.setMinimumSize(new java.awt.Dimension(150, 22));

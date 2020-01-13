@@ -6,6 +6,7 @@
 package patientmanagementsystem.UserTypes;
 
 import Objects.Address;
+import patientmanagementsystem.PatientManagementSystem;
 
 /**
  *
@@ -16,6 +17,14 @@ public class Administrator extends User{
 
     public Administrator(String uniqueID, String firstName, String lastName, String password, Address address) {
         this.uniqueID = uniqueID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.address = address;
+    }
+    
+    public Administrator(String firstName, String lastName, String password, Address address) {
+        this.uniqueID = this.uniqueIdentifier+getNextID(uniqueIdentifier,PatientManagementSystem.getUsers());
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

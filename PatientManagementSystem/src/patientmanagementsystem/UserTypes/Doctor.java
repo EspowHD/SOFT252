@@ -31,14 +31,14 @@ public class Doctor extends User{
         this.feedbacks = feedbacks;
     }
 
-    public Doctor(String firstName, String lastName, String password, Address address, ArrayList<Rating> ratings,ArrayList<Feedback> feedbacks) {
+    public Doctor(String firstName, String lastName, String password, Address address) {
         this.uniqueID = this.uniqueIdentifier+getNextID(uniqueIdentifier,PatientManagementSystem.getUsers());
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.address = address;
-        this.ratings = ratings;
-        this.feedbacks = feedbacks;
+        this.ratings = new ArrayList<>();
+        this.feedbacks = new ArrayList<>();
     }
 
     public String getAverageRating() {

@@ -134,6 +134,10 @@ public class PatientManagementSystem {
                     break;
                 case "ADMINISTRATOR" :
                     user = new Administrator(uniqueID,firstName,lastName,password,address);
+                    break;
+                case "SECRETARY" :
+                    user = new Secretary(uniqueID,firstName,lastName,password,address);
+                    break;
             }
             users.add(user);
             try{
@@ -304,6 +308,16 @@ public class PatientManagementSystem {
                     writer.write(admin.getLastName()+"\n");
                     writer.write(admin.getPassword()+"\n");
                     writeAddress(writer,admin.getAddress());
+                    break;
+                case 'S':
+                    Secretary secretary = (Secretary) users.get(i);
+                    writer.write("SECRETARY\n");
+                    writer.write(secretary.getUniqueID()+"\n");
+                    writer.write(secretary.getFirstName()+"\n");
+                    writer.write(secretary.getLastName()+"\n");
+                    writer.write(secretary.getPassword()+"\n");
+                    writeAddress(writer,secretary.getAddress());
+                    break;
             }
         }
     }

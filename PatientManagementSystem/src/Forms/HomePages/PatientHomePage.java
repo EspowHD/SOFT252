@@ -70,6 +70,7 @@ public final class PatientHomePage extends JFrame {
         setFont(PatientManagementSystem.getTextFont());
         setMaximumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
         setMinimumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         SclAppointments.setBackground(new java.awt.Color(255, 102, 102));
@@ -266,7 +267,7 @@ public final class PatientHomePage extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRequestAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestAppointmentActionPerformed
-        newAppointmentButtonPressed();
+        new PatientApppintmentRequester(this).setVisible(true);
     }//GEN-LAST:event_BtnRequestAppointmentActionPerformed
 
     private void BtnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogOutActionPerformed
@@ -371,19 +372,13 @@ public final class PatientHomePage extends JFrame {
         }
     }
     
-    //Button Methods
-    private void newAppointmentButtonPressed(){ 
-        PatientApppintmentRequester par = new PatientApppintmentRequester(this);
-        par.setVisible(true);
-    }
-    
     //Fills combo box with all doctors
     private void loadDoctors() {
         ArrayList<User> users = PatientManagementSystem.getUsers();
          for (int i = 0; i < users.size(); i++) {
             String userID = users.get(i).getUniqueID();
             if(userID.contains("D")){
-                this.CbxDoctor.addItem("Dr "+users.get(i).getFirstName()+" "+users.get(i).getLastName());
+                this.CbxDoctor.addItem(users.get(i).displayUser());
             }
         }
         if(this.CbxDoctor.getItemCount() == 0) this.CbxDoctor.addItem("No Doctors Loaded");
@@ -406,8 +401,7 @@ public final class PatientHomePage extends JFrame {
 
     private void logout() {
         PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
-        StartPage NewSession = new StartPage();
-        NewSession.setVisible(true);
+        new StartPage().setVisible(true);
         this.dispose();
     }
 }

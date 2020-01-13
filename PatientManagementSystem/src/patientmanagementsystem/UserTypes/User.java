@@ -16,7 +16,7 @@ public abstract class User {
     String password;
     
     public String getNextID(String type,ArrayList<User> users){
-        int maxID = 0;
+        int maxID = -1;
         for(int i = 0;i < users.size();i++){
             if(users.get(i).uniqueID.contains(type)){
                 int inInt = Integer.parseInt(users.get(i).uniqueID.substring(1));
@@ -67,6 +67,7 @@ public abstract class User {
     }
     
     public String displayUser(){
-        return "Name: "+this.firstName+" "+this.lastName;
+        if(this.uniqueID.contains("D")) return "Dr "+this.firstName+" "+this.lastName;
+        else return this.firstName+" "+this.lastName;
     }
 }

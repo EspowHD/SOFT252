@@ -5,6 +5,8 @@
  */
 package Forms.HomePages;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author espow
@@ -28,6 +30,9 @@ public class DoctorHomePage extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Doctor Home Page");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

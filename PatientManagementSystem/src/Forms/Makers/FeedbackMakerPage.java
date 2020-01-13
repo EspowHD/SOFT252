@@ -21,6 +21,7 @@ public class FeedbackMakerPage extends javax.swing.JFrame {
         this.doctor = doctor;
         this.admin = admin;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -38,6 +39,8 @@ public class FeedbackMakerPage extends javax.swing.JFrame {
         BtnGiveFeedback = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Provide Feedback");
+        setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(450, 260));
         setResizable(false);
 

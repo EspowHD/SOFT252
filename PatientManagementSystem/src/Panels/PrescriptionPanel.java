@@ -299,6 +299,5 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         this.TblMedicines.getColumnModel().getColumn(0).setPreferredWidth(140);//Medicine Name width
         this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(100);//Medicine Name width
         this.TblMedicines.getColumnModel().getColumn(2).setPreferredWidth(400);//Medicine Name width
-        
     }
 }
