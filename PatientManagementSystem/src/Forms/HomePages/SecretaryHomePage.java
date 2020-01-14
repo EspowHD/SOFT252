@@ -7,6 +7,7 @@ package Forms.HomePages;
 
 import Forms.Makers.SecretaryAppointmentMakerPage;
 import Forms.Requesters.PatientApppintmentRequester;
+import Forms.StartPage;
 import Objects.Appointment;
 import Objects.Medicine;
 import Objects.Prescription;
@@ -15,7 +16,10 @@ import Panels.UserPanel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import patientmanagementsystem.PatientManagementSystem;
 import patientmanagementsystem.UserTypes.Doctor;
@@ -33,15 +37,8 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     
     public SecretaryHomePage() {
         initComponents();
-        fillCombos(PatientManagementSystem.getUsers());
-        updateSelected();
-        updateAppointmentsList(this.selectedDoctor.getAppointments());
-        
-        updateUsersList(Patient.getPatients(PatientManagementSystem.getUsers()));
-        
-        updateRequestsList(this.getRequestedPatients(PatientManagementSystem.getUsers()),
-                this.getRequestedAppointments(PatientManagementSystem.getAppointments()));
-        //updateMedicinesList();
+        updateAll();
+        updateMedicinesList(PatientManagementSystem.getMedicines());
     }
 
     /**
@@ -69,8 +66,8 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         TblMedicines = new javax.swing.JTable();
         BtnRemovePatient = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        CbxRequests = new javax.swing.JComboBox<>();
+        LblRequest = new javax.swing.JLabel();
         BtnApprove = new javax.swing.JButton();
         BtnDeny = new javax.swing.JButton();
         BtnLogout = new javax.swing.JButton();
@@ -102,7 +99,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         getContentPane().add(SclUsers, gridBagConstraints);
 
@@ -128,7 +125,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         getContentPane().add(SclAppointments, gridBagConstraints);
 
@@ -139,7 +136,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 5);
         getContentPane().add(LblDoctor, gridBagConstraints);
 
         CbxDoctor.setFont(PatientManagementSystem.getTextFont());
@@ -151,6 +148,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
         getContentPane().add(CbxDoctor, gridBagConstraints);
 
@@ -199,6 +197,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         getContentPane().add(SclRequests, gridBagConstraints);
 
@@ -219,7 +218,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 5);
         getContentPane().add(LblPatient, gridBagConstraints);
 
         CbxPatient.setFont(PatientManagementSystem.getTextFont());
@@ -270,47 +269,72 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
         getContentPane().add(BtnRemovePatient, gridBagConstraints);
 
-        jComboBox1.setFont(PatientManagementSystem.getTextFont());
+        CbxRequests.setFont(PatientManagementSystem.getTextFont());
+        CbxRequests.setMaximumSize(new java.awt.Dimension(350, 26));
+        CbxRequests.setMinimumSize(new java.awt.Dimension(350, 26));
+        CbxRequests.setName(""); // NOI18N
+        CbxRequests.setPreferredSize(new java.awt.Dimension(350, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
-        getContentPane().add(jComboBox1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 10);
+        getContentPane().add(CbxRequests, gridBagConstraints);
 
-        jLabel1.setFont(PatientManagementSystem.getTextFont());
-        jLabel1.setText("Request:");
+        LblRequest.setFont(PatientManagementSystem.getTextFont());
+        LblRequest.setText("Request:");
+        LblRequest.setAutoscrolls(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
-        getContentPane().add(jLabel1, gridBagConstraints);
+        getContentPane().add(LblRequest, gridBagConstraints);
 
         BtnApprove.setFont(PatientManagementSystem.getTextFont());
         BtnApprove.setText("Approve");
+        BtnApprove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnApproveActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 10);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 5);
         getContentPane().add(BtnApprove, gridBagConstraints);
 
         BtnDeny.setFont(PatientManagementSystem.getTextFont());
         BtnDeny.setText("Deny");
+        BtnDeny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDenyActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
+        gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 10);
         getContentPane().add(BtnDeny, gridBagConstraints);
 
-        BtnLogout.setText("jButton3");
-        getContentPane().add(BtnLogout, new java.awt.GridBagConstraints());
+        BtnLogout.setText("Log out");
+        BtnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLogoutActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 10, 15);
+        getContentPane().add(BtnLogout, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -329,19 +353,65 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_CbxPatientActionPerformed
 
     private void BtnRemovePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemovePatientActionPerformed
-        for(Appointment appointment: PatientManagementSystem.getAppointments()){
-            if(appointment.getPatient().equals(this.selectedPatient)) PatientManagementSystem.getAppointments().remove(appointment);
-        }
-        for(Prescription prescription: PatientManagementSystem.getPrescriptions()){
-            if(prescription.getIssueTo().equals(this.selectedPatient)) PatientManagementSystem.getPrescriptions().remove(prescription);
-        }
-        PatientManagementSystem.getUsers().remove(this.selectedPatient);
+        Patient.removePatient(selectedPatient);
         PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
-        this.updateUsersList(PatientManagementSystem.getUsers());
-        this.updateAppointmentsList(PatientManagementSystem.getAppointments());
-        this.updateRequestsList(this.getRequestedPatients(PatientManagementSystem.getUsers()),
-                this.getRequestedAppointments(PatientManagementSystem.getAppointments()));
+        updateAll();
     }//GEN-LAST:event_BtnRemovePatientActionPerformed
+
+    private void BtnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnApproveActionPerformed
+        if(this.CbxRequests.getSelectedItem()!= null){
+        if(this.CbxRequests.getSelectedItem().toString().contains("Patient:")){
+            String uniqueID = this.CbxRequests.getSelectedItem().toString().replace("Patient: ","");
+            Patient patient = (Patient) User.getUser(PatientManagementSystem.getUsers(), uniqueID);
+            if(patient.getStatus().contains("Termination")) Patient.removePatient(patient);
+            else patient.setStatus("Approved");
+        }
+        else if(this.CbxRequests.getSelectedItem().toString().contains("Appointment")){
+            for(Appointment appointment : PatientManagementSystem.getAppointments()){
+                if(this.CbxRequests.getSelectedItem().toString().contains(appointment.getDoctor().getUniqueID()) &&
+                        this.CbxRequests.getSelectedItem().toString().contains(PatientManagementSystem.getFormat().format(appointment.getDateTime())))
+                {
+                    appointment.setStatus("Approved");
+                }
+            }
+        }
+        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+        updateAll();
+        } else JOptionPane.showMessageDialog(null,
+                            "There is no request selected",
+                            "Nothing Selected",
+                            JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_BtnApproveActionPerformed
+
+    private void BtnDenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDenyActionPerformed
+        if(this.CbxRequests.getSelectedItem()!= null){
+        if(this.CbxRequests.getSelectedItem().toString().contains("Patient:")){
+            String uniqueID = this.CbxRequests.getSelectedItem().toString().replace("Patient: ","");
+            Patient patient = (Patient) User.getUser(PatientManagementSystem.getUsers(), uniqueID);
+            if(patient.getStatus().contains("Termination")) patient.setStatus("Approved");
+            else Patient.removePatient(patient);
+        } else if(this.CbxRequests.getSelectedItem().toString().contains("Appointment")){
+            for(Appointment appointment : PatientManagementSystem.getAppointments()){
+                if(this.CbxRequests.getSelectedItem().toString().contains(appointment.getDoctor().getUniqueID()) &&
+                        this.CbxRequests.getSelectedItem().toString().contains(PatientManagementSystem.getFormat().format(appointment.getDateTime())))
+                {
+                    PatientManagementSystem.getAppointments().remove(appointment);
+                }
+            }
+        }
+        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+        updateAll();
+        } else JOptionPane.showMessageDialog(null,
+                            "There is no reques selected",
+                            "Nothing Selected",
+                            JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_BtnDenyActionPerformed
+
+    private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+        new StartPage().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AppointmentsContainer;
@@ -352,17 +422,17 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     private javax.swing.JButton BtnRequestAppointment;
     private javax.swing.JComboBox<String> CbxDoctor;
     private javax.swing.JComboBox<String> CbxPatient;
+    private javax.swing.JComboBox<String> CbxRequests;
     private javax.swing.JLabel LblDoctor;
     private javax.swing.JLabel LblPatient;
     private javax.swing.JLabel LblPatients;
+    private javax.swing.JLabel LblRequest;
     private javax.swing.JPanel RequestsContainer;
     private javax.swing.JScrollPane SclAppointments;
     private javax.swing.JScrollPane SclRequests;
     private javax.swing.JScrollPane SclUsers;
     private javax.swing.JTable TblMedicines;
     private javax.swing.JPanel UsersContainer;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
@@ -384,10 +454,20 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     private void updateUsersList(ArrayList<User> users) {
         UsersContainer.removeAll();
         for(User user : users){
+            if(user.getUniqueID().contains("P")){
+                Patient patient =(Patient) user;
+                if (!patient.getStatus().contains("Request")){
+                    UserPanel UP = new UserPanel(user);
+                    UP.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    UP.setVisible(true);
+                    UsersContainer.add(UP);
+                }
+            } else {
             UserPanel UP = new UserPanel(user);
             UP.setAlignmentX(Component.CENTER_ALIGNMENT);
             UP.setVisible(true);
             UsersContainer.add(UP);
+            }
         }
         resizeUsersContainerToFit();
         validate();
@@ -395,7 +475,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     }
 
     private void updateMedicinesList(ArrayList<Medicine> medicines) {
-        String[] col = {"Medicine Name","Quantity","Dosage"};
+        String[] col = {"Medicine Name","Quantity"};
         Object[][] data = new String[PatientManagementSystem.getMedicines().size()][2];
         for(int i = 0;i<data.length;i++){
             data[i][0] = PatientManagementSystem.getMedicines().get(i).getMedicineName();
@@ -465,12 +545,25 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         return selectedDoctor;
     }
 
-    private void fillCombos(ArrayList<User> users) {
+    private void fillCombos(ArrayList<User> users,ArrayList<Appointment> appointments) {
+        this.CbxDoctor.removeAllItems();
+        this.CbxPatient.removeAllItems();
+        this.CbxRequests.removeAllItems();
         for(User user : users){
-            if(user.getUniqueID().contains("P")) this.CbxPatient.addItem(user.displayUser());
+            if(user.getUniqueID().contains("P")){
+                Patient patient = (Patient) user;
+                if(!patient.getStatus().contains("Request"))this.CbxPatient.addItem(user.displayUser());
+                else this.CbxRequests.addItem("Patient: "+patient.getUniqueID());
+            }
             else if (user.getUniqueID().contains("D")) this.CbxDoctor.addItem(user.displayUser());
         }
-    }
+        for(Appointment appointment : appointments){
+            if(appointment.getStatus().contains("Request")) this.CbxRequests.addItem("Appointment: Doctor: "+appointment.getDoctor().getUniqueID()+
+                    " Date and Time: "+PatientManagementSystem.getFormat().format(appointment.getDateTime()));
+        }
+        validate();
+        repaint();
+    }       
     
     private ArrayList<Patient> getRequestedPatients(ArrayList<User> users){
         ArrayList<Patient> patients = new ArrayList<>();
@@ -489,5 +582,16 @@ public class SecretaryHomePage extends javax.swing.JFrame {
             if(appointment.getStatus().contains("Request")) requestedAppointments.add(appointment);
         }
         return requestedAppointments;
+    }
+
+    private void updateAll() {
+        fillCombos(PatientManagementSystem.getUsers(),PatientManagementSystem.getAppointments());
+        updateSelected();
+        updateAppointmentsList(this.selectedDoctor.getAppointments());
+        
+        updateUsersList(Patient.getPatients(PatientManagementSystem.getUsers()));
+        
+        updateRequestsList(this.getRequestedPatients(PatientManagementSystem.getUsers()),
+                this.getRequestedAppointments(PatientManagementSystem.getAppointments()));
     }
 }

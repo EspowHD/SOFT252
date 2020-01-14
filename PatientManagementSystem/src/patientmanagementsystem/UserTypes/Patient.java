@@ -113,4 +113,21 @@ public class Patient extends User {
         }
         return patients;
     }
+    
+    public static void removePatient(Patient patient){
+        for(int i = PatientManagementSystem.getUsers().size();i>0;i--){
+            if(PatientManagementSystem.getUsers().get(i-1).uniqueID.equals(patient.getUniqueID())){
+                PatientManagementSystem.getUsers().remove(PatientManagementSystem.getUsers().get(i-1));
+            }
+        }
+        for(int i = PatientManagementSystem.getAppointments().size();i>0;i--){
+            if(PatientManagementSystem.getAppointments().get(i-1).getPatient().equals(patient)){
+                PatientManagementSystem.getAppointments().remove(PatientManagementSystem.getAppointments().get(i-1));
+            }
+        }
+        for(int i = PatientManagementSystem.getPrescriptions().size();i>0;i--){
+            if(PatientManagementSystem.getPrescriptions().get(i-1).getIssueTo().equals(patient))
+                PatientManagementSystem.getPrescriptions().remove(PatientManagementSystem.getPrescriptions().get(i-1));
+        }
+    }
 }

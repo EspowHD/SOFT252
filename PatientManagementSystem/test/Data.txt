@@ -42,7 +42,7 @@ Plymouth
 PL1 1AB
 Female
 01/14/1989
-Completed
+Approved
 DOCTOR
 D0001
 Sarah
@@ -99,7 +99,7 @@ Plymouth
 PL1 1AB
 Male
 02/11/1974
-Completed
+Approved
 PATIENT
 P0001
 Chris
@@ -112,7 +112,7 @@ Plymouth
 PL1 1AB
 Male
 09/11/1992
-Completed
+Approved
 SECRETARY
 S0000
 Richie
@@ -176,12 +176,6 @@ Completed
 12/25/2019 11:30
 NOTES
 Did not need to see GP minor cold
-NO PRESCRIPTION
-P0000
-D0000
-Request
-01/01/2019 08:00
-NO NOTES
 NO PRESCRIPTION
 P0000
 D0002

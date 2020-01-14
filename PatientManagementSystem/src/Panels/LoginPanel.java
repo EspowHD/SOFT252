@@ -175,7 +175,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private void openPatientPage(User user) {
         Patient patient = (Patient) user;
         switch (patient.getStatus()) {
-            case "Completed":
+            case "Approved":
                 new PatientHomePage(patient).setVisible(true);
                 this.done = true;
                 this.setVisible(false);

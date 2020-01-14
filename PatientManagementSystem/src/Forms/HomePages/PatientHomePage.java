@@ -271,7 +271,9 @@ public final class PatientHomePage extends JFrame {
     }//GEN-LAST:event_BtnRequestAppointmentActionPerformed
 
     private void BtnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogOutActionPerformed
-        logout();
+        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+        new StartPage().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnLogOutActionPerformed
 
     private void CbxDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxDoctorActionPerformed
@@ -284,8 +286,10 @@ public final class PatientHomePage extends JFrame {
     }//GEN-LAST:event_BtnNewReviewActionPerformed
 
     private void BtnRequestTerminationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestTerminationActionPerformed
-        this.PATIENT.setStatus("Request termination");
-        logout();
+        this.PATIENT.setStatus("Request Termination");
+        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+        new StartPage().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnRequestTerminationActionPerformed
 
 
@@ -397,11 +401,5 @@ public final class PatientHomePage extends JFrame {
             }
         }
         if(this.selectedDoctor!=null)this.LblDoctorRating.setText("Rating: "+this.selectedDoctor.getAverageRating()+"/5");
-    }
-
-    private void logout() {
-        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
-        new StartPage().setVisible(true);
-        this.dispose();
     }
 }
