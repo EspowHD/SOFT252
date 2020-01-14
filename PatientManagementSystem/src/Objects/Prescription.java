@@ -5,6 +5,7 @@
  */
 package Objects;
 
+import java.util.ArrayList;
 import patientmanagementsystem.UserTypes.Patient;
 import patientmanagementsystem.UserTypes.Doctor;
 
@@ -15,10 +16,10 @@ import patientmanagementsystem.UserTypes.Doctor;
 public class Prescription {
     Doctor prescribedBy;
     Patient issueTo;
-    PrescribedMedicine[] medicines;
+    ArrayList<PrescribedMedicine> medicines;
     String notes;
 
-    public Prescription(Doctor prescribedBy, Patient issueTo, PrescribedMedicine[] medicines, String notes) {
+    public Prescription(Doctor prescribedBy, Patient issueTo, ArrayList<PrescribedMedicine> medicines, String notes) {
         this.prescribedBy = prescribedBy;
         this.issueTo = issueTo;
         this.medicines= medicines;
@@ -33,7 +34,7 @@ public class Prescription {
         return issueTo;
     }
 
-    public PrescribedMedicine[] getPrescribedMedicine() {
+    public ArrayList<PrescribedMedicine> getPrescribedMedicine() {
         return medicines;
     }
 

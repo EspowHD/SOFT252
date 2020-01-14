@@ -284,9 +284,9 @@ public class PrescriptionPanel extends javax.swing.JPanel {
 
     private void fillMedicines() {
         String[] col = {"Medicine Name","Quantity","Dosage"};
-        Object[][] data = new String[this.prescription.getPrescribedMedicine().length][3];
+        Object[][] data = new String[this.prescription.getPrescribedMedicine().size()][3];
         for(int i = 0;i<data.length;i++){
-            PrescribedMedicine pm = this.prescription.getPrescribedMedicine()[i];
+            PrescribedMedicine pm = this.prescription.getPrescribedMedicine().get(i);
             data[i][0] = pm.getMedicine().getMedicineName();
             data[i][1] = Integer.toString(pm.getQuantity());
             data[i][2] = pm.getDosage();

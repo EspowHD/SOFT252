@@ -123,7 +123,7 @@ public class SecretaryAppointmentMakerPage extends javax.swing.JFrame {
                 ArrayList<Appointment> appointments = PatientManagementSystem.getAppointments();
                 appointments.add(new Appointment(this.selectedPatient,doctor,"Approved",this.pnlAppointmentMaker1.getDate()));
                 PatientManagementSystem.setAppointments(appointments);
-                if(this.shp != null)this.shp.updateAppointmentsList(shp.getSelectedDoctor().getAppointments());
+                if(this.shp != null)this.shp.updateAll();
                 PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
                 dispose();
             }

@@ -127,7 +127,7 @@ MEDICINES
 Paracetemol
 20
 Ibuprofen
-17
+15
 Synthroid
 12
 Crestor

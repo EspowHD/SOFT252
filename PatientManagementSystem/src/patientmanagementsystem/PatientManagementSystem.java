@@ -26,6 +26,7 @@ import patientmanagementsystem.UserTypes.*;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 /**
  *
@@ -116,12 +117,12 @@ public class PatientManagementSystem {
                 case "DOCTOR" :                
                     ArrayList<Rating> ratings;
                     if(sc.nextLine().contains("NO")){
-                        ratings = new ArrayList<Rating>();
+                        ratings = new ArrayList<>();
                     } else ratings = loadRatings(sc);
                     
                     ArrayList<Feedback> feedbacks;
                     if(sc.nextLine().contains("NO")){
-                        feedbacks = new ArrayList<Feedback>();
+                        feedbacks = new ArrayList<>();
                     } else feedbacks = loadFeedback(sc);
                     
                     user = new Doctor(uniqueID,firstName,lastName,password,address,ratings,feedbacks);
@@ -158,7 +159,7 @@ public class PatientManagementSystem {
     } 
     
     private static ArrayList<Rating> loadRatings(Scanner sc) {
-        ArrayList<Rating> ratings = new ArrayList<Rating>();
+        ArrayList<Rating> ratings = new ArrayList<>();
         int length = Integer.parseInt(sc.nextLine());
         for(int i = 0;i<length;i++){
             String line = sc.nextLine();
@@ -184,7 +185,7 @@ public class PatientManagementSystem {
             System.out.println("Error loading file");
         } catch (NoSuchElementException e){
         }catch (Exception e){
-            System.out.println(e.getStackTrace());
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }  
     
@@ -221,13 +222,13 @@ public class PatientManagementSystem {
     
     private static Prescription loadPrescriptions(Scanner sc,Patient patient,Doctor doctor) {
         int length =Integer.parseInt(sc.nextLine());
-        PrescribedMedicine[] prescribedMedicines = new PrescribedMedicine[length];
+        ArrayList<PrescribedMedicine> prescribedMedicines = new ArrayList<>();
         for(int i = 0;i<length;i++){
             String medicineName = sc.nextLine();
             Medicine medicine = Medicine.getMedicine(medicines,medicineName);
             String quantity = sc.nextLine();
             String dosage = sc.nextLine();
-            prescribedMedicines[i] = new PrescribedMedicine(medicine,Integer.parseInt(quantity),dosage);
+            prescribedMedicines.add(new PrescribedMedicine(medicine,Integer.parseInt(quantity),dosage));
         }
         String prescriptionNote = sc.nextLine();
         Prescription prescription = new Prescription(doctor,patient,prescribedMedicines,prescriptionNote);
@@ -235,7 +236,7 @@ public class PatientManagementSystem {
     }
     
     private static ArrayList<Feedback> loadFeedback(Scanner sc) {
-        ArrayList<Feedback> feedbacks = new ArrayList<Feedback>();
+        ArrayList<Feedback> feedbacks = new ArrayList<>();
         int length = Integer.parseInt(sc.nextLine());
         for(int i = 0;i<length;i++){
             String line = sc.nextLine();
@@ -368,11 +369,11 @@ public class PatientManagementSystem {
 
     private static void writePrescription(BufferedWriter writer, Prescription prescription) throws IOException {
         writer.write("PRESCRIPTION\n");
-        writer.write(Integer.toString(prescription.getPrescribedMedicine().length)+"\n");
-        for(int i = 0;i<prescription.getPrescribedMedicine().length;i++){
-            writer.write(prescription.getPrescribedMedicine()[i].getMedicine().getMedicineName()+"\n");
-            writer.write(prescription.getPrescribedMedicine()[i].getQuantity()+"\n");
-            writer.write(prescription.getPrescribedMedicine()[i].getDosage()+"\n");
+        writer.write(Integer.toString(prescription.getPrescribedMedicine().size())+"\n");
+        for(PrescribedMedicine prescribedMed : prescription.getPrescribedMedicine()){
+            writer.write(prescribedMed.getMedicine().getMedicineName()+"\n");
+            writer.write(prescribedMed.getQuantity()+"\n");
+            writer.write(prescribedMed.getDosage()+"\n");
         }
         writer.write(prescription.getNotes()+"\n");
     }

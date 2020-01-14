@@ -6,6 +6,7 @@
 package Forms.HomePages;
 
 import Forms.Makers.SecretaryAppointmentMakerPage;
+import Forms.PrescriptionPage;
 import Forms.Requesters.PatientApppintmentRequester;
 import Forms.StartPage;
 import Objects.Appointment;
@@ -71,6 +72,9 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         BtnApprove = new javax.swing.JButton();
         BtnDeny = new javax.swing.JButton();
         BtnLogout = new javax.swing.JButton();
+        BtnAdjustStocks = new javax.swing.JButton();
+        BtnGivePrescription = new javax.swing.JButton();
+        LblMedicines = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Secretary Home Page");
@@ -233,6 +237,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 15);
         getContentPane().add(CbxPatient, gridBagConstraints);
 
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setMaximumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
         jScrollPane3.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
         jScrollPane3.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
@@ -323,6 +328,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 10);
         getContentPane().add(BtnDeny, gridBagConstraints);
 
+        BtnLogout.setFont(PatientManagementSystem.getTextFont());
         BtnLogout.setText("Log out");
         BtnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,6 +341,42 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(15, 10, 10, 15);
         getContentPane().add(BtnLogout, gridBagConstraints);
+
+        BtnAdjustStocks.setFont(PatientManagementSystem.getTextFont());
+        BtnAdjustStocks.setText("Adjust stocks");
+        BtnAdjustStocks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAdjustStocksActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
+        getContentPane().add(BtnAdjustStocks, gridBagConstraints);
+
+        BtnGivePrescription.setFont(PatientManagementSystem.getTextFont());
+        BtnGivePrescription.setText("Give medicine for Prescription");
+        BtnGivePrescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGivePrescriptionActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(BtnGivePrescription, gridBagConstraints);
+
+        LblMedicines.setFont(PatientManagementSystem.getTextFont());
+        LblMedicines.setText("Medicine Stock List:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblMedicines, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -413,10 +455,20 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
+    private void BtnGivePrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGivePrescriptionActionPerformed
+        new PrescriptionPage(this).setVisible(true);
+    }//GEN-LAST:event_BtnGivePrescriptionActionPerformed
+
+    private void BtnAdjustStocksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdjustStocksActionPerformed
+
+    }//GEN-LAST:event_BtnAdjustStocksActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AppointmentsContainer;
+    private javax.swing.JButton BtnAdjustStocks;
     private javax.swing.JButton BtnApprove;
     private javax.swing.JButton BtnDeny;
+    private javax.swing.JButton BtnGivePrescription;
     private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnRemovePatient;
     private javax.swing.JButton BtnRequestAppointment;
@@ -424,6 +476,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CbxPatient;
     private javax.swing.JComboBox<String> CbxRequests;
     private javax.swing.JLabel LblDoctor;
+    private javax.swing.JLabel LblMedicines;
     private javax.swing.JLabel LblPatient;
     private javax.swing.JLabel LblPatients;
     private javax.swing.JLabel LblRequest;
@@ -436,7 +489,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
-    public void updateAppointmentsList(ArrayList<Appointment> appointments) {
+    private void updateAppointmentsList(ArrayList<Appointment> appointments) {
         AppointmentsContainer.removeAll();
         for(Appointment appointment : appointments){
             if(!appointment.getStatus().contains("Request")){
@@ -487,7 +540,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         };
         this.TblMedicines.setModel(model);
         this.TblMedicines.getColumnModel().getColumn(0).setPreferredWidth(300);//Medicine Name width
-        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(300);//Medicine Name width
+        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(298);//Medicine Quantity width
     }
 
     private void updateRequestsList(ArrayList<Patient> patients,ArrayList<Appointment> appointments) {
@@ -541,10 +594,6 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         }
     }
 
-    public Doctor getSelectedDoctor() {
-        return selectedDoctor;
-    }
-
     private void fillCombos(ArrayList<User> users,ArrayList<Appointment> appointments) {
         this.CbxDoctor.removeAllItems();
         this.CbxPatient.removeAllItems();
@@ -584,7 +633,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         return requestedAppointments;
     }
 
-    private void updateAll() {
+    public void updateAll() {
         fillCombos(PatientManagementSystem.getUsers(),PatientManagementSystem.getAppointments());
         updateSelected();
         updateAppointmentsList(this.selectedDoctor.getAppointments());
@@ -593,5 +642,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         
         updateRequestsList(this.getRequestedPatients(PatientManagementSystem.getUsers()),
                 this.getRequestedAppointments(PatientManagementSystem.getAppointments()));
+        
+        updateMedicinesList(PatientManagementSystem.getMedicines());
     }
 }
