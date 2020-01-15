@@ -8,14 +8,14 @@ package Forms.HomePages;
 import Forms.Makers.FeedbackMakerPage;
 import Forms.Makers.MakeASDAccountsPage;
 import Forms.StartPage;
-import Panels.RatingPanel;
+import Panels.ContainedComponents.RatingPanel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import patientmanagementsystem.PatientManagementSystem;
 import Objects.Rating;
-import Panels.UserPanel;
+import Panels.ContainedComponents.UserPanel;
 import javax.swing.JOptionPane;
 import patientmanagementsystem.UserTypes.*;
 

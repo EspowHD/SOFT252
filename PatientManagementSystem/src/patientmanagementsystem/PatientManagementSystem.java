@@ -195,7 +195,9 @@ public class PatientManagementSystem {
                 !(medicineName.equals("") || medicineName.equals("APPOINTMENTS")))
         {
             int stock = Integer.parseInt(sc.nextLine());
-            medicines.add(new Medicine(medicineName,stock));
+            int ordered = Integer.parseInt(sc.nextLine());
+            int requestOrdered = Integer.parseInt(sc.nextLine());
+            medicines.add(new Medicine(medicineName,stock,ordered,requestOrdered));
             medicineName = sc.nextLine();
         }
     }
@@ -345,6 +347,8 @@ public class PatientManagementSystem {
         for (int i = 0; i <medicines.size(); i++) {
             writer.write(medicines.get(i).getMedicineName()+"\n");
             writer.write(Integer.toString(medicines.get(i).getStock())+"\n");
+            writer.write(Integer.toString(medicines.get(i).getOrdered())+"\n");
+            writer.write(Integer.toString(medicines.get(i).getRequestedOrdered())+"\n");
         }
     }
 

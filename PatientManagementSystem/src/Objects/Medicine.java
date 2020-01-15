@@ -14,10 +14,14 @@ import java.util.ArrayList;
 public class Medicine {
     private final String medicineName;
     private int stock;//Number of that medicine in stock
-
-    public Medicine(String medicineName, int stock) {
+    private int ordered;//Number of that medicine ordered
+    private int requestedOrders;//Number of that medicine requested to be ordered by doctors
+    
+    public Medicine(String medicineName, int stock,int ordered,int requestedOrders) {
         this.medicineName = medicineName;
         this.stock = stock;
+        this.ordered = ordered;
+        this.requestedOrders = requestedOrders;
     }
 
     public String getMedicineName() {
@@ -27,9 +31,30 @@ public class Medicine {
     public int getStock() {
         return stock;
     }
+    
+    public int getOrdered() {
+        return ordered;
+    }
+    
+    public int getRequestedOrdered() {
+        return requestedOrders;
+    }
+    
+    public void setRequestedOrdered(int requestedOrders) {
+        if(requestedOrders<=0) this.requestedOrders = requestedOrders;
+    }
+    
+    public void setOrdered(int ordered){
+        if(ordered<=0) this.ordered = ordered;
+    }
 
     public void setStock(int stock) {
-        if(stock>-1)this.stock = stock;
+        if(stock<=0)this.stock = stock;
+    }
+    
+    public void orderArrived(int amountArrived){
+        ordered -= amountArrived;
+        stock += amountArrived;
     }
     
     public static Medicine getMedicine(ArrayList<Medicine> medicines,String medicineName){

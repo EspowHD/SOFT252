@@ -59,7 +59,7 @@ public class Patient extends User {
     
     @Override
     public String displayUser(){
-        return "Name: "+this.firstName+" "+this.lastName+" Date of Birth: "+PatientManagementSystem.getFormat().format(this.DOB).replace(" 00:00", "");
+        return "Name: "+this.firstName+" "+this.lastName+" DOB: "+PatientManagementSystem.getFormat().format(this.DOB).replace(" 00:00", "");
     }
     
     public ArrayList<Appointment> getAppointments(){

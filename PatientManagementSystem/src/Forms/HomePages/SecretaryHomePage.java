@@ -6,19 +6,15 @@
 package Forms.HomePages;
 
 import Forms.Makers.SecretaryAppointmentMakerPage;
-import Forms.PrescriptionPage;
-import Forms.Requesters.PatientApppintmentRequester;
-import Forms.StartPage;
+import Forms.*;
 import Objects.Appointment;
 import Objects.Medicine;
-import Objects.Prescription;
-import Panels.AppointmentPanel;
-import Panels.UserPanel;
+import Panels.ContainedComponents.AppointmentPanel;
+import Panels.ContainedComponents.MedicinePanel;
+import Panels.ContainedComponents.UserPanel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -39,7 +35,6 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     public SecretaryHomePage() {
         initComponents();
         updateAll();
-        updateMedicinesList(PatientManagementSystem.getMedicines());
     }
 
     /**
@@ -72,9 +67,11 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         BtnApprove = new javax.swing.JButton();
         BtnDeny = new javax.swing.JButton();
         BtnLogout = new javax.swing.JButton();
-        BtnAdjustStocks = new javax.swing.JButton();
+        BtnOrderArrived = new javax.swing.JButton();
         BtnGivePrescription = new javax.swing.JButton();
         LblMedicines = new javax.swing.JLabel();
+        BtnOrderMedicine = new javax.swing.JButton();
+        LblRequests = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Secretary Home Page");
@@ -162,9 +159,9 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         BtnRequestAppointment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         BtnRequestAppointment.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BtnRequestAppointment.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        BtnRequestAppointment.setMaximumSize(new java.awt.Dimension(200, 50));
-        BtnRequestAppointment.setMinimumSize(new java.awt.Dimension(200, 50));
-        BtnRequestAppointment.setPreferredSize(new java.awt.Dimension(200, 50));
+        BtnRequestAppointment.setMaximumSize(new java.awt.Dimension(200, 32));
+        BtnRequestAppointment.setMinimumSize(new java.awt.Dimension(200, 32));
+        BtnRequestAppointment.setPreferredSize(new java.awt.Dimension(200, 32));
         BtnRequestAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRequestAppointmentActionPerformed(evt);
@@ -238,6 +235,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         getContentPane().add(CbxPatient, gridBagConstraints);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane3.setMaximumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
         jScrollPane3.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
         jScrollPane3.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
@@ -248,9 +246,24 @@ public class SecretaryHomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Medicine Name", "Stock", "Ordered"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TblMedicines.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         TblMedicines.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(TblMedicines);
@@ -342,11 +355,11 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 10, 10, 15);
         getContentPane().add(BtnLogout, gridBagConstraints);
 
-        BtnAdjustStocks.setFont(PatientManagementSystem.getTextFont());
-        BtnAdjustStocks.setText("Adjust stocks");
-        BtnAdjustStocks.addActionListener(new java.awt.event.ActionListener() {
+        BtnOrderArrived.setFont(PatientManagementSystem.getTextFont());
+        BtnOrderArrived.setText("Order Arrived");
+        BtnOrderArrived.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAdjustStocksActionPerformed(evt);
+                BtnOrderArrivedActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -354,7 +367,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
-        getContentPane().add(BtnAdjustStocks, gridBagConstraints);
+        getContentPane().add(BtnOrderArrived, gridBagConstraints);
 
         BtnGivePrescription.setFont(PatientManagementSystem.getTextFont());
         BtnGivePrescription.setText("Give medicine for Prescription");
@@ -377,6 +390,28 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
         getContentPane().add(LblMedicines, gridBagConstraints);
+
+        BtnOrderMedicine.setFont(PatientManagementSystem.getTextFont());
+        BtnOrderMedicine.setText("Order new Stock");
+        BtnOrderMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOrderMedicineActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 10);
+        getContentPane().add(BtnOrderMedicine, gridBagConstraints);
+
+        LblRequests.setFont(PatientManagementSystem.getTextFont());
+        LblRequests.setText("Requests:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 10);
+        getContentPane().add(LblRequests, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -416,6 +451,13 @@ public class SecretaryHomePage extends javax.swing.JFrame {
                     appointment.setStatus("Approved");
                 }
             }
+        } else if(this.CbxRequests.getSelectedItem().toString().contains("Order")){
+            for(Medicine medicine : PatientManagementSystem.getMedicines()){
+                if(this.CbxRequests.getSelectedItem().toString().contains(medicine.getMedicineName()))
+                {
+                    medicine.setOrdered(medicine.getOrdered()+medicine.getRequestedOrdered());
+                }
+            }
         }
         PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
         updateAll();
@@ -440,11 +482,18 @@ public class SecretaryHomePage extends javax.swing.JFrame {
                     PatientManagementSystem.getAppointments().remove(appointment);
                 }
             }
+        } else if(this.CbxRequests.getSelectedItem().toString().contains("Order")){
+            for(Medicine medicine : PatientManagementSystem.getMedicines()){
+                if(this.CbxRequests.getSelectedItem().toString().contains(medicine.getMedicineName()))
+                {
+                    medicine.setRequestedOrdered(0);
+                }
+            }
         }
         PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
         updateAll();
         } else JOptionPane.showMessageDialog(null,
-                            "There is no reques selected",
+                            "There is no request selected",
                             "Nothing Selected",
                             JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_BtnDenyActionPerformed
@@ -459,17 +508,22 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         new PrescriptionPage(this).setVisible(true);
     }//GEN-LAST:event_BtnGivePrescriptionActionPerformed
 
-    private void BtnAdjustStocksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdjustStocksActionPerformed
+    private void BtnOrderArrivedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderArrivedActionPerformed
+        new OrderArrivedPage(this).setVisible(true);
+    }//GEN-LAST:event_BtnOrderArrivedActionPerformed
 
-    }//GEN-LAST:event_BtnAdjustStocksActionPerformed
+    private void BtnOrderMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderMedicineActionPerformed
+        new MakeOrderPage(this).setVisible(true);
+    }//GEN-LAST:event_BtnOrderMedicineActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AppointmentsContainer;
-    private javax.swing.JButton BtnAdjustStocks;
     private javax.swing.JButton BtnApprove;
     private javax.swing.JButton BtnDeny;
     private javax.swing.JButton BtnGivePrescription;
     private javax.swing.JButton BtnLogout;
+    private javax.swing.JButton BtnOrderArrived;
+    private javax.swing.JButton BtnOrderMedicine;
     private javax.swing.JButton BtnRemovePatient;
     private javax.swing.JButton BtnRequestAppointment;
     private javax.swing.JComboBox<String> CbxDoctor;
@@ -480,6 +534,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel LblPatient;
     private javax.swing.JLabel LblPatients;
     private javax.swing.JLabel LblRequest;
+    private javax.swing.JLabel LblRequests;
     private javax.swing.JPanel RequestsContainer;
     private javax.swing.JScrollPane SclAppointments;
     private javax.swing.JScrollPane SclRequests;
@@ -528,19 +583,21 @@ public class SecretaryHomePage extends javax.swing.JFrame {
     }
 
     private void updateMedicinesList(ArrayList<Medicine> medicines) {
-        String[] col = {"Medicine Name","Quantity"};
-        Object[][] data = new String[PatientManagementSystem.getMedicines().size()][2];
+        String[] col = {"Medicine Name","Stock","Ordered"};
+        Object[][] data = new String[PatientManagementSystem.getMedicines().size()][3];
         for(int i = 0;i<data.length;i++){
             data[i][0] = PatientManagementSystem.getMedicines().get(i).getMedicineName();
             data[i][1] = Integer.toString(PatientManagementSystem.getMedicines().get(i).getStock());
+            data[i][2] = Integer.toString(PatientManagementSystem.getMedicines().get(i).getOrdered());
         }
         DefaultTableModel model = new DefaultTableModel(data,col){
             @Override
             public boolean isCellEditable(int i, int i1){return false;}
         };
         this.TblMedicines.setModel(model);
-        this.TblMedicines.getColumnModel().getColumn(0).setPreferredWidth(300);//Medicine Name width
-        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(298);//Medicine Quantity width
+        this.TblMedicines.getColumnModel().getColumn(0).setPreferredWidth(190);//Medicine Name width
+        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(190);//Medicine Stock width
+        this.TblMedicines.getColumnModel().getColumn(2).setPreferredWidth(190);//Medicine Ordered width
     }
 
     private void updateRequestsList(ArrayList<Patient> patients,ArrayList<Appointment> appointments) {
@@ -556,6 +613,14 @@ public class SecretaryHomePage extends javax.swing.JFrame {
             AP.setAlignmentX(Component.CENTER_ALIGNMENT);
             AP.setVisible(true);
             RequestsContainer.add(AP);
+        }
+        for(Medicine medicine : PatientManagementSystem.getMedicines()){
+            if(medicine.getRequestedOrdered() > 0){
+            MedicinePanel MRP = new MedicinePanel(medicine);
+            MRP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            MRP.setVisible(true);
+            RequestsContainer.add(MRP);
+            }
         }
         resizeRequestsContainerToFit();
         validate();
@@ -601,7 +666,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         for(User user : users){
             if(user.getUniqueID().contains("P")){
                 Patient patient = (Patient) user;
-                if(!patient.getStatus().contains("Request"))this.CbxPatient.addItem(user.displayUser());
+                if(!patient.getStatus().contains("Request"))this.CbxPatient.addItem(patient.displayUser());
                 else this.CbxRequests.addItem("Patient: "+patient.getUniqueID());
             }
             else if (user.getUniqueID().contains("D")) this.CbxDoctor.addItem(user.displayUser());
@@ -609,6 +674,9 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         for(Appointment appointment : appointments){
             if(appointment.getStatus().contains("Request")) this.CbxRequests.addItem("Appointment: Doctor: "+appointment.getDoctor().getUniqueID()+
                     " Date and Time: "+PatientManagementSystem.getFormat().format(appointment.getDateTime()));
+        }
+        for(Medicine medicine : PatientManagementSystem.getMedicines()){
+            if(medicine.getRequestedOrdered()>0) this.CbxRequests.addItem("Order: "+medicine.getMedicineName());
         }
         validate();
         repaint();
