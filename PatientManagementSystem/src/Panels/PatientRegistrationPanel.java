@@ -5,6 +5,7 @@
  */
 package Panels;
 
+import java.util.Date;
 import javax.swing.JOptionPane;
 import patientmanagementsystem.PatientManagementSystem;
 import patientmanagementsystem.UserTypes.Patient;
@@ -32,7 +33,7 @@ public class PatientRegistrationPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        dateSelectPart1 = new Panels.Parts.DateSelectPart();
+        dateSelectPart1 = new Panels.Parts.DateSelectPart(new Date("1/1/1900 00:00"),new Date());
         addressInputPart1 = new Panels.Parts.AddressInputPart();
         LblDOB = new javax.swing.JLabel();
         LblAddress = new javax.swing.JLabel();

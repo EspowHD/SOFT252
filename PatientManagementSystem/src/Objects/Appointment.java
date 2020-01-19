@@ -7,6 +7,7 @@ package Objects;
 import patientmanagementsystem.UserTypes.Patient;
 import patientmanagementsystem.UserTypes.Doctor;
 import java.util.Date;
+import patientmanagementsystem.PatientManagementSystem;
 /**
  *
  * @author espow
@@ -59,5 +60,10 @@ public class Appointment {
     
     public String getDoctorNotes() {
         return doctorNotes;
+    }
+
+    public String getAppointmentName() {
+        return "Appointment: Doctor: "+getDoctor().getUniqueID()+
+                    " Date and Time: "+PatientManagementSystem.getFormat().format(getDateTime());
     }
 }

@@ -30,6 +30,7 @@
   <SubComponents>
     <Component class="Panels.Parts.DateSelectPart" name="dateSelectPart1">
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Panels.Parts.DateSelectPart(new Date(&quot;1/1/1900 00:00&quot;),new Date())"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
       <Constraints>

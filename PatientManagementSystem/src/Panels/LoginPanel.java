@@ -147,7 +147,7 @@ public class LoginPanel extends javax.swing.JPanel {
             char type = user.getUniqueID().charAt(0);
             switch(type){
                 case 'D':
-                    Doctor doctor = (Doctor) user;
+                    openDoctorPage(user);
                     break;
                 case 'P':
                     openPatientPage(user);
@@ -205,6 +205,13 @@ public class LoginPanel extends javax.swing.JPanel {
     private void openAdminPage(User user) {
         Administrator admin = (Administrator) user;
         new AdministratorHomePage(admin).setVisible(true);
+        this.done = true;
+        this.setVisible(false);
+    }
+    
+    private void openDoctorPage(User user) {
+        Doctor doctor = (Doctor) user;
+        new DoctorHomePage(doctor).setVisible(true);
         this.done = true;
         this.setVisible(false);
     }

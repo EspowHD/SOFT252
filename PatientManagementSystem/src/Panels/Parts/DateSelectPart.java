@@ -5,7 +5,9 @@
  */
 package Panels.Parts;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import javax.swing.SpinnerNumberModel;
 import patientmanagementsystem.PatientManagementSystem;
 /**
  *
@@ -13,13 +15,15 @@ import patientmanagementsystem.PatientManagementSystem;
  */
 public class DateSelectPart extends javax.swing.JPanel {
     Date date = null;
-    /**
-     * Creates new form DateSelectPanel
-     */
-    public DateSelectPart() {
+    Date min;
+    Date max;
+    public DateSelectPart(Date min,Date max) {
+        this.min = min;
+        this.max = max;
         initComponents();
         updateDate();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,8 +57,8 @@ public class DateSelectPart extends javax.swing.JPanel {
         add(LblPickDate, gridBagConstraints);
 
         SpinMonth.setFont(PatientManagementSystem.getTextFont());
-        SpinMonth.setModel(new javax.swing.SpinnerListModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
-        SpinMonth.setEditor(new javax.swing.JSpinner.ListEditor(SpinMonth));
+        SpinMonth.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        SpinMonth.setEditor(new javax.swing.JSpinner.NumberEditor(SpinMonth, ""));
         SpinMonth.setPreferredSize(new java.awt.Dimension(40, 22));
         SpinMonth.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -69,8 +73,8 @@ public class DateSelectPart extends javax.swing.JPanel {
         add(SpinMonth, gridBagConstraints);
 
         SpinYear.setFont(PatientManagementSystem.getTextFont());
-        SpinYear.setModel(new javax.swing.SpinnerListModel(new String[] {"1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"}));
-        SpinYear.setEditor(new javax.swing.JSpinner.ListEditor(SpinYear));
+        SpinYear.setModel(new SpinnerNumberModel(1900+ min.getYear(),1900+ min.getYear(),1900+ max.getYear(),1));
+        SpinYear.setEditor(new javax.swing.JSpinner.NumberEditor(SpinYear, ""));
         SpinYear.setPreferredSize(new java.awt.Dimension(60, 22));
         SpinYear.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -85,18 +89,13 @@ public class DateSelectPart extends javax.swing.JPanel {
         add(SpinYear, gridBagConstraints);
 
         SpinDay.setFont(PatientManagementSystem.getTextFont());
-        SpinDay.setModel(new javax.swing.SpinnerListModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-        SpinDay.setEditor(new javax.swing.JSpinner.ListEditor(SpinDay));
+        SpinDay.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+        SpinDay.setEditor(new javax.swing.JSpinner.NumberEditor(SpinDay, ""));
         SpinDay.setMinimumSize(new java.awt.Dimension(40, 22));
         SpinDay.setPreferredSize(new java.awt.Dimension(40, 22));
         SpinDay.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SpinDayStateChanged(evt);
-            }
-        });
-        SpinDay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                SpinDayPropertyChange(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -134,10 +133,6 @@ public class DateSelectPart extends javax.swing.JPanel {
         setDayToValid();
     }//GEN-LAST:event_SpinDayStateChanged
 
-    private void SpinDayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_SpinDayPropertyChange
-        // Was unable to remove it after a mis-click
-    }//GEN-LAST:event_SpinDayPropertyChange
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblPickDate;
@@ -151,24 +146,24 @@ public class DateSelectPart extends javax.swing.JPanel {
     private boolean checkDateValid(){
         boolean result = false;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date(this.SpinYear.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString());
-        if((this.SpinDay.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinYear.getValue().toString()).equals(dateFormat.format(date))) return true;
+        Date date = new Date(this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString()+"/"+this.SpinYear.getValue().toString());
+        if((String.format("%02d", (int) this.SpinDay.getValue())+"/"+String.format("%02d", (int) this.SpinMonth.getValue())+"/"+this.SpinYear.getValue().toString()).equals(dateFormat.format(date))) return true;
         else return result;
     }
     
     private void setDayToValid(){
         if(!checkDateValid()){
-            int month = Integer.parseInt(this.SpinMonth.getValue().toString());
+            int month = (int) this.SpinMonth.getValue();
             if(month<=7){
                 if(month == 2)
-                    if((Integer.parseInt(this.SpinYear.getValue().toString())%4 == 0)) this.SpinDay.setValue("29");
-                    else this.SpinDay.setValue("28");
-                else if (month%2 == 0) this.SpinDay.setValue("30");
-                else this.SpinDay.setValue("31");
+                    if( ((int) this.SpinYear.getValue()) %4 == 0) this.SpinDay.setValue(29);
+                    else this.SpinDay.setValue(28);
+                else if (month%2 == 0) this.SpinDay.setValue(30);
+                else this.SpinDay.setValue(31);
             }
             else{
-                if (month%2 == 0) this.SpinDay.setValue("31");
-                else this.SpinDay.setValue("30");
+                if (month%2 == 0) this.SpinDay.setValue(31);
+                else this.SpinDay.setValue(30);
             }
         }
         updateDate();
@@ -176,6 +171,23 @@ public class DateSelectPart extends javax.swing.JPanel {
     
     private void updateDate() {
         this.date = new Date(this.SpinYear.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString()+" 00:00");
+        if(date.after(max)){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(max);
+            this.SpinYear.setValue(cal.get(Calendar.YEAR));
+            this.SpinMonth.setValue(cal.get(Calendar.MONTH)+1);
+            this.SpinDay.setValue(cal.get(Calendar.DAY_OF_MONTH));
+            this.date = new Date(this.SpinYear.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString()+" 00:00");
+        }
+        if(date.before(min)){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(min);
+            this.SpinYear.setValue(cal.get(Calendar.YEAR));
+            this.SpinMonth.setValue(cal.get(Calendar.MONTH)+1);
+            this.SpinDay.setValue(cal.get(Calendar.DAY_OF_MONTH));
+            this.date = new Date(this.SpinYear.getValue().toString()+"/"+this.SpinMonth.getValue().toString()+"/"+this.SpinDay.getValue().toString()+" 00:00");
+        }
+        validate();
     }
     
     public Date getDate() {

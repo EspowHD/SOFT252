@@ -76,6 +76,9 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Secretary Home Page");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setMaximumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
+        setMinimumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
+        setPreferredSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         SclUsers.setBackground(new java.awt.Color(255, 102, 102));
@@ -475,11 +478,11 @@ public class SecretaryHomePage extends javax.swing.JFrame {
             if(patient.getStatus().contains("Termination")) patient.setStatus("Approved");
             else Patient.removePatient(patient);
         } else if(this.CbxRequests.getSelectedItem().toString().contains("Appointment")){
-            for(Appointment appointment : PatientManagementSystem.getAppointments()){
-                if(this.CbxRequests.getSelectedItem().toString().contains(appointment.getDoctor().getUniqueID()) &&
-                        this.CbxRequests.getSelectedItem().toString().contains(PatientManagementSystem.getFormat().format(appointment.getDateTime())))
+            for(int i = PatientManagementSystem.getAppointments().size()-1;i>=0;i--){
+                if(this.CbxRequests.getSelectedItem().toString().contains(PatientManagementSystem.getAppointments().get(i).getDoctor().getUniqueID()) &&
+                        this.CbxRequests.getSelectedItem().toString().contains(PatientManagementSystem.getFormat().format(PatientManagementSystem.getAppointments().get(i).getDateTime())))
                 {
-                    PatientManagementSystem.getAppointments().remove(appointment);
+                    PatientManagementSystem.getAppointments().remove(PatientManagementSystem.getAppointments().get(i));
                 }
             }
         } else if(this.CbxRequests.getSelectedItem().toString().contains("Order")){
@@ -559,22 +562,14 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         repaint();
     }
     
-    private void updateUsersList(ArrayList<User> users) {
+    private void updateUsersList(ArrayList<Patient> patients) {
         UsersContainer.removeAll();
-        for(User user : users){
-            if(user.getUniqueID().contains("P")){
-                Patient patient =(Patient) user;
-                if (!patient.getStatus().contains("Request")){
-                    UserPanel UP = new UserPanel(user);
-                    UP.setAlignmentX(Component.CENTER_ALIGNMENT);
-                    UP.setVisible(true);
-                    UsersContainer.add(UP);
-                }
-            } else {
-            UserPanel UP = new UserPanel(user);
-            UP.setAlignmentX(Component.CENTER_ALIGNMENT);
-            UP.setVisible(true);
-            UsersContainer.add(UP);
+        for(Patient patient : patients){
+            if (!patient.getStatus().contains("Request")){
+                UserPanel UP = new UserPanel(patient);
+                UP.setAlignmentX(Component.CENTER_ALIGNMENT);
+                UP.setVisible(true);
+                UsersContainer.add(UP);
             }
         }
         resizeUsersContainerToFit();
@@ -672,8 +667,7 @@ public class SecretaryHomePage extends javax.swing.JFrame {
             else if (user.getUniqueID().contains("D")) this.CbxDoctor.addItem(user.displayUser());
         }
         for(Appointment appointment : appointments){
-            if(appointment.getStatus().contains("Request")) this.CbxRequests.addItem("Appointment: Doctor: "+appointment.getDoctor().getUniqueID()+
-                    " Date and Time: "+PatientManagementSystem.getFormat().format(appointment.getDateTime()));
+            if(appointment.getStatus().contains("Request")) this.CbxRequests.addItem(appointment.getAppointmentName());
         }
         for(Medicine medicine : PatientManagementSystem.getMedicines()){
             if(medicine.getRequestedOrdered()>0) this.CbxRequests.addItem("Order: "+medicine.getMedicineName());

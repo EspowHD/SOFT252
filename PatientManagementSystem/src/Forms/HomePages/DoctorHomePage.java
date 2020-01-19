@@ -5,19 +5,33 @@
  */
 package Forms.HomePages;
 
+import Forms.Requesters.DoctorAppointmentRequester;
+import Forms.StartPage;
+import Objects.Appointment;
+import Objects.Prescription;
+import Panels.ContainedComponents.AppointmentPanel;
+import Panels.ContainedComponents.PrescriptionPanel;
+import java.awt.Component;
+import java.awt.Dimension;
 import javax.swing.JFrame;
+import patientmanagementsystem.PatientManagementSystem;
+import patientmanagementsystem.UserTypes.Doctor;
+import patientmanagementsystem.UserTypes.Patient;
 
 /**
  *
  * @author espow
  */
 public class DoctorHomePage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form DoctorHomePage
-     */
-    public DoctorHomePage() {
+    private final Doctor DOCTOR;
+    private Patient selectedPatient;
+    private Appointment selectedAppointment;
+    public DoctorHomePage(Doctor thisDoctor) {
+        this.DOCTOR = thisDoctor;
         initComponents();
+        fillCombos();
+        updateSelected();
+        updateContainers();
     }
 
     /**
@@ -28,61 +42,295 @@ public class DoctorHomePage extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        SclAppointments = new javax.swing.JScrollPane();
+        AppointmentsContainer = new javax.swing.JPanel();
+        BtnRequestAppointment = new javax.swing.JButton();
+        LblAppointments = new javax.swing.JLabel();
+        BtnLogOut = new javax.swing.JButton();
+        SclPatientHistory = new javax.swing.JScrollPane();
+        PatientHistoryContainer = new javax.swing.JPanel();
+        LblPatientHistory = new javax.swing.JLabel();
+        CbxPatient = new javax.swing.JComboBox<>();
+        BtnStartAppointment = new javax.swing.JButton();
+        LblAppointment = new javax.swing.JLabel();
+        CbxAppointment = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Doctor Home Page");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setMinimumSize(new Dimension(PatientManagementSystem.getSCREEN_SIZE().width,PatientManagementSystem.getSCREEN_SIZE().height));
         setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        SclAppointments.setBackground(new java.awt.Color(255, 102, 102));
+        SclAppointments.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SclAppointments.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclAppointments.setAlignmentX(0.0F);
+        SclAppointments.setAlignmentY(0.0F);
+        SclAppointments.setMaximumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclAppointments.setMinimumSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclAppointments.setPreferredSize(new Dimension(600,PatientManagementSystem.getSCREEN_SIZE().height-250));
+
+        AppointmentsContainer.setBackground(new java.awt.Color(247, 247, 247));
+        AppointmentsContainer.setAutoscrolls(true);
+        AppointmentsContainer.setMaximumSize(new java.awt.Dimension(700, 10000));
+        AppointmentsContainer.setMinimumSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        AppointmentsContainer.setName(""); // NOI18N
+        AppointmentsContainer.setPreferredSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-150));
+        AppointmentsContainer.setLayout(new javax.swing.BoxLayout(AppointmentsContainer, javax.swing.BoxLayout.Y_AXIS));
+        SclAppointments.setViewportView(AppointmentsContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(SclAppointments, gridBagConstraints);
+
+        BtnRequestAppointment.setFont(PatientManagementSystem.getTextFont());
+        BtnRequestAppointment.setText("Request new appointment");
+        BtnRequestAppointment.setAlignmentY(0.0F);
+        BtnRequestAppointment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        BtnRequestAppointment.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnRequestAppointment.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BtnRequestAppointment.setMaximumSize(new java.awt.Dimension(200, 50));
+        BtnRequestAppointment.setMinimumSize(new java.awt.Dimension(200, 50));
+        BtnRequestAppointment.setPreferredSize(new java.awt.Dimension(200, 50));
+        BtnRequestAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRequestAppointmentActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        getContentPane().add(BtnRequestAppointment, gridBagConstraints);
+
+        LblAppointments.setFont(PatientManagementSystem.getTextFont());
+        LblAppointments.setText("Appointments:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 0);
+        getContentPane().add(LblAppointments, gridBagConstraints);
+
+        BtnLogOut.setFont(PatientManagementSystem.getTextFont());
+        BtnLogOut.setText("Log Out");
+        BtnLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLogOutActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 15, 15);
+        getContentPane().add(BtnLogOut, gridBagConstraints);
+
+        SclPatientHistory.setBackground(new java.awt.Color(255, 102, 102));
+        SclPatientHistory.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SclPatientHistory.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SclPatientHistory.setAlignmentX(0.0F);
+        SclPatientHistory.setAlignmentY(0.0F);
+        SclPatientHistory.setMaximumSize(new Dimension(650,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclPatientHistory.setMinimumSize(new Dimension(650,PatientManagementSystem.getSCREEN_SIZE().height-250));
+        SclPatientHistory.setPreferredSize(new Dimension(650,PatientManagementSystem.getSCREEN_SIZE().height-250));
+
+        PatientHistoryContainer.setBackground(new java.awt.Color(247, 247, 247));
+        PatientHistoryContainer.setAutoscrolls(true);
+        PatientHistoryContainer.setMaximumSize(new java.awt.Dimension(700, 10000));
+        PatientHistoryContainer.setMinimumSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-100));
+        PatientHistoryContainer.setName(""); // NOI18N
+        PatientHistoryContainer.setPreferredSize(new Dimension(700,PatientManagementSystem.getSCREEN_SIZE().height-150));
+        PatientHistoryContainer.setLayout(new javax.swing.BoxLayout(PatientHistoryContainer, javax.swing.BoxLayout.Y_AXIS));
+        SclPatientHistory.setViewportView(PatientHistoryContainer);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        getContentPane().add(SclPatientHistory, gridBagConstraints);
+
+        LblPatientHistory.setFont(PatientManagementSystem.getTextFont());
+        LblPatientHistory.setText("Patient History for:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 0);
+        getContentPane().add(LblPatientHistory, gridBagConstraints);
+
+        CbxPatient.setFont(PatientManagementSystem.getTextFont());
+        CbxPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbxPatientActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 10);
+        getContentPane().add(CbxPatient, gridBagConstraints);
+
+        BtnStartAppointment.setFont(PatientManagementSystem.getTextFont());
+        BtnStartAppointment.setText("Start appoinment");
+        BtnStartAppointment.setMaximumSize(new java.awt.Dimension(200, 50));
+        BtnStartAppointment.setMinimumSize(new java.awt.Dimension(200, 50));
+        BtnStartAppointment.setPreferredSize(new java.awt.Dimension(200, 50));
+        BtnStartAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnStartAppointmentActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        getContentPane().add(BtnStartAppointment, gridBagConstraints);
+
+        LblAppointment.setFont(PatientManagementSystem.getTextFont());
+        LblAppointment.setText("Appointment:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 0);
+        getContentPane().add(LblAppointment, gridBagConstraints);
+
+        CbxAppointment.setFont(PatientManagementSystem.getTextFont());
+        CbxAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbxAppointmentActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        getContentPane().add(CbxAppointment, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DoctorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DoctorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DoctorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoctorHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void BtnRequestAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestAppointmentActionPerformed
+        new DoctorAppointmentRequester(this).setVisible(true);
+    }//GEN-LAST:event_BtnRequestAppointmentActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DoctorHomePage().setVisible(true);
-            }
-        });
-    }
+    private void BtnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogOutActionPerformed
+        PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
+        new StartPage().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnLogOutActionPerformed
+
+    private void CbxPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxPatientActionPerformed
+        updateSelected();
+        updateContainers();
+    }//GEN-LAST:event_CbxPatientActionPerformed
+
+    private void BtnStartAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStartAppointmentActionPerformed
+        
+    }//GEN-LAST:event_BtnStartAppointmentActionPerformed
+
+    private void CbxAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxAppointmentActionPerformed
+        updateSelected();
+    }//GEN-LAST:event_CbxAppointmentActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AppointmentsContainer;
+    private javax.swing.JButton BtnLogOut;
+    private javax.swing.JButton BtnRequestAppointment;
+    private javax.swing.JButton BtnStartAppointment;
+    private javax.swing.JComboBox<String> CbxAppointment;
+    private javax.swing.JComboBox<String> CbxPatient;
+    private javax.swing.JLabel LblAppointment;
+    private javax.swing.JLabel LblAppointments;
+    private javax.swing.JLabel LblPatientHistory;
+    private javax.swing.JPanel PatientHistoryContainer;
+    private javax.swing.JScrollPane SclAppointments;
+    private javax.swing.JScrollPane SclPatientHistory;
     // End of variables declaration//GEN-END:variables
+
+    private void fillCombos() {
+        this.CbxPatient.removeAllItems();
+        for(Patient patient : Patient.getPatients(PatientManagementSystem.getUsers())){
+            if(!patient.getStatus().contains("Request")) this.CbxPatient.addItem(patient.displayUser());
+        }
+        this.CbxAppointment.removeAllItems();
+        for(Appointment appointment : DOCTOR.getAppointments()){
+            if(appointment.getStatus().contains("Approved")) this.CbxAppointment.addItem(appointment.getAppointmentName());
+        }
+        if(this.CbxAppointment.getItemCount() == 0){this.CbxAppointment.addItem("No upcoming Appointments");}
+    }
+
+    private void updateSelected() {
+        if(CbxPatient.getSelectedItem() !=null){
+            for(Patient patient : Patient.getPatients(PatientManagementSystem.getUsers())){
+                if(this.CbxPatient.getSelectedItem().toString().contains(patient.getFirstName()) &&
+                        this.CbxPatient.getSelectedItem().toString().contains(patient.getLastName()) &&
+                        this.CbxPatient.getSelectedItem().toString().contains(
+                                PatientManagementSystem.getFormat().format(patient.getDOB()).replace(" 00:00", ""))){
+                    this.selectedPatient = patient;
+                }
+            }
+        }
+        if(CbxAppointment.getSelectedItem() !=null){
+            for(Appointment appointment : DOCTOR.getAppointments()){
+                if(CbxAppointment.getSelectedItem().toString().contains(PatientManagementSystem.getFormat().format(appointment.getDateTime()))
+                        && CbxAppointment.getSelectedItem().toString().contains(appointment.getDoctor().getUniqueID())){
+                    this.selectedAppointment = appointment;
+                }
+            }
+        }
+    }
+
+    public void updateContainers() {
+        this.AppointmentsContainer.removeAll();
+        for(Appointment appointment : this.DOCTOR.getAppointments()){
+            AppointmentPanel AP = new AppointmentPanel(appointment);
+            AP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            AP.setVisible(true);
+            AppointmentsContainer.add(AP);
+        }
+        resizeAppointmentContainerToFit();
+        this.PatientHistoryContainer.removeAll();
+        for(Appointment appointment : this.selectedPatient.getAppointments()){
+            AppointmentPanel AP = new AppointmentPanel(appointment);
+            AP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            AP.setVisible(true);
+            PatientHistoryContainer.add(AP);
+        }
+        for(Prescription prescription : this.selectedPatient.getPrescriptions()){
+            PrescriptionPanel PP = new PrescriptionPanel(prescription);
+            PP.setAlignmentX(Component.CENTER_ALIGNMENT);
+            PP.setVisible(true);
+            PatientHistoryContainer.add(PP);
+        }
+        resizePatientHistoryContainerToFit();
+        validate();
+        repaint();
+    }
+    
+    public void resizeAppointmentContainerToFit(){
+        int componentHeight = 100*(this.AppointmentsContainer.getComponentCount());
+        this.AppointmentsContainer.setPreferredSize(new Dimension(600, componentHeight));
+    }
+
+    private void resizePatientHistoryContainerToFit() {
+        int componentHeight =(int) (100*(this.selectedPatient.getAppointments().size()
+                +(3.1*this.selectedPatient.getPrescriptions().size())));
+        this.PatientHistoryContainer.setPreferredSize(new Dimension(650, componentHeight));
+    }
+    
+    public Doctor getDoctor(){
+        return DOCTOR;
+    }
 }

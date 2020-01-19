@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Forms.HomePages;
-import Forms.Requesters.PatientApppintmentRequester;
+import Forms.Requesters.PatientAppointmentRequester;
 import Forms.Makers.RatingMakerPage;
 import Forms.StartPage;
 import Panels.ContainedComponents.AppointmentPanel;
@@ -267,7 +267,7 @@ public final class PatientHomePage extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRequestAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRequestAppointmentActionPerformed
-        new PatientApppintmentRequester(this).setVisible(true);
+        new PatientAppointmentRequester(this).setVisible(true);
     }//GEN-LAST:event_BtnRequestAppointmentActionPerformed
 
     private void BtnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogOutActionPerformed

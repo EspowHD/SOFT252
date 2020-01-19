@@ -57,6 +57,10 @@ public class Patient extends User {
         this.status = status;
     }
     
+    /**
+     *
+     * @return "Name: FN LN DOB: dd/yy/mm
+     */
     @Override
     public String displayUser(){
         return "Name: "+this.firstName+" "+this.lastName+" DOB: "+PatientManagementSystem.getFormat().format(this.DOB).replace(" 00:00", "");
@@ -106,10 +110,10 @@ public class Patient extends User {
         return status;
     }
     
-    public static ArrayList<User> getPatients(ArrayList<User> users){
-        ArrayList<User> patients = new ArrayList<>();
+    public static ArrayList<Patient> getPatients(ArrayList<User> users){
+        ArrayList<Patient> patients = new ArrayList<>();
         for(User user : users){
-            if(user.getUniqueID().contains("P")) patients.add(user);
+            if(user.getUniqueID().contains("P")) patients.add((Patient) user);
         }
         return patients;
     }
