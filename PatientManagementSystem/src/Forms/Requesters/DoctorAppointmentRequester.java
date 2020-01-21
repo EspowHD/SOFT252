@@ -192,7 +192,7 @@ public class DoctorAppointmentRequester extends javax.swing.JFrame {
             if(patient != null ){
                 if(!checkIfBusy(patient,this.dhp.getDoctor(),date)){
                     PatientManagementSystem.getAppointments().add(new Appointment(patient,this.dhp.getDoctor(),"Request",date));
-                    this.dhp.updateContainers();
+                    this.dhp.updateAll();
                     PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
                     dispose();
                 }

@@ -1,2 +1,0 @@
-Forms.ReducedStock
-Forms.PrescriptionPage

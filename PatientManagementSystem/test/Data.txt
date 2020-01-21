@@ -165,8 +165,8 @@ Lyrica
 0
 0
 Morphine Sulfate
-0
 5
+0
 0
 APPOINTMENTS
 P0001
@@ -203,13 +203,27 @@ Did not need to see GP minor cold
 NO PRESCRIPTION
 P0000
 D0002
-Approved
+Completed
 02/01/2019 08:00
-NO NOTES
-NO PRESCRIPTION
+NOTES
+Suffering from headaches encouraged to increase hydration through water consumption and to take Paracetemol to ease Symptoms
+PRESCRIPTION
+1
+Paracetemol
+5
+Take with water when headaches occure no more than 2 every 4 hours
+Suffering from headaches encouraged to increase hydration through water consumption and to take Paracetemol to ease Symptoms
 P0002
 D0000
-Request
+Approved
 01/19/2020 11:00
 NO NOTES
+NO PRESCRIPTION
+P0000
+D0002
+Completed
+02/27/2020 12:45
+NOTES
+This man is a perfect specimen of a human, no issues seen.
+
 NO PRESCRIPTION

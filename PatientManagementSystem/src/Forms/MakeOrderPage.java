@@ -27,6 +27,7 @@ public class MakeOrderPage extends javax.swing.JFrame {
         this.dhp = dhp;
         initComponents();
         setLocationRelativeTo(null);
+        this.BtnOrder.setText("Request Order");
     }
 
     /**
@@ -72,9 +73,9 @@ public class MakeOrderPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnCancel)
+                        .addComponent(BtnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnOrder))
+                        .addComponent(BtnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(medicineOrderPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -109,7 +110,7 @@ public class MakeOrderPage extends javax.swing.JFrame {
             if(notFound)PatientManagementSystem.getMedicines().add(new Medicine(
                     this.medicineOrderPanel1.getMedicineName(),0,this.medicineOrderPanel1.getQuantity(),0));
             shp.updateAll();
-        } else{
+        } else if(dhp!= null){
             boolean notFound = true;
             for(Medicine medicine : PatientManagementSystem.getMedicines()){
                 if(medicine.getMedicineName().equalsIgnoreCase(this.medicineOrderPanel1.getMedicineName())){
@@ -119,7 +120,7 @@ public class MakeOrderPage extends javax.swing.JFrame {
             }
             if(notFound)PatientManagementSystem.getMedicines().add(new Medicine(
                     this.medicineOrderPanel1.getMedicineName(),0,0,this.medicineOrderPanel1.getQuantity()));
-            //dhp.updateAll();
+            dhp.updateAll();
         }
         PatientManagementSystem.saveInformation(PatientManagementSystem.getFile());
         this.dispose();

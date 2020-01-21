@@ -35,9 +35,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="BtnCancel" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnCancel" max="32767" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="BtnOrder" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnOrder" max="32767" attributes="0"/>
                   </Group>
                   <Component id="medicineOrderPanel1" alignment="0" pref="338" max="32767" attributes="0"/>
               </Group>

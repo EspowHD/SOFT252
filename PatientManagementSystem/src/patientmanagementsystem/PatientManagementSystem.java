@@ -360,7 +360,7 @@ public class PatientManagementSystem {
             writer.write(appointments.get(i).getStatus()+"\n");
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
             writer.write(sdf.format(appointments.get(i).getDateTime())+"\n");
-            if(appointments.get(i).getDoctorNotes() != null){
+            if(appointments.get(i).getDoctorNotes() != null && !appointments.get(i).getDoctorNotes().equals("")){
                 writer.write("NOTES\n");
                 writer.write(appointments.get(i).getDoctorNotes()+"\n");
             } else writer.write("NO NOTES\n");

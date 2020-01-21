@@ -151,7 +151,9 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         TxtNotes.setEditable(false);
         TxtNotes.setColumns(20);
         TxtNotes.setFont(PatientManagementSystem.getTextFont());
+        TxtNotes.setLineWrap(true);
         TxtNotes.setRows(5);
+        TxtNotes.setWrapStyleWord(true);
         TxtNotes.setMaximumSize(new java.awt.Dimension(400, 2147483647));
         TxtNotes.setMinimumSize(new java.awt.Dimension(400, 100));
         TxtNotes.setPreferredSize(new java.awt.Dimension(400, 100));
@@ -227,7 +229,6 @@ public class PrescriptionPanel extends javax.swing.JPanel {
 
             }
         ));
-        TblMedicines.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         TblMedicines.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TblMedicines);
 
@@ -297,7 +298,7 @@ public class PrescriptionPanel extends javax.swing.JPanel {
         };
         this.TblMedicines.setModel(model);
         this.TblMedicines.getColumnModel().getColumn(0).setPreferredWidth(140);//Medicine Name width
-        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(100);//Medicine Name width
-        this.TblMedicines.getColumnModel().getColumn(2).setPreferredWidth(400);//Medicine Name width
+        this.TblMedicines.getColumnModel().getColumn(1).setPreferredWidth(80);//Medicine Quantity width
+        this.TblMedicines.getColumnModel().getColumn(2).setPreferredWidth(420);//Medicine Doseage width
     }
 }

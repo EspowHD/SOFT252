@@ -581,9 +581,9 @@ public class SecretaryHomePage extends javax.swing.JFrame {
         String[] col = {"Medicine Name","Stock","Ordered"};
         Object[][] data = new String[PatientManagementSystem.getMedicines().size()][3];
         for(int i = 0;i<data.length;i++){
-            data[i][0] = PatientManagementSystem.getMedicines().get(i).getMedicineName();
-            data[i][1] = Integer.toString(PatientManagementSystem.getMedicines().get(i).getStock());
-            data[i][2] = Integer.toString(PatientManagementSystem.getMedicines().get(i).getOrdered());
+            data[i][0] = medicines.get(i).getMedicineName();
+            data[i][1] = Integer.toString(medicines.get(i).getStock());
+            data[i][2] = Integer.toString(medicines.get(i).getOrdered());
         }
         DefaultTableModel model = new DefaultTableModel(data,col){
             @Override
