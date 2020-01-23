@@ -219,11 +219,3 @@ Approved
 01/19/2020 11:00
 NO NOTES
 NO PRESCRIPTION
-P0000
-D0002
-Completed
-02/27/2020 12:45
-NOTES
-This man is a perfect specimen of a human, no issues seen.
-
-NO PRESCRIPTION

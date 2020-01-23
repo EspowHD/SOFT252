@@ -17,6 +17,11 @@ public class DateSelectPart extends javax.swing.JPanel {
     Date date = null;
     Date min;
     Date max;
+    
+    public DateSelectPart(){
+        initComponents();
+    }
+    
     public DateSelectPart(Date min,Date max) {
         this.min = min;
         this.max = max;
