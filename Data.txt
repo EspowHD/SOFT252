@@ -1,0 +1,221 @@
+ADMINISTRATOR
+A0000
+Henry
+Cavill
+Password1
+1
+Clinic Way
+Drake Circus
+Plymouth
+PL1 1AA
+DOCTOR
+D0000
+John
+Smith
+Password1
+1
+Clinic Way
+Drake Circus
+Plymouth
+PL1 1AA
+RATINGS
+3
+RATING
+2
+Was over an hour late with a previous patient
+RATING
+2
+Was over an hour late with a previous patient
+RATING
+4
+Was over an hour late with a previous patient
+NO FEEDBACK
+PATIENT
+P0002
+Maggie
+Simpson
+Password1
+3
+Patient Road
+Drake Circus
+Plymouth
+PL1 1AB
+Female
+01/14/1989
+Approved
+DOCTOR
+D0001
+Sarah
+Jones
+Password1
+1
+Clinic Way
+Drake Circus
+Plymouth
+PL1 1AA
+RATINGS
+3
+RATING
+2
+Was over an hour late with a previous patient
+RATING
+4
+Was over an hour late with a previous patient
+RATING
+4
+Was over an hour late with a previous patient
+NO FEEDBACK
+DOCTOR
+D0002
+Connor
+Davies
+Password1
+1
+Clinic Way
+Drake Circus
+Plymouth
+PL1 1AA
+RATINGS
+3
+RATING
+2
+Was over an hour late with a previous patient
+RATING
+4
+Was over an hour late with a previous patient
+RATING
+4
+Was over an hour late with a previous patient
+NO FEEDBACK
+PATIENT
+P0000
+Alex
+Jones
+Password1
+1
+Patient Road
+Drake Circus
+Plymouth
+PL1 1AB
+Male
+02/11/1974
+Approved
+PATIENT
+P0001
+Chris
+Thompson
+Password1
+2
+Patient Road
+Drake Circus
+Plymouth
+PL1 1AB
+Male
+09/11/1992
+Approved
+SECRETARY
+S0000
+Richie
+Rich
+Password1
+1
+Secretary Road
+Drake Circus
+Plymouth
+PL1 1BB
+MEDICINES
+Paracetemol
+20
+0
+0
+Ibuprofen
+15
+0
+0
+Synthroid
+12
+0
+0
+Crestor
+4
+0
+0
+Ventolin
+13
+0
+0
+Nexium
+9
+0
+0
+Advair Diskus
+2
+0
+0
+Lantus Solostar
+6
+0
+0
+Vyvanse
+7
+0
+0
+Lyrica
+14
+0
+0
+Morphine Sulfate
+5
+0
+0
+APPOINTMENTS
+P0001
+D0000
+Completed
+11/25/2019 12:30
+NOTES
+Had major Headache
+PRESCRIPTION
+1
+Ibuprofen
+2
+Take one very 4 hours after food or drink
+To help with headache
+P0002
+D0002
+Completed
+12/25/2019 17:15
+NO NOTES
+NO PRESCRIPTION
+P0000
+D0000
+Completed
+12/25/2019 11:45
+NOTES
+Did not need to see GP minor cold
+NO PRESCRIPTION
+P0000
+D0001
+Completed
+12/25/2019 11:30
+NOTES
+Did not need to see GP minor cold
+NO PRESCRIPTION
+P0000
+D0002
+Completed
+02/01/2019 08:00
+NOTES
+Suffering from headaches encouraged to increase hydration through water consumption and to take Paracetemol to ease Symptoms
+PRESCRIPTION
+1
+Paracetemol
+5
+Take with water when headaches occure no more than 2 every 4 hours
+Suffering from headaches encouraged to increase hydration through water consumption and to take Paracetemol to ease Symptoms
+P0002
+D0000
+Approved
+01/19/2020 11:00
+NO NOTES
+NO PRESCRIPTION
